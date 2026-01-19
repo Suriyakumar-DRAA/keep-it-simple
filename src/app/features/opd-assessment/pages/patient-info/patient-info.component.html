@@ -15,7 +15,7 @@
                 <div class="d-flex align-items-baseline gap-2">
                     <h2 class="h3 fw-bold text-dark m-0 text-nowrap">{{ patient.name }}</h2>
                     <span class="small text-secondary opacity-75 fw-medium">
-                        {{ patient.gender }} | {{ patient.age }} Years
+                        ({{ patient.gender }} | {{ patient.age }} Years)
                     </span>
                 </div>
             </div>
@@ -28,69 +28,99 @@
                 In</span>
 
             <div class="d-flex gap-2">
-                <button
-                    class="btn btn-outline-primary d-flex align-items-center gap-2 text-nowrap">
+                <button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-2 text-nowrap">
                     Actions <i class="bi bi-chevron-down small"></i>
                 </button>
-                <button class="btn btn-primary text-nowrap">Get Patient</button>
+                <button class="btn btn-primary btn-sm text-nowrap">Get Patient</button>
             </div>
         </div>
     </div>
 
     <!-- Main Info Row -->
     <div class="d-flex gap-4 flex-wrap flex-lg-nowrap">
-        <div class="flex-grow-1 pt-2">
+        <div class="flex-grow-1">
             <div class="d-flex flex-column gap-3">
-                <div class="row g-3">
+                <div class="row">
+                    <div class="col-9 border-end">
+                        <div class="row g-3">
+                            <!-- Row 1, Col 1: MR No -->
+                            <div class="col-6 col-md-4">
+                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">MR No</label>
+                                <p class="text-secondary small mb-0">NLR/{{ patient.mr_no }}</p>
+                            </div>
 
-                    <!-- Row 1, Col 1: MR No -->
-                    <div class="col-6 col-md-4">
-                        <label class="d-block text-dark fw-bold small mb-1 opacity-75">MR No</label>
-                        <p class="text-secondary small mb-0">NLR/{{ patient.mr_no }}</p>
+                            <!-- Row 2, Col 1: Ophthalmic History -->
+                            <div class="col-6 col-md-4">
+                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">Ophthalmic
+                                    History</label>
+                                <p class="text-secondary small mb-0">{{ patient.ophthalmic_history || 'None' }}</p>
+                            </div>
+
+                            <!-- Row 1, Col 3: Systemic History -->
+                            <div class="col-6 col-md-4">
+                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">Systemic History</label>
+                                <p class="text-secondary small mb-0">{{ patient.systemic_history || 'None' }}</p>
+                            </div>
+
+                            <!-- Row 1, Col 2: Mobile -->
+                            <div class="col-6 col-md-4">
+                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">Mobile</label>
+                                <p class="text-secondary small mb-0">{{ patient.phone || '9790897371' }}</p>
+                            </div>
+
+                            <!-- Row 2, Col 2: Previous Surgery -->
+                            <div class="col-6 col-md-4">
+                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">Previous Surgery</label>
+                                <p class="text-secondary small mb-0">{{ patient.previous_surgery || 'None' }}</p>
+                            </div>
+
+                            <!-- Row 2, Col 3: Previous Diagnosis -->
+                            <div class="col-6 col-md-4">
+                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">Previous
+                                    Diagnosis</label>
+                                <p class="text-secondary small mb-0">{{ patient.previous_diagnosis || 'None' }}</p>
+                            </div>
+
+                            <!-- Row 3, Col 1: Infectious Disease -->
+                            <div class="col-6 col-md-4">
+                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">Infectious
+                                    Disease</label>
+                                <p class="text-secondary small mb-0">{{ caseData?.patient_referral || 'Dr. Kranthi' }}
+                                </p>
+                            </div>
+
+                            <!-- Row 3, Col 2: Allergies -->
+                            <div class="col-6 col-md-4">
+                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">Allergies</label>
+                                <p class="text-secondary small mb-0">{{ patient.allergies || 'None' }}</p>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Row 2, Col 1: Ophthalmic History -->
-                    <div class="col-6 col-md-4">
-                        <label class="d-block text-dark fw-bold small mb-1 opacity-75">Ophthalmic History</label>
-                        <p class="text-secondary small mb-0">{{ patient.ophthalmic_history || 'None' }}</p>
-                    </div>
-
-                    <!-- Row 1, Col 3: Systemic History -->
-                    <div class="col-6 col-md-4">
-                        <label class="d-block text-dark fw-bold small mb-1 opacity-75">Systemic History</label>
-                        <p class="text-secondary small mb-0">{{ patient.systemic_history || 'None' }}</p>
-                    </div>
-
-                    <!-- Row 1, Col 2: Mobile -->
-                    <div class="col-6 col-md-4">
-                        <label class="d-block text-dark fw-bold small mb-1 opacity-75">Mobile</label>
-                        <p class="text-secondary small mb-0">{{ patient.phone || '9790897371' }}</p>
-                    </div>
-
-                    <!-- Row 2, Col 2: Previous Surgery -->
-                    <div class="col-6 col-md-4">
-                        <label class="d-block text-dark fw-bold small mb-1 opacity-75">Previous Surgery</label>
-                        <p class="text-secondary small mb-0">{{ patient.previous_surgery || 'None' }}</p>
-                    </div>
-
-                    <!-- Row 2, Col 3: Previous Diagnosis -->
-                    <div class="col-6 col-md-4">
-                        <label class="d-block text-dark fw-bold small mb-1 opacity-75">Previous Diagnosis</label>
-                        <p class="text-secondary small mb-0">{{ patient.previous_diagnosis || 'None' }}</p>
-                    </div>
-
-                    <!-- Row 3, Col 1: Infectious Disease -->
-                    <div class="col-6 col-md-4">
-                        <label class="d-block text-dark fw-bold small mb-1 opacity-75">Infectious Disease</label>
-                        <p class="text-secondary small mb-0">{{ caseData?.patient_referral || 'Dr. Kranthi' }}</p>
-                    </div>
-
-                    <!-- Row 3, Col 2: Allergies -->
-                    <div class="col-6 col-md-4">
-                        <label class="d-block text-dark fw-bold small mb-1 opacity-75">Allergies</label>
-                        <p class="text-secondary small mb-0">{{ patient.allergies || 'None' }}</p>
+                    <div class="col-3 ps-4">
+                        <div class="d-flex flex-column gap-3">
+                            <div>
+                                <label class="d-block text-secondary small fw-medium mb-1">Doctor</label>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center text-primary fw-bold"
+                                        style="width: 24px; height: 24px; font-size: 0.7rem;">DK</div>
+                                    <span class="text-dark small fw-medium">Dr. Kranthi</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="d-block text-secondary small fw-medium mb-1">Referral</label>
+                                <span class="text-dark small fw-medium d-block">{{ caseData.patient_referral || 'Self'
+                                    }}</span>
+                            </div>
+                            <div>
+                                <label class="d-block text-secondary small fw-medium mb-1">Registration Date</label>
+                                <span class="text-dark small fw-medium d-block">{{ caseData.visit_date |
+                                    date:'mediumDate'
+                                    }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

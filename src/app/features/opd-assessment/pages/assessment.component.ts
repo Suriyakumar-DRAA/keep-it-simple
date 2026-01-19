@@ -11,6 +11,11 @@ import { HistoryComponent } from './history/history.component';
 import { AutoRefractionComponent } from './auto-refraction/auto-refraction.component';
 import { RefractionComponent } from './refraction/refraction.component';
 import { AssessmentService } from '../services/assessment.service';
+import { OverviewComponent } from './overview/overview.component';
+import { ExaminationComponent } from './examination/examination.component';
+import { DiagnosisComponent } from './diagnosis/diagnosis.component';
+import { InvestigationComponent } from './investigation/investigation.component';
+import { PatientJourneyComponent } from './patient-journey/patient-journey.component';
 
 @Component({
     selector: 'app-assessment',
@@ -23,9 +28,14 @@ import { AssessmentService } from '../services/assessment.service';
         OPDPatientStatsComponent,
         PatientQueueComponent,
         PatientInfoComponent,
+        OverviewComponent,
+        ExaminationComponent,
+        DiagnosisComponent,
+        InvestigationComponent,
         HistoryComponent,
         AutoRefractionComponent,
         RefractionComponent,
+        PatientJourneyComponent
     ],
     providers: [AssessmentService]
 })
@@ -36,21 +46,21 @@ export class AssessmentComponent {
     patient: PatientWithCase | null = null;
     selectedQueue = 'My Queue';
     activeTab: string = '';
-    tabs = [
-        { id: 'history', label: 'History' },
-        { id: 'auto-refraction', label: 'Auto Refraction' },
-        { id: 'refraction', label: 'Refraction' }
-    ];
     // tabs = [
-    //     { id: 'history', label: 'History' },
     //     { id: 'overview', label: 'Overview' },
-    //     { id: 'examination', label: 'Examination' },
-    //     { id: 'diagnosis', label: 'Diagnosis' },
-    //     { id: 'investigation', label: 'Investigation' },
-    //     { id: 'advise', label: 'Advice' },
-    //     { id: 'follow-up', label: 'Follow up' },
-    //     { id: 'documents', label: 'Reports' }
+    //     { id: 'history', label: 'History' },
+    //     { id: 'auto-refraction', label: 'Auto Refraction' },
+    //     { id: 'refraction', label: 'Refraction' }
     // ];
+    tabs = [
+        { id: 'overview', label: 'Overview' },
+        { id: 'examination', label: 'Examination' },
+        // { id: 'diagnosis', label: 'Diagnosis' },
+        { id: 'investigation', label: 'Investigation' },
+        // { id: 'advise', label: 'Advice' },
+        // { id: 'follow-up', label: 'Follow up' },
+        // { id: 'documents', label: 'Reports' }
+    ];
 
     private assessmentService = inject(AssessmentService);
 
@@ -61,7 +71,9 @@ export class AssessmentComponent {
         this.patients = this.loadMockPatients();
         if (this.patients.length > 0) {
             this.selectedPatientId = this.patients[0].id;
+            this.patient = this.patients.find(p => p.id === this.selectedPatientId) || null;
         }
+        this.setDefaultTab();
     }
 
     onQueueSelect(queueLabel: string) {
@@ -131,7 +143,7 @@ export class AssessmentComponent {
     }
 
     setDefaultTab() {
-        this.activeTab = 'history';
+        this.activeTab = 'overview';
     }
 
     setActiveTab(tabId: string) {

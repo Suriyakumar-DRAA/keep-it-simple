@@ -1,0 +1,71 @@
+<div class="p-4 bg-white rounded border border-1 shadow-sm">
+    <div class="d-flex justify-content-end align-items-center mb-6">
+        <button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-2" (click)="isEditing = !isEditing">
+            <i class="bi bi-pencil"></i> {{ isEditing ? 'View' : 'Edit' }}
+        </button>
+    </div>
+
+    <div *ngIf="isEditing; else viewMode">
+        <div class="card border border-1 p-4 mb-4">
+            <div class="d-flex gap-2 mb-4">
+                <button class="btn btn-sm" [class.btn-dark]="activeCategory === 'Laboratory'"
+                    [class.btn-light]="activeCategory !== 'Laboratory'"
+                    (click)="activeCategory = 'Laboratory'">Laboratory</button>
+                <button class="btn btn-sm" [class.btn-dark]="activeCategory === 'Ophthal'"
+                    [class.btn-light]="activeCategory !== 'Ophthal'"
+                    (click)="activeCategory = 'Ophthal'">Ophthal</button>
+                <button class="btn btn-sm" [class.btn-dark]="activeCategory === 'Radiology'"
+                    [class.btn-light]="activeCategory !== 'Radiology'"
+                    (click)="activeCategory = 'Radiology'">Radiology</button>
+            </div>
+
+            <div class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label small fw-bold">Test Name</label>
+                    <select class="form-select form-select-sm" [(ngModel)]="selectedTest">
+                        <option value="">Select Test</option>
+                        <option *ngFor="let t of getTestsForCategory()" [value]="t">{{ t }}</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label small fw-bold">Set</label>
+                    <select class="form-select form-select-sm" [(ngModel)]="selectedSet">
+                        <option value="">Select Set</option>
+                        <option *ngFor="let s of getSetsForCategory()" [value]="s">{{ s }}</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary btn-sm w-100" (click)="addInvestigation()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #viewMode>
+        <div *ngIf="investigations.length === 0" class="text-center text-muted py-5">No investigations added.</div>
+        <div *ngIf="investigations.length > 0">
+            <div class="table-responsive">
+                <table class="table table-sm table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Type</th>
+                            <th>Test</th>
+                            <th>Set</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let inv of investigations">
+                            <td>{{ inv.category }}</td>
+                            <td>{{ inv.test_name }}</td>
+                            <td>{{ inv.test_set }}</td>
+                            <td>{{ inv.test_date | date:'shortDate' }}</td>
+                            <td><span class="badge bg-secondary">{{ inv.status }}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-template>
+</div>

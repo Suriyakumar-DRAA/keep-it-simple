@@ -1,0 +1,173 @@
+<div class="p-4 bg-white rounded shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-6">
+        <h2 class="h5 fw-bold m-0"></h2>
+        <button class="btn btn-outline-primary btn-sm d-flex align-items-center gap-2" (click)="isEditing = !isEditing">
+            <i class="bi bi-pencil"></i> {{ isEditing ? 'View' : 'Edit' }}
+        </button>
+    </div>
+
+    <div *ngIf="isEditing; else viewMode">
+        <div class="card border p-4 mb-4">
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold">General examination</label>
+                    <div class="btn-group w-100" role="group">
+                        <button type="button" class="btn btn-sm"
+                            [class.btn-primary]="data.general_examination === 'Normal'"
+                            [class.btn-outline-secondary]="data.general_examination !== 'Normal'"
+                            (click)="data.general_examination = 'Normal'">Normal</button>
+                        <button type="button" class="btn btn-sm"
+                            [class.btn-danger]="data.general_examination === 'Abnormal'"
+                            [class.btn-outline-secondary]="data.general_examination !== 'Abnormal'"
+                            (click)="data.general_examination = 'Abnormal'">Abnormal</button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold">One eyed</label>
+                    <div class="btn-group w-100" role="group">
+                        <button type="button" class="btn btn-sm" [class.btn-primary]="data.one_eyed === 'Normal'"
+                            [class.btn-outline-secondary]="data.one_eyed !== 'Normal'"
+                            (click)="data.one_eyed = 'Normal'">Normal</button>
+                        <button type="button" class="btn btn-sm" [class.btn-danger]="data.one_eyed === 'Abnormal'"
+                            [class.btn-outline-secondary]="data.one_eyed !== 'Abnormal'"
+                            (click)="data.one_eyed = 'Abnormal'">Abnormal</button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold">Squint evaluation</label>
+                    <div class="btn-group w-100" role="group">
+                        <button type="button" class="btn btn-sm"
+                            [class.btn-primary]="data.squint_evaluation === 'Normal'"
+                            [class.btn-outline-secondary]="data.squint_evaluation !== 'Normal'"
+                            (click)="data.squint_evaluation = 'Normal'">Normal</button>
+                        <button type="button" class="btn btn-sm"
+                            [class.btn-danger]="data.squint_evaluation === 'Abnormal'"
+                            [class.btn-outline-secondary]="data.squint_evaluation !== 'Abnormal'"
+                            (click)="data.squint_evaluation = 'Abnormal'">Abnormal</button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold">Overall Diagnosis</label>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small text-muted">RE</span>
+                            <button type="button" class="btn btn-sm py-0 px-2"
+                                [class.btn-outline-primary]="data.overall_diagnosis_right === 'Normal'"
+                                [class.btn-outline-danger]="data.overall_diagnosis_right !== 'Normal'"
+                                (click)="data.overall_diagnosis_right = data.overall_diagnosis_right === 'Normal' ? 'Abnormal' : 'Normal'">{{
+                                data.overall_diagnosis_right }}</button>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small text-muted">LE</span>
+                            <button type="button" class="btn btn-sm py-0 px-2"
+                                [class.btn-outline-primary]="data.overall_diagnosis_left === 'Normal'"
+                                [class.btn-outline-danger]="data.overall_diagnosis_left !== 'Normal'"
+                                (click)="data.overall_diagnosis_left = data.overall_diagnosis_left === 'Normal' ? 'Abnormal' : 'Normal'">{{
+                                data.overall_diagnosis_left }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion" id="examAccordion">
+            <div class="accordion-item" *ngFor="let section of sections">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" (click)="toggleSection(section.id)">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-check-circle-fill text-success"
+                                *ngIf="data[section.statusKey] === 'completed'"></i>
+                            <i class="bi bi-circle-fill text-secondary" style="font-size: 0.5rem;"
+                                *ngIf="data[section.statusKey] !== 'completed'"></i>
+                            {{ section.label }}
+                        </div>
+                    </button>
+                </h2>
+                <div [class.show]="expandedSections.has(section.id)" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <div *ngIf="section.id === 'cornea'">
+                            <div class="row g-4">
+                                <div class="col-md-6 border-end">
+                                    <h6 class="small fw-bold text-muted mb-3">Right Eye (RE) <button
+                                            class="btn btn-link btn-sm p-0 ms-2" (click)="copyRightToLeft()">Copy to
+                                            LE</button></h6>
+                                    <div class="mb-3">
+                                        <label class="form-label small">Size</label>
+                                        <div class="btn-group w-100 btn-group-sm">
+                                            <button class="btn btn-outline-secondary"
+                                                [class.active]="data.cornea_right_size === 'Normal'"
+                                                (click)="data.cornea_right_size='Normal'">Normal</button>
+                                            <button class="btn btn-outline-secondary"
+                                                [class.active]="data.cornea_right_size === 'Micro'"
+                                                (click)="data.cornea_right_size='Micro'">Micro</button>
+                                            <button class="btn btn-outline-secondary"
+                                                [class.active]="data.cornea_right_size === 'Macro'"
+                                                (click)="data.cornea_right_size='Macro'">Macro</button>
+                                        </div>
+                                    </div>
+                                    <!-- Additional Cornea fields for RE would go here -->
+                                </div>
+                                <div class="col-md-6 ps-4">
+                                    <h6 class="small fw-bold text-muted mb-3">Left Eye (LE)</h6>
+                                    <div class="mb-3">
+                                        <label class="form-label small">Size</label>
+                                        <div class="btn-group w-100 btn-group-sm">
+                                            <button class="btn btn-outline-secondary"
+                                                [class.active]="data.cornea_left_size === 'Normal'"
+                                                (click)="data.cornea_left_size='Normal'">Normal</button>
+                                            <button class="btn btn-outline-secondary"
+                                                [class.active]="data.cornea_left_size === 'Micro'"
+                                                (click)="data.cornea_left_size='Micro'">Micro</button>
+                                            <button class="btn btn-outline-secondary"
+                                                [class.active]="data.cornea_left_size === 'Macro'"
+                                                (click)="data.cornea_left_size='Macro'">Macro</button>
+                                        </div>
+                                    </div>
+                                    <!-- Additional Cornea fields for LE would go here -->
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="section.id !== 'cornea'">
+                            <textarea class="form-control" rows="3" [(ngModel)]="data[section.notesKey]"
+                                placeholder="Add notes..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-end mt-4">
+            <button class="btn btn-primary btn-sm px-4" (click)="saveData(); isEditing = false">Save & Continue</button>
+        </div>
+    </div>
+
+    <ng-template #viewMode>
+        <div class="space-y-4">
+            <div class="row g-4 mb-4">
+                <div class="col-3"><small class="text-muted d-block">General</small><span class="fw-medium">{{
+                        data.general_examination }}</span></div>
+                <div class="col-3"><small class="text-muted d-block">One Eyed</small><span class="fw-medium">{{
+                        data.one_eyed }}</span></div>
+                <div class="col-3"><small class="text-muted d-block">Squint</small><span class="fw-medium">{{
+                        data.squint_evaluation }}</span></div>
+                <div class="col-3"><small class="text-muted d-block">Diagnosis</small><span class="fw-medium">RE: {{
+                        data.overall_diagnosis_right }}, LE: {{ data.overall_diagnosis_left }}</span></div>
+            </div>
+
+            <div class="border-top pt-3">
+                <h6 class="fw-bold mb-3">Detailed Notes</h6>
+                <div *ngFor="let section of sections" class="mb-2" [hidden]="!data[section.notesKey]">
+                    <span class="fw-bold small">{{ section.label }}:</span> <span class="small">{{
+                        data[section.notesKey] }}</span>
+                </div>
+                <div *ngIf="data.cornea_right_size !== 'Normal' || data.cornea_left_size !== 'Normal'">
+                    <span class="fw-bold small">Cornea:</span>
+                    <div class="row mt-1 ps-3">
+                        <div class="col-6 small">RE Size: {{ data.cornea_right_size }}</div>
+                        <div class="col-6 small">LE Size: {{ data.cornea_left_size }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
