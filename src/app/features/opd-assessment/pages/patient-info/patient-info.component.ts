@@ -26,9 +26,10 @@ export class PatientInfoComponent {
     }
 
     ngOnInit() {
+        this.patient;
     }
 
-    getStatusColor(status: string): string {
+    getStatusColor(status: string | undefined): string {
         switch (status?.toLowerCase()) {
             case 'new': return 'bg-teal-100';
             case 'free': return 'bg-emerald-100';
@@ -38,7 +39,7 @@ export class PatientInfoComponent {
         }
     }
 
-    getAppointmentTypeColor(type: string): string {
+    getAppointmentTypeColor(type: string | undefined): string {
         switch (type?.toLowerCase()) {
             case 'free': return 'bg-emerald-100';
             case 'paid': return 'bg-amber-100';
@@ -46,7 +47,10 @@ export class PatientInfoComponent {
         }
     }
 
-    getTimeDiff(date: string): string {
+    getTimeDiff(date: string | undefined): string {
+        if (!date) {
+            return '';
+        }
         const now = new Date();
         const visitDate = new Date(date);
         const diffMinutes = Math.floor((now.getTime() - visitDate.getTime()) / 60000);

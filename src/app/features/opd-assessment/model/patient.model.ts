@@ -13,6 +13,7 @@ export interface IPatient {
   previous_diagnosis?: string;
   allergies?: string;
   created_at?: string;
+  case: ICase;
 }
 
 export type PatientWithCase = IPatient & { case: ICase };

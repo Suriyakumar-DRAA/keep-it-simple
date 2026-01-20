@@ -50,12 +50,12 @@
                     <span class="badge fw-medium px-2 py-1" [ngClass]="getStatusColor(patient.case.status)">{{
                         patient.case.status }}</span>
                     <span class="badge fw-medium px-2 py-1"
-                        [ngClass]="getAppointmentTypeColor(patient.case.appointment_type)">{{
-                        patient.case.appointment_type || 'Free' }}</span>
+                        [ngClass]="getAppointmentTypeColor(patient?.case?.appointment_type)">{{
+                        patient?.case?.appointment_type || 'Free' }}</span>
                 </div>
 
                 <div class="d-flex justify-content-end ps-2">
-                    <span class="small text-secondary fw-medium">{{ getTimeDiff(patient.case.visit_date) }}</span>
+                    <span class="small text-secondary fw-medium">{{ getTimeDiff(patient?.case?.visit_date) }}</span>
                 </div>
             </div>
         </div>

@@ -45,21 +45,16 @@ export class AssessmentComponent {
     patients: PatientWithCase[] = [];
     patient: PatientWithCase | null = null;
     selectedQueue = 'My Queue';
-    activeTab: string = '';
-    // tabs = [
-    //     { id: 'overview', label: 'Overview' },
-    //     { id: 'history', label: 'History' },
-    //     { id: 'auto-refraction', label: 'Auto Refraction' },
-    //     { id: 'refraction', label: 'Refraction' }
-    // ];
+    activeTabId = 'overview';
     tabs = [
-        { id: 'overview', label: 'Overview' },
-        { id: 'examination', label: 'Examination' },
-        // { id: 'diagnosis', label: 'Diagnosis' },
-        { id: 'investigation', label: 'Investigation' },
-        // { id: 'advise', label: 'Advice' },
-        // { id: 'follow-up', label: 'Follow up' },
-        // { id: 'documents', label: 'Reports' }
+        { id: 'overview', label: 'Overview', completed: true },
+        { id: 'exam', label: 'Examination', completed: true },
+        { id: 'diag', label: 'Diagnosis', completed: true },
+        { id: 'invest', label: 'Investigation', completed: false },
+        { id: 'advice', label: 'Advice', completed: false },
+        { id: 'ref', label: 'Referral', completed: false },
+        { id: 'follow', label: 'Follow up', completed: false },
+        { id: 'reports', label: 'Reports', completed: false },
     ];
 
     private assessmentService = inject(AssessmentService);
@@ -143,10 +138,10 @@ export class AssessmentComponent {
     }
 
     setDefaultTab() {
-        this.activeTab = 'overview';
+        this.activeTabId = 'overview';
     }
 
     setActiveTab(tabId: string) {
-        this.activeTab = tabId;
+        this.activeTabId = tabId;
     }
 }

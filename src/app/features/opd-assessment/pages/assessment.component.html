@@ -16,8 +16,6 @@
             </app-patient-info>
         </ng-container>
 
-        <app-patient-journey> </app-patient-journey>
-
         <ng-template #noSelection>
             <div class="d-flex align-items-center justify-content-center h-100 text-muted">
                 <div class="text-center">
@@ -27,49 +25,70 @@
             </div>
         </ng-template>
 
-        <div class="flex-grow-1 overflow-hidden vh-100">
+        <app-patient-journey> </app-patient-journey>
+
+        <!-- 2. Tabs Navigation -->
+        <div class="pt-2 px-3">
+            <ul class="nav nav-tabs border-bottom-0">
+                @for (tab of tabs; track tab.id) {
+                <li class="nav-item">
+                    <button class="nav-link" [class.active]="activeTabId === tab.id" (click)="activeTabId = tab.id">
+                        {{ tab.label }}
+                        @if (tab.completed) {
+                        <i class="bi bi-check-circle-fill text-success ms-2" style="font-size: 0.8rem;"></i>
+                        }
+                    </button>
+                </li>
+                }
+            </ul>
+        </div>
+
+        <!-- 3. Tab Content Area -->
+        <div class="tab-content flex-grow-1 bg-light px-3">
+            <ng-container [ngSwitch]="activeTabId">
+                <app-overview *ngSwitchCase="'overview'"></app-overview>
+                <app-examination *ngSwitchCase="'examination'"></app-examination>
+                <app-investigation *ngSwitchCase="'investigation'"></app-investigation>
+                <div *ngSwitchDefault
+                    class="p-5 text-center text-muted h-100 d-flex flex-column justify-content-center align-items-center">
+                    <i class="bi bi-cone-striped display-4 mb-3 text-secondary opacity-50"></i>
+                    <h5 class="text-dark">{{ activeTabId | titlecase }} Content</h5>
+                    <p class="small">Content for this tab is not yet implemented.</p>
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- <div class="flex-grow-1 overflow-hidden">
             <div class="d-flex flex-column h-100">
-                <!-- Tabs -->
                 <div class="border-bottom bg-white">
-                    <div class="d-flex gap-4 px-4 overflow-x-auto custom-scrollbar">
+                    <div class="d-flex gap-4 px-3 py-2 overflow-x-auto custom-scrollbar">
                         <ng-container>
                             <button *ngFor="let tab of tabs" (click)="setActiveTab(tab.id)"
                                 class="btn btn-sm border-0 rounded-0 py-3  small text-nowrap position-relative"
-                                [class.text-dark]="activeTab === tab.id" [class.text-secondary]="activeTab !== tab.id">
+                                [class.text-dark]="activeTabId === tab.id" [class.text-secondary]="activeTabId !== tab.id">
                                 {{ tab.label }}
-                                <div *ngIf="activeTab === tab.id"
+                                <div *ngIf="activeTabId === tab.id"
                                     class="position-absolute bottom-0 start-0 end-0 bg-dark" style="height: 3px;"></div>
                             </button>
                         </ng-container>
                     </div>
                 </div>
-
-                <!-- Tab Content Area -->
                 <div class="flex-grow-1 bg-light p-4 overflow-auto custom-scrollbar">
                     <div class="border-0 h-100">
-                        <ng-container [ngSwitch]="activeTab">
+                        <ng-container [ngSwitch]="activeTabId">
                             <app-overview *ngSwitchCase="'overview'"></app-overview>
                             <app-examination *ngSwitchCase="'examination'"></app-examination>
                             <app-investigation *ngSwitchCase="'investigation'"></app-investigation>
-                            <!-- <app-diagnosis *ngSwitchCase="'diagnosis'"></app-diagnosis>
-                            <app-advice *ngSwitchCase="'advice'"></app-advice> -->
-
-                            <!-- <app-history *ngSwitchCase="'history'"></app-history>
-                            <app-auto-refraction *ngSwitchCase="'auto-refraction'"></app-auto-refraction>
-                            <app-refraction *ngSwitchCase="'refraction'"></app-refraction> -->
-
-
-                            <!-- Fallback for other tabs not yet implemented as components -->
                             <div *ngSwitchDefault
                                 class="p-5 text-center text-muted h-100 d-flex flex-column justify-content-center align-items-center">
                                 <i class="bi bi-cone-striped display-4 mb-3 text-secondary opacity-50"></i>
-                                <h5 class="text-dark">{{ activeTab | titlecase }} Content</h5>
+                                <h5 class="text-dark">{{ activeTabId | titlecase }} Content</h5>
                                 <p class="small">Content for this tab is not yet implemented.</p>
                             </div>
                         </ng-container>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

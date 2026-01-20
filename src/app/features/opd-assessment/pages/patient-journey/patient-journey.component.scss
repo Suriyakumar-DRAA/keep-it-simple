@@ -11,7 +11,7 @@
        display: flex;
        justify-content: space-between;
        align-items: center;
-    //    margin-bottom: 15px;
+       //    margin-bottom: 15px;
        flex-wrap: wrap;
        gap: 20px;
    }
@@ -35,10 +35,13 @@
        margin: 0;
    }
 
+   /* HIGHLIGHTED TOTAL TIME: Badge Style */
    .total-time {
-       color: #666;
+       color: #0d6efd;
+       background-color: #cfe2ff;
+       padding: 5px 10px;
+       border-radius: 4px;
        font-size: 0.8rem;
-       font-weight: 400;
        white-space: nowrap;
    }
 
@@ -123,7 +126,7 @@
 
    .journey-steps-wrapper {
        flex: 1;
-    //    background-color: #F8FAFB;
+       //    background-color: #F8FAFB;
        /* UPDATED: Left padding set to 0 to align first step with title */
        padding: 15px 15px 15px 0;
        border-radius: 6px;
@@ -159,7 +162,7 @@
        position: relative;
        flex-wrap: nowrap;
        /* Forces single row */
-    //    padding-bottom: 5px;
+       //    padding-bottom: 5px;
        /* Space for scrollbar */
    }
 
