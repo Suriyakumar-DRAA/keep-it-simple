@@ -15,7 +15,10 @@ import { forkJoin } from 'rxjs';
 })
 export class OverviewComponent {
 
+    @Output() viewTimeline = new EventEmitter<void>();
+
     private assessmentService = inject(AssessmentService);
+
 
     constructor() {
     }

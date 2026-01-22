@@ -1,5 +1,4 @@
 <div class="sidebar-container bg-light border-end d-flex flex-column h-100">
-
     <!-- Queue List with Scroll -->
     <div class="flex-grow-1 overflow-y-auto custom-scrollbar pt-2">
         <button *ngFor="let item of queueItems" (click)="selectQueue.emit(item.label)"

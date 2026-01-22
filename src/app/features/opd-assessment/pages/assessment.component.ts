@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, EventEmitter, HostListener, inject, Input, Output, signal } from '@angular/core';
+import { Component, computed, EventEmitter, HostListener, inject, Input, Output, signal, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
+import { BsModalService, BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
 import { OPDPatientStatsComponent } from '@features/opd-patient-stats/pages/opd-patient-stats.component';
 import { PatientQueueComponent } from '@features/opd-assessment/pages/patient-queue/patient-queue.component';
 import { PatientInfoComponent } from './patient-info/patient-info.component';
@@ -16,6 +17,7 @@ import { ExaminationComponent } from './examination/examination.component';
 import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { InvestigationComponent } from './investigation/investigation.component';
 import { PatientJourneyComponent } from './patient-journey/patient-journey.component';
+import { PatientSummaryComponent } from './patient-summary/patient-summary.component';
 
 @Component({
     selector: 'app-assessment',
@@ -35,9 +37,13 @@ import { PatientJourneyComponent } from './patient-journey/patient-journey.compo
         HistoryComponent,
         AutoRefractionComponent,
         RefractionComponent,
-        PatientJourneyComponent
+        PatientJourneyComponent,
+        PatientSummaryComponent
     ],
-    providers: [AssessmentService]
+    providers: [
+        AssessmentService,
+        BsModalService
+    ]
 })
 export class AssessmentComponent {
 
@@ -46,20 +52,25 @@ export class AssessmentComponent {
     patient: PatientWithCase | null = null;
     selectedQueue = 'My Queue';
     activeTabId = 'overview';
+    isSidebarOpen = false;
+    splitConfig = { left: 50, right: 50 };
     tabs = [
         { id: 'overview', label: 'Overview', completed: true },
         { id: 'exam', label: 'Examination', completed: true },
-        { id: 'diag', label: 'Diagnosis', completed: true },
         { id: 'invest', label: 'Investigation', completed: false },
+        { id: 'diag', label: 'Diagnosis', completed: true },
         { id: 'advice', label: 'Advice', completed: false },
-        { id: 'ref', label: 'Referral', completed: false },
-        { id: 'follow', label: 'Follow up', completed: false },
-        { id: 'reports', label: 'Reports', completed: false },
+        // { id: 'ref', label: 'Referral', completed: false },
+        // { id: 'follow', label: 'Follow up', completed: false },
+        // { id: 'reports', label: 'Reports', completed: false },
     ];
+    modalRef?: BsModalRef;
+    currentSide: 'left' | 'right' = 'left';
+
 
     private assessmentService = inject(AssessmentService);
 
-    constructor() {
+    constructor(private modalService: BsModalService) {
     }
 
     ngOnInit() {
@@ -144,4 +155,29 @@ export class AssessmentComponent {
     setActiveTab(tabId: string) {
         this.activeTabId = tabId;
     }
+
+    timelineOpenModal(template: TemplateRef<any>, side: 'left' | 'right') {
+        this.isSidebarOpen = !this.isSidebarOpen;
+    }
+
+    timelineCloseModal() {
+        this.isSidebarOpen = false;
+    }
+
+    // timelineOpenModal(template: TemplateRef<any>, side: 'left' | 'right') {
+    //     this.currentSide = side;
+
+    //     this.modalRef = this.modalService.show(template, {
+    //         // ngx-bootstrap applies this class to the modal-dialog
+    //         backdrop: false,
+    //         class: `modal-${side}`,
+    //         animated: true
+    //     });
+    // }
+
+    // timelineCloseModal() {
+    //     if (this.modalRef) {
+    //         this.modalRef.hide();
+    //     }
+    // }
 }

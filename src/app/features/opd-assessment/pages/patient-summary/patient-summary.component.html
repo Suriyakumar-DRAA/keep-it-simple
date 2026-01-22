@@ -1,0 +1,355 @@
+<div class="container-fluid p-3 p-md-4" style="max-width: 1200px;">
+    <div class="border-0">
+        <button type="button" class="btn btn-danger btn-sm position-absolute end-0 top-0 m-3" aria-label="Close"
+            (click)="close.emit()">
+            <i class="bi bi-x"></i> Close
+        </button>
+    </div>
+    <!-- Horizontal Timeline Tabs -->
+    <div class="timeline-tabs mb-4" *ngIf="showTimelineTabs">
+        @for (date of dates; track date) {
+        <div class="timeline-tab" [class.active]="activeDate() === date" (click)="activeDate.set(date)">
+            {{ date }}
+        </div>
+        }
+    </div>
+
+    <div class="row g-3">
+        <!-- Content -->
+        @if (activeDate() === '28 Nov 2025') {
+        <!-- Left Sidebar -->
+        <div class="col-12 col-lg-3 pe-lg-4">
+            <h6 class="fw-semibold mb-3">Visit Summary</h6>
+            <div class="card border">
+                <div class="card-body small">
+                    <div class="mb-3">
+                        <div class="fw-semibold mb-1">Visit Reason</div>
+                        <div class="text-muted">Alloxan follow up<br>Alloxan follow up</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="fw-semibold mb-1">Chief Complaints</div>
+                        <div class="text-muted">Blur in vision in both eyes</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="fw-semibold mb-1">Ophthalmic History</div>
+                        <div class="text-muted">H/O IOL in LE<br>H/O ION: in RE: 1 yre</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="fw-semibold mb-1">Systemic History</div>
+                        <div class="text-muted">Thyroid since 8 yrs</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="fw-semibold mb-1">Previous Surgery</div>
+                        <div class="text-muted">None</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="fw-semibold mb-1">Infectious Disease History</div>
+                        <div class="text-muted">None</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="fw-semibold mb-1">Allergies</div>
+                        <div class="text-muted">Sulpha</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-12 col-lg-9 ps-lg-4">
+            <!-- Refraction -->
+            <div class="card border mb-3">
+                <div class="card-body">
+                    <h6 class="fw-semibold mb-3">Refraction</h6>
+                    <div class="table-responsive">
+                        <table class="table table-sm small table-spacing">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 120px;"></th>
+                                    <th>Right Eye</th>
+                                    <th>Left Eye</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-muted">
+                                <tr>
+                                    <td class="fw-semibold text-dark">VA</td>
+                                    <td>PL + Inferior Nasal and central city</td>
+                                    <td>PL + Inferior Nasal and central city</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold text-dark">IOP (1)</td>
+                                    <td>ERB @ 1 14T(H) with NCT</td>
+                                    <td>14(H) @ NAT(1) not clear</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold text-dark">PGP</td>
+                                    <td>Type of Lens : Single Vision : Distant</td>
+                                    <td>Type of Lens : Single Vision : Distant</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Auto Refraction -->
+            <div class="card border mb-3">
+                <div class="card-body">
+                    <h6 class="fw-semibold mb-3">Auto Refraction</h6>
+                    <div class="table-responsive mb-3">
+                        <table class="table table-bordered table-sm small mb-0 table-spacing">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-start">Right Eye</th>
+                                    <th class="text-center">Sph</th>
+                                    <th class="text-center">Cyl</th>
+                                    <th class="text-center">Axis</th>
+                                    <th class="text-center">Vision</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-muted">
+                                <tr>
+                                    <td class="fw-medium text-dark">Distant</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium text-dark">Near</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm small mb-0 table-spacing">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-start">Left Eye</th>
+                                    <th class="text-center">Sph</th>
+                                    <th class="text-center">Cyl</th>
+                                    <th class="text-center">Axis</th>
+                                    <th class="text-center">Vision</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-muted">
+                                <tr>
+                                    <td class="fw-medium text-dark">Distant</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium text-dark">Near</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Squint Examination -->
+            <div class="card border mb-3">
+                <div class="card-body">
+                    <h6 class="fw-semibold mb-3">Squint Examination</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm small mb-0 table-spacing">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 200px;"></th>
+                                    <th>Right Eye</th>
+                                    <th>Left Eye</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-muted">
+                                <tr>
+                                    <td class="fw-medium text-dark">Extra ocular movement</td>
+                                    <td>Muscular and Binocular movements full and normal</td>
+                                    <td>Muscular and Binocular movements full and normal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Examination -->
+            <div class="card border mb-3">
+                <div class="card-body">
+                    <h6 class="fw-semibold mb-3">Examination</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm small mb-0 table-spacing">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 200px;"></th>
+                                    <th>Right Eye</th>
+                                    <th>Left Eye</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-muted">
+                                <tr>
+                                    <td class="fw-medium text-dark">Appearance</td>
+                                    <td>Normal</td>
+                                    <td>Normal</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium text-dark">Appendages</td>
+                                    <td>Normal</td>
+                                    <td>Normal</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium text-dark">Conjunctiva</td>
+                                    <td>Normal</td>
+                                    <td>Normal</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium text-dark">Sclera</td>
+                                    <td>Normal</td>
+                                    <td>Normal</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium text-dark">Cornea</td>
+                                    <td>Normal</td>
+                                    <td>S/P IOL 6.00mm Optiedge</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium text-dark">Anterior Chamber</td>
+                                    <td>Normal</td>
+                                    <td>Shallow</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium text-dark">Pupil</td>
+                                    <td>Shape normal dilated details not clear</td>
+                                    <td>Round shape Normal contour & Good round reflex</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium text-dark">Iris</td>
+                                    <td>details not clear</td>
+                                    <td>details not clear</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-medium text-dark">Lens</td>
+                                    <td>details not clear</td>
+                                    <td>Clear crystalline central</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ophthal Investigations -->
+            <div class="card border mb-3">
+                <div class="card-body">
+                    <h6 class="fw-semibold mb-3">Ophthal Investigations</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm small mb-0 table-spacing">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 60px;">S.No</th>
+                                    <th>Advised</th>
+                                    <th>Performed</th>
+                                    <th>Investigation</th>
+                                    <th>Doctor Name</th>
+                                    <th>Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-muted">
+                                <tr>
+                                    <td>01</td>
+                                    <td>USB B-SCAN (BE)</td>
+                                    <td>Yes</td>
+                                    <td>USB B-SCAN (BE)</td>
+                                    <td>Dr. Ashwin Kumar</td>
+                                    <td>BE: No Echo, Retina appears attached</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication Advised -->
+            <div class="card border mb-3">
+                <div class="card-body">
+                    <h6 class="fw-semibold mb-3">Medication Advised</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm small mb-0 table-spacing">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 60px;">S.No</th>
+                                    <th>Name</th>
+                                    <th>Qty</th>
+                                    <th>Frequency</th>
+                                    <th>Duration</th>
+                                    <th>Eye</th>
+                                    <th>Instruction</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-muted">
+                                <tr>
+                                    <td>01</td>
+                                    <td>TRUSOPT Eye Drops</td>
+                                    <td>01</td>
+                                    <td>2 times a day</td>
+                                    <td>Next Follow-up</td>
+                                    <td>Both Eyes</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>02</td>
+                                    <td>DIAMOX - 250 Tablet</td>
+                                    <td>01</td>
+                                    <td>2 times a day</td>
+                                    <td>1 Week</td>
+                                    <td></td>
+                                    <td>After meal</td>
+                                </tr>
+                                <tr>
+                                    <td>03</td>
+                                    <td>OMEZ - 20 Capsule</td>
+                                    <td>01</td>
+                                    <td>2 times a day</td>
+                                    <td>1 Week</td>
+                                    <td></td>
+                                    <td>Before meal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advice & Precautions -->
+            <div class="card border mb-3">
+                <div class="card-body">
+                    <h6 class="fw-semibold mb-3">Advice & Precautions</h6>
+                    <ul class="small mb-0">
+                        <li>Precaution text will come here</li>
+                        <li>Precaution text will come here</li>
+                        <li>Precaution text will come here</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        } @else {
+        <div class="col-12 text-center p-5 text-muted">
+            <p>No records found for {{ activeDate() }}</p>
+        </div>
+        }
+    </div>
+</div>
