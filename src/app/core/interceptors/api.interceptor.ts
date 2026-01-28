@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // Optionally modify request here (e.g., add headers)
     return next.handle(req).pipe(
       map(event => {

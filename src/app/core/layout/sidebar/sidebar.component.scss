@@ -1,25 +1,12 @@
-.sidebar-container {
-    width: 140px;
-    min-width: 140px;
+:host {
+    display: block;
+    height: 100%;
 }
 
-.queue-item:hover {
-    background-color: #f8f9fa;
-}
-
-.active-indicator {
-    width: 4px;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 2px;
+.btn-link {
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    &:hover {
+        opacity: 1;
+    }
 }

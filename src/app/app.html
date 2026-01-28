@@ -1,13 +1,9 @@
-<div class="d-flex flex-column vh-100 bg-light">
-
-  <!-- Top Header -->
-  <app-header [userRole]="userRole" (roleChange)="userRole = $event">
-  </app-header>
-
-  <!-- Sub Header -->
-  <app-sub-header [currentDate]="currentDate">
-  </app-sub-header>
-
-  <!-- Main Layout -->
-  <router-outlet></router-outlet>
+<div class="d-flex w-100 h-100 overflow-hidden">
+  <!-- Sidebar -->
+  <app-sidebar class="flex-shrink-0"></app-sidebar>
+  
+  <!-- Main Content -->
+  <main class="flex-grow-1 overflow-auto bg-light">
+    <router-outlet></router-outlet>
+  </main>
 </div>

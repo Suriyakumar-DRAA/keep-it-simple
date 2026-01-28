@@ -1,74 +1,225 @@
-<div class="split-layout">
-    <div class="left-panel border-end" [class.open]="isSidebarOpen"
-        [style.width.%]="isSidebarOpen ? splitConfig.left : 0">
-        <div class="left-panel-content">
-            <app-patient-summary (close)="timelineCloseModal()"></app-patient-summary>
+<div class="h-100 d-flex overflow-hidden">
+  
+  <!-- LEFT COLUMN: Patient List -->
+  <div class="d-flex flex-column border-end bg-white" style="width: 440px; flex-shrink: 0;">
+    
+    <!-- Header: My Queue -->
+    <div class="p-3 border-bottom">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="d-flex align-items-center gap-2">
+           <span class="badge bg-primary rounded-pill px-2 py-1 fs-6">07</span>
+           <h5 class="mb-0 fw-bold text-primary">My Queue</h5>
         </div>
+        <div class="d-flex align-items-center gap-2 bg-light rounded px-2 py-1">
+            <img src="assets/images/arrow-left.svg" width="16" alt="prev" role="button">
+            <span class="small fw-medium">Today - Jan 12, 2026</span>
+            <img src="assets/images/arrow-right.svg" width="16" alt="next" role="button">
+        </div>
+      </div>
+      
+      <!-- Search -->
+      <div class="input-group input-group-sm">
+        <button class="btn btn-outline-secondary dropdown-toggle bg-light border-end-0 text-muted" type="button">
+          Search by
+        </button>
+        <input type="text" class="form-control bg-light border-start-0" placeholder="Hint text for search">
+        <span class="input-group-text bg-light border-start-0">
+             <i class="bi bi-search text-muted"></i>
+        </span>
+      </div>
     </div>
 
-    <div class="d-flex flex-grow-1 overflow-hidden right-panel">
-        <!-- Stats Count -->
-        <app-opd-patient-stats [selectedQueue]="selectedQueue" (selectQueue)="onQueueSelect($event)" *ngIf="!isSidebarOpen">
-        </app-opd-patient-stats>
+    <!-- Stats Tabs (Scrollable) -->
+    <div class="d-flex align-items-center gap-2 overflow-auto p-2 border-bottom no-scrollbar bg-light">
+       @for (stat of queueStats; track stat.label) {
+       <div 
+            class="stat-card d-flex flex-column align-items-center justify-content-center px-3 py-2 rounded cursor-pointer"
+            [class.active]="stat.active"
+            [class.bg-white]="!stat.active"
+            [class.text-dark]="!stat.active">
+           <span class="fw-bold fs-5" [class.text-secondary]="!stat.active">{{ stat.count }}</span>
+           <span class="small text-nowrap" [class.text-muted]="!stat.active">{{ stat.label }}</span>
+       </div>
+       }
+    </div>
 
-        <!-- Queue -->
-        <app-patient-queue [patients]="patients" [selectedPatientId]="selectedPatientId"
-            (selectPatient)="onSelectPatient($event)" [queueLabel]="selectedQueue" *ngIf="!isSidebarOpen">
-        </app-patient-queue>
-
-        <div class="flex-grow-1 d-flex flex-column overflow-hidden bg-white h-100">
-            <ng-container *ngIf="patient; else noSelection">
-                <app-patient-info [patient]="patient" [case]="patient.case" class="flex-shrink-0">
-                    <!-- Prevent shrinking -->
-                </app-patient-info>
-            </ng-container>
-
-            <ng-template #noSelection>
-                <div class="d-flex align-items-center justify-content-center h-100 text-muted">
-                    <div class="text-center">
-                        <i class="bi bi-people display-1"></i>
-                        <p class="mt-3">Select a patient from the queue to view details.</p>
-                    </div>
-                </div>
-            </ng-template>
-
-            <app-patient-journey> </app-patient-journey>
-
-            <!-- Tabs Navigation -->
-            <div class="px-3 main-workspace">
-                <ul class="nav nav-tabs border-bottom-0">
-                    @for (tab of tabs; track tab.id) {
-                    <li class="nav-item">
-                        <button class="nav-link" [class.active]="activeTabId === tab.id" (click)="activeTabId = tab.id">
-                            {{ tab.label }}
-                            @if (tab.completed) {
-                            <i class="bi bi-check-circle-fill text-success ms-2" style="font-size: 0.8rem;"></i>
-                            }
-                        </button>
-                    </li>
-                    }
-                </ul>
-                <!-- Tab Content Area -->
-                <div class="tab-content flex-grow-1 bg-light px-3 py-3">
-                    <ng-container [ngSwitch]="activeTabId">
-                        <app-overview *ngSwitchCase="'overview'"
-                            (viewTimeline)="timelineOpenModal(splitTemplate, 'left')"></app-overview>
-                        <app-examination *ngSwitchCase="'examination'"></app-examination>
-                        <app-investigation *ngSwitchCase="'investigation'"></app-investigation>
-                        <div *ngSwitchDefault
-                            class="p-5 text-center text-muted h-100 d-flex flex-column justify-content-center align-items-center">
-                            <i class="bi bi-cone-striped display-4 mb-3 text-secondary opacity-50"></i>
-                            <h5 class="text-dark">{{ activeTabId | titlecase }} Content</h5>
-                            <p class="small">Content for this tab is not yet implemented.</p>
-                        </div>
-                    </ng-container>
-                </div>
+    <!-- Patient List -->
+    <div class="flex-grow-1 overflow-auto bg-white p-2">
+       @for (patient of patients; track patient.id) {
+       <div 
+            class="patient-card p-2 mb-2 rounded border cursor-pointer d-flex gap-2"
+            [class.active]="patient.active">
+            
+            <!-- Avatar Placeholder -->
+            <div class="avatar-placeholder rounded-circle bg-light d-flex align-items-center justify-content-center text-primary fw-bold" 
+                 style="width: 40px; height: 40px; font-size: 14px;">
+              {{ patient.name | slice:0:1 }}
             </div>
 
-            <ng-template #splitTemplate>
-                <app-patient-summary (close)="timelineCloseModal()"></app-patient-summary>
-            </ng-template>
-
-        </div>
+            <div class="d-flex flex-column flex-grow-1">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <span class="fw-bold d-block text-truncate" style="max-width: 140px;">{{ patient.name }}</span>
+                        <div class="d-flex gap-2 small text-muted">
+                            <span>{{ patient.id }}</span>
+                            <span>•</span>
+                            <span>{{ patient.age }} / {{ patient.gender }}</span>
+                        </div>
+                    </div>
+                    @if (patient.priority) {
+                    <span class="badge bg-danger-subtle text-danger rounded-pill">{{ patient.priority }}</span>
+                    }
+                </div>
+                <div class="mt-2 d-flex justify-content-between align-items-end">
+                    <span class="small text-muted">{{ patient.time }}</span>
+                    @if (patient.status === 'Completed') {
+                    <span class="badge bg-success-subtle text-success rounded-pill px-2">done</span>
+                    }
+                </div>
+            </div>
+       </div>
+       }
     </div>
+  </div>
+
+  <!-- RIGHT COLUMN: Patient Details / Assessment -->
+  <div class="flex-grow-1 bg-white overflow-auto d-flex flex-column">
+
+    <!-- Header: Patient Info -->
+    <div class="p-3 border-bottom d-flex align-items-center justify-content-between bg-white sticky-top">
+         <div class="d-flex align-items-center gap-3">
+             <div class="avatar-lg bg-primary-subtle rounded-circle d-flex align-items-center justify-content-center text-primary fw-bold fs-4" style="width: 48px; height: 48px;">
+                 R
+             </div>
+             <div>
+                 <div class="d-flex align-items-center gap-2">
+                     <h5 class="mb-0 fw-bold">Ralph Edwards</h5>
+                     <span class="badge border text-dark fw-normal">Male</span>
+                     <span class="badge border text-dark fw-normal">24 Years</span>
+                 </div>
+                 <div class="d-flex gap-3 small text-muted mt-1">
+                     <span>ID: PID-29384</span>
+                     <span>•</span>
+                     <span>+91 95000 78222</span>
+                 </div>
+             </div>
+         </div>
+         <div class="d-flex gap-2">
+             <button class="btn btn-outline-primary btn-sm">Vitals</button>
+             <button class="btn btn-outline-primary btn-sm">History</button>
+             <button class="btn btn-primary btn-sm">Save & Next</button>
+         </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="px-3 pt-2 bg-light border-bottom">
+        <ul class="nav nav-tabs border-bottom-0 gap-4">
+             @for (tab of tabs; track tab) {
+             <li class="nav-item">
+                 <a class="nav-link pb-2 px-0 text-dark" 
+                    [class.active]="tab === 'Initial Assessment'" 
+                    [class.fw-bold]="tab === 'Initial Assessment'"
+                    style="border: none; border-bottom: 2px solid transparent;"
+                    [style.border-bottom-color]="tab === 'Initial Assessment' ? 'var(--bs-primary)' : 'transparent'"
+                    href="#">
+                    {{ tab }}
+                 </a>
+             </li>
+             }
+        </ul>
+    </div>
+
+    <!-- FORM CONTENT -->
+    <div class="p-4 flex-grow-1 overflow-auto">
+        
+        <h6 class="fw-bold mb-3">Pain Assessment</h6>
+        <div class="row g-3 mb-4">
+            <div class="col-12">
+                <label for="painScore" class="form-label small fw-bold text-muted">Pain Score</label>
+                <div class="d-flex gap-2">
+                    @for (score of [1,2,3,4,5,6,7,8,9,10]; track score) {
+                    <button class="btn btn-outline-secondary rounded-circle" 
+                            [class.btn-primary]="score === 6" 
+                            [class.text-white]="score === 6"
+                            style="width: 36px; height: 36px; padding: 0;">
+                            {{ score }}
+                    </button>
+                    }
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="painLocation" class="form-label small fw-bold text-muted">Pain Location</label>
+                <div class="d-flex gap-2 flex-wrap">
+                    @for (loc of ['Abdomen', 'Chest', 'Back', 'Head', 'Neck', 'Arms', 'Legs']; track loc) {
+                    <div class="form-check">
+                         <input class="form-check-input" type="checkbox" [id]="'loc-' + loc" [checked]="loc === 'Abdomen' || loc === 'Head'">
+                         <label class="form-check-label" [for]="'loc-' + loc">{{ loc }}</label>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mb-3">Symptoms</h6>
+        <div class="row g-3">
+             <div class="col-12">
+                 <label for="symptomsSearch" class="form-label small fw-bold text-muted">Search Symptoms</label>
+                 <div class="input-group">
+                      <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                      <input type="text" id="symptomsSearch" class="form-control border-start-0 ps-0" placeholder="Start typing to search...">
+                 </div>
+             </div>
+             
+             <!-- Mocked Form Fields -->
+             <div class="col-md-6">
+                 <label for="chiefComplaint" class="form-label small fw-bold text-muted">Chief Complaint</label>
+                 <select id="chiefComplaint" class="form-select">
+                     <option>Fever</option>
+                 </select>
+             </div>
+             <div class="col-md-6">
+                 <label for="duration" class="form-label small fw-bold text-muted">Duration</label>
+                 <input type="text" id="duration" class="form-control" value="3 Days">
+             </div>
+
+             <div class="col-md-6">
+                 <label for="severity" class="form-label small fw-bold text-muted">Severity</label>
+                 <select id="severity" class="form-select">
+                     <option>High</option>
+                 </select>
+             </div>
+             <div class="col-md-6">
+                 <label for="onset" class="form-label small fw-bold text-muted">Onset</label>
+                 <input type="text" id="onset" class="form-control" value="Sudden">
+             </div>
+
+             <div class="col-md-6">
+                 <label for="aggravatingFactors" class="form-label small fw-bold text-muted">Aggravating Factors</label>
+                 <input type="text" id="aggravatingFactors" class="form-control" value="Cold Air">
+             </div>
+             <div class="col-md-6">
+                 <label for="relievingFactors" class="form-label small fw-bold text-muted">Relieving Factors</label>
+                 <input type="text" id="relievingFactors" class="form-control" value="Rest">
+             </div>
+
+             <div class="col-md-6">
+                 <label for="associatedSymptoms" class="form-label small fw-bold text-muted">Associated Symptoms</label>
+                 <input type="text" id="associatedSymptoms" class="form-control" value="Headache">
+             </div>
+             <div class="col-md-6">
+                 <label for="notes" class="form-label small fw-bold text-muted">Notes</label>
+                 <input type="text" id="notes" class="form-control" value="-">
+             </div>
+        </div>
+
+        <div class="mt-4 p-3 bg-light rounded text-center border-dashed border-secondary">
+             <div class="d-flex flex-column align-items-center justify-content-center text-muted gap-2">
+                 <img src="assets/images/help.svg" alt="upload" width="24" class="opacity-50">
+                 <span class="small">Drag & drop files here or <a href="#" class="text-primary text-decoration-none">browse</a></span>
+             </div>
+        </div>
+
+    </div>
+  </div>
+
 </div>

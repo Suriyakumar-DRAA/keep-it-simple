@@ -1,88 +1,150 @@
-:host {
-    display: block;
-    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    height: 100%;
-    min-height: 0;
+/* Global Design Tokens */
+:root {
+  /* Colors - Primary */
+  --color-primary: #0054A5;
+  --color-primary-dark: #144CA7;
+  --color-primary-light: #0375D9;
+  --color-primary-lighter: #287DCE;
+  --color-primary-bg: #EFF6FF;
+  --color-primary-bg-light: #F0F8FF;
+  --color-primary-bg-lighter: #D9EDFF;
+
+  /* Colors - Neutral */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-bg: #EFF3FB;
+  --color-bg-secondary: #EBF0F5;
+  --color-bg-tertiary: #F4F7FA;
+  --color-bg-card: rgba(213, 223, 243, 0.4);
+
+  /* Colors - Text */
+  --color-text-primary: #000000;
+  --color-text-secondary: #464F61;
+  --color-text-tertiary: #5D6574;
+  --color-text-dark: #011120;
+  --color-text-heading: #1E1E1E;
+  --color-text-label: #171C26;
+  --color-text-muted: rgba(23, 28, 38, 0.5);
+  --color-text-disabled: rgba(64, 64, 65, 0.5);
+  --color-text-gray: #545759;
+  --color-text-brand: #344256;
+  --color-text-black: #1B1919;
+
+  /* Colors - Status */
+  --color-status-open: #0375D9;
+  --color-status-open-bg: #F0F8FF;
+  --color-status-open-border: #D8ECFE;
+  --color-status-emergency-bg: #D9EDFF;
+  
+  /* Colors - Chips */
+  --color-chip-review-bg: #F4FCFD;
+  --color-chip-review-text: #0D5B65;
+  --color-chip-free-bg: #FEF7F9;
+  --color-chip-free-text: #8A0927;
+
+  /* Colors - Borders */
+  --color-border: #E6E6E6;
+  --color-border-light: #BCC8D3;
+  --color-border-medium: #B1B3B6;
+
+  /* Colors - Buttons */
+  --color-btn-primary: #0054A5;
+  --color-btn-secondary: #FFFFFF;
+  --color-btn-ghost: transparent;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
 }
 
-.vh-100 {
-    height: 100vh !important;
+body {
+  background-color: var(--color-bg);
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-text-primary);
 }
 
-.flex-grow-1 {
-    flex-grow: 1 !important;
+/* Global Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.overflow-hidden {
-    overflow: hidden !important;
+/* Bootstrap Overrides & Utilities */
+.bg-sidebar {
+  background-color: var(--color-white);
+  border-right: 1px solid var(--color-border);
 }
 
-
-/* 1. SETUP: Fix the modal to the side 
-Note: ngx-bootstrap applies the class to the modal-dialog element
-*/
-.modal-dialog.modal-left,
-.modal-dialog.modal-right {
-    position: fixed;
-    margin: auto;
-    width: 50%;
-    /* Split window width */
-    max-width: 50%;
-    /* Override default bootstrap max-width */
-    height: 100%;
-    top: 0;
-    bottom: 0;
+.text-primary {
+  color: var(--color-primary) !important;
 }
 
-/* Responsive: On mobile, make it full width */
-@media (max-width: 768px) {
-
-    .modal-dialog.modal-left,
-    .modal-dialog.modal-right {
-        width: 100%;
-        max-width: 100%;
-    }
+.text-muted {
+  color: var(--color-text-tertiary) !important;
 }
 
-.modal-content {
-    height: 100%;
-    overflow-y: auto;
-    border-radius: 0 !important;
-    /* Remove rounded corners */
-    border: none !important;
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  background-color: var(--color-white);
 }
 
-/* 2. ANIMATIONS 
-      We use the .modal.show parent class (added by bootstrap when open)
-      to trigger the slide in of the .modal-dialog child.
-    */
-
-/* LEFT SIDEBAR */
-.modal-dialog.modal-left {
-    left: 0;
-    transform: translate3d(-100%, 0, 0);
-    /* Start hidden to the left */
-    transition: transform 0.3s ease-out;
+.form-control, .form-select {
+  border-color: var(--color-border-medium);
+  border-radius: var(--radius-sm);
+  &:focus {
+    border-color: var(--color-primary-light);
+    box-shadow: 0 0 0 0.25rem rgba(3, 117, 217, 0.25);
+  }
 }
 
-.modal.show .modal-dialog.modal-left {
-    transform: translate3d(0, 0, 0);
-    /* Slide in */
+.btn-primary {
+  background-color: var(--color-btn-primary);
+  border-color: var(--color-btn-primary);
+  &:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+  }
 }
 
-/* RIGHT SIDEBAR */
-.modal-dialog.modal-right {
-    right: 0;
-    transform: translate3d(100%, 0, 0);
-    /* Start hidden to the right */
-    transition: transform 0.3s ease-out;
+.nav-tabs .nav-link {
+  color: var(--color-text-tertiary);
+  border: none;
+  border-bottom: 2px solid transparent;
+  &:hover {
+    color: var(--color-primary);
+    border-color: transparent;
+  }
+  &.active {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    font-weight: 500;
+  }
 }
 
-.modal.show .modal-dialog.modal-right {
-    transform: translate3d(0, 0, 0);
-    /* Slide in */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
 
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-light);
+  border-radius: var(--radius-4);
 
-
+  &:hover {
+    background: var(--color-text-tertiary);
+  }
+}

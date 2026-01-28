@@ -1,183 +1,152 @@
-import { CommonModule } from '@angular/common';
-import { Component, computed, EventEmitter, HostListener, inject, Input, Output, signal, TemplateRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import moment from 'moment';
-import { forkJoin } from 'rxjs';
-import { BsModalService, BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
-import { OPDPatientStatsComponent } from '@features/opd-patient-stats/pages/opd-patient-stats.component';
-import { PatientQueueComponent } from '@features/opd-assessment/pages/patient-queue/patient-queue.component';
-import { PatientInfoComponent } from './patient-info/patient-info.component';
-import { PatientWithCase } from '../model/patient.model';
-import { HistoryComponent } from './history/history.component';
-import { AutoRefractionComponent } from './auto-refraction/auto-refraction.component';
-import { RefractionComponent } from './refraction/refraction.component';
-import { AssessmentService } from '../services/assessment.service';
-import { OverviewComponent } from './overview/overview.component';
-import { ExaminationComponent } from './examination/examination.component';
-import { DiagnosisComponent } from './diagnosis/diagnosis.component';
-import { InvestigationComponent } from './investigation/investigation.component';
-import { PatientJourneyComponent } from './patient-journey/patient-journey.component';
-import { PatientSummaryComponent } from './patient-summary/patient-summary.component';
+import { Component } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+
+interface Patient {
+  id: string;
+  name: string;
+  age: number;
+  gender: string;
+  mrNo: string;
+  statusTag: { type: string, label: string }[];
+  chips: { type: string, label: string }[];
+  time: string;
+  active: boolean;
+  image?: string;
+  priority?: string;
+  status?: string;
+}
 
 @Component({
-    selector: 'app-assessment',
-    standalone: true,
-    templateUrl: './assessment.component.html',
-    styleUrls: ['./assessment.component.scss'],
-    imports: [
-        CommonModule,
-        FormsModule,
-        OPDPatientStatsComponent,
-        PatientQueueComponent,
-        PatientInfoComponent,
-        OverviewComponent,
-        ExaminationComponent,
-        // DiagnosisComponent,
-        InvestigationComponent,
-        HistoryComponent,
-        AutoRefractionComponent,
-        RefractionComponent,
-        PatientJourneyComponent,
-        PatientSummaryComponent
-    ],
-    providers: [
-        AssessmentService,
-        BsModalService
-    ]
+  selector: 'app-assessment',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './assessment.component.html',
+  styleUrls: ['./assessment.component.scss'],
+  providers: [DatePipe]
 })
 export class AssessmentComponent {
+  today = new Date('2026-01-12'); // Mock date from Figma
+  tabs = ['Initial Assessment', 'Diagnosis', 'Prescription', 'Procedure', 'Referral'];
 
-    selectedPatientId: string | null = null;
-    patients: PatientWithCase[] = [];
-    patient: PatientWithCase | null = null;
-    selectedQueue = 'My Queue';
-    activeTabId = 'overview';
-    isSidebarOpen = false;
-    splitConfig = { left: 50, right: 50 };
-    tabs = [
-        { id: 'overview', label: 'Overview', completed: true },
-        { id: 'exam', label: 'Examination', completed: true },
-        { id: 'invest', label: 'Investigation', completed: false },
-        { id: 'diag', label: 'Diagnosis', completed: true },
-        { id: 'advice', label: 'Advice', completed: false },
-        // { id: 'ref', label: 'Referral', completed: false },
-        // { id: 'follow', label: 'Follow up', completed: false },
-        // { id: 'reports', label: 'Reports', completed: false },
-    ];
-    modalRef?: BsModalRef;
-    currentSide: 'left' | 'right' = 'left';
+  // Stats
+  queueStats = [
+    { count: 150, label: 'All', active: false },
+    { count: '05', label: 'All OP', active: true },
+    { count: 20, label: 'Not Arrived', active: false },
+    { count: '04', label: 'Completed', active: false },
+    { count: 20, label: 'Referrals', active: false },
+    { count: 20, label: 'Unassigned', active: false },
+    { count: 20, label: 'All Scheduled', active: false },
+  ];
 
-
-    private assessmentService = inject(AssessmentService);
-
-    constructor(private modalService: BsModalService) {
+  // Patients
+  patients: Patient[] = [
+    {
+      id: '1',
+      name: 'Mrs. Geetha Padmanabhan (Female)',
+      age: 38,
+      gender: 'Female',
+      mrNo: 'GBC/95000/192',
+      statusTag: [{ type: 'open-blue', label: 'Optom' }, { type: 'open-light', label: 'E' }],
+      chips: [{ type: 'review', label: 'Review' }, { type: 'free', label: 'Free' }],
+      time: '02:43 min',
+      active: true,
+      priority: 'High',
+      status: 'Pending'
+    },
+    {
+      id: '2',
+      name: 'Mr. Venkat (Male)',
+      age: 45,
+      gender: 'Male',
+      mrNo: 'GBC/95001/193',
+      statusTag: [{ type: 'open-blue', label: 'Optom' }, { type: 'open-light', label: 'E' }],
+      chips: [{ type: 'review', label: 'Post Op' }, { type: 'free', label: 'Free' }],
+      time: '02:43 min',
+      active: false,
+      status: 'Completed'
+    },
+    {
+      id: '3',
+      name: 'Mr. Ajay Chowdary (Male)',
+      age: 29,
+      gender: 'Male',
+      mrNo: 'GBC/95002/194',
+      statusTag: [{ type: 'open-blue', label: 'Optom' }, { type: 'open-light', label: 'E' }],
+      chips: [{ type: 'new', label: 'New' }, { type: 'free', label: 'Free' }],
+      time: '02:43 min',
+      active: false
+    },
+     {
+      id: '4',
+      name: 'Mr. Silvian G (Male)',
+      age: 52,
+      gender: 'Male',
+      mrNo: 'GBC/95003/195',
+      statusTag: [{ type: 'open-blue', label: 'Optom' }, { type: 'open-light', label: 'E' }],
+      chips: [{ type: 'review', label: 'Review' }, { type: 'free', label: 'Free' }],
+      time: '02:43 min',
+      active: false
+    },
+    {
+      id: '5',
+      name: 'Mrs. Swathi (Female)',
+      age: 31,
+      gender: 'Female',
+      mrNo: 'GBC/95004/196',
+      statusTag: [{ type: 'open-blue', label: 'Optom' }, { type: 'open-light', label: 'E' }],
+      chips: [{ type: 'new', label: 'New' }, { type: 'free', label: 'Free' }],
+      time: '02:43 min',
+      active: false
     }
+  ];
 
-    ngOnInit() {
-        this.patients = this.loadMockPatients();
-        if (this.patients.length > 0) {
-            this.selectedPatientId = this.patients[0].id;
-            this.patient = this.patients.find(p => p.id === this.selectedPatientId) || null;
-        }
-        this.setDefaultTab();
-    }
+  selectedPatient = this.patients[0];
 
-    onQueueSelect(queueLabel: string) {
-        this.selectedQueue = queueLabel;
-        this.assessmentService.setVisiblePatientQueue(true);
-    }
+  // Right Side Data
+  patientDetails = {
+    ...this.selectedPatient,
+    systemicHistory: 'Thyroid since 8 yrs.',
+    previousDiagnosis: 'None',
+    ophthalmicHistory: 'Dry Eye (Both)',
+    allergies: 'Sulpha',
+    appointmentType: 'Walk-in',
+    occupation: 'Software Developer',
+    dob: '26 Jan 2002',
+    infectiousDisease: 'None',
+    previousSurgery: 'None',
+    visitReason: 'Follow up / Review',
+    chiefComplaints: ['Burning sensation in both eyes.', 'Redness and irritation'],
+    medication: [
+        'Refresh Tears drops',
+        'Morning - 2 drops each in BE',
+        'Evening - 2 drops each in BE'
+    ],
+    followUp: 'After 2 weeks - 12 Jan 2026',
+    findings: 'Normal'
+  };
 
-    onSelectPatient(event: any) {
-        this.selectedPatientId = event;
-        this.patient = this.patients.find(p => p.id === this.selectedPatientId) || null;
-    }
+  leStats = {
+      k1: '42.00 @ 180',
+      k2: '41.20 @ 90',
+      va: '6/6',
+      near: 'N10',
+      ph: '6/6',
+      autoRef: 'Sph +1.00 | Cyl —0.50 | Axis 90',
+      iop: '13 @ 3:46 PM',
+      dryRef: '+0.50 | —0.50 X 90 (6/6)',
+      nearAdd: '+1.75'
+  };
 
-    loadMockPatients() {
-        return [
-            {
-                id: '1',
-                name: 'Suhasini',
-                mr_no: '20230001',
-                gender: 'Female',
-                age: 32,
-                systemic_history: 'Hypertension',
-                ophthalmic_history: 'None',
-                previous_surgery: 'None',
-                previous_diagnosis: 'None',
-                allergies: 'None',
-                phone: '9790897371',
-                case: {
-                    id: 'c1', patient_id: '1', visit_date: new Date().toISOString(),
-                    status: 'New', appointment_type: 'Paid', patient_referral: 'Dr. Kranthi Brahmavar'
-                }
-            },
-            {
-                id: '2',
-                name: 'Rajesh Kumar',
-                mr_no: '20230002',
-                gender: 'Male',
-                age: 45,
-                systemic_history: 'Diabetes',
-                case: {
-                    id: 'c2', patient_id: '2', visit_date: new Date(Date.now() - 15 * 60000).toISOString(),
-                    status: 'Review', appointment_type: 'Free'
-                }
-            },
-            {
-                id: '3',
-                name: 'Priya Sharma',
-                mr_no: '20230003',
-                gender: 'Female',
-                age: 28,
-                case: {
-                    id: 'c3', patient_id: '3', visit_date: new Date(Date.now() - 45 * 60000).toISOString(),
-                    status: 'Free', appointment_type: 'Free'
-                }
-            },
-            {
-                id: '4',
-                name: 'Amit Patel',
-                mr_no: '20230004',
-                gender: 'Male',
-                age: 60,
-                case: {
-                    id: 'c4', patient_id: '4', visit_date: new Date(Date.now() - 120 * 60000).toISOString(),
-                    status: 'Paid', appointment_type: 'Paid'
-                }
-            }
-        ];
-    }
-
-    setDefaultTab() {
-        this.activeTabId = 'overview';
-    }
-
-    setActiveTab(tabId: string) {
-        this.activeTabId = tabId;
-    }
-
-    timelineOpenModal(template: TemplateRef<any>, side: 'left' | 'right') {
-        this.isSidebarOpen = !this.isSidebarOpen;
-    }
-
-    timelineCloseModal() {
-        this.isSidebarOpen = false;
-    }
-
-    // timelineOpenModal(template: TemplateRef<any>, side: 'left' | 'right') {
-    //     this.currentSide = side;
-
-    //     this.modalRef = this.modalService.show(template, {
-    //         // ngx-bootstrap applies this class to the modal-dialog
-    //         backdrop: false,
-    //         class: `modal-${side}`,
-    //         animated: true
-    //     });
-    // }
-
-    // timelineCloseModal() {
-    //     if (this.modalRef) {
-    //         this.modalRef.hide();
-    //     }
-    // }
+   reStats = {
+      k1: '42.00 @ 180',
+      k2: '41.20 @ 90',
+      va: '6/6',
+      near: 'N10',
+      ph: '6/6',
+      autoRef: 'Sph +1.00 | Cyl —0.50 | Axis 90',
+      iop: '13 @ 3:46 PM',
+      dryRef: '+0.50 | —0.50 X 90 (6/6)',
+      nearAdd: '+1.75'
+  };
 }
