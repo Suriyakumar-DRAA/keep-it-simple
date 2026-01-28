@@ -32,7 +32,7 @@ import { PatientSummaryComponent } from './patient-summary/patient-summary.compo
         PatientInfoComponent,
         OverviewComponent,
         ExaminationComponent,
-        DiagnosisComponent,
+        // DiagnosisComponent,
         InvestigationComponent,
         HistoryComponent,
         AutoRefractionComponent,

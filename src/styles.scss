@@ -1,6 +1,8 @@
 :host {
     display: block;
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    height: 100%;
+    min-height: 0;
 }
 
 .vh-100 {
@@ -14,8 +16,6 @@
 .overflow-hidden {
     overflow: hidden !important;
 }
-
-
 
 
 /* 1. SETUP: Fix the modal to the side 
@@ -82,3 +82,7 @@ Note: ngx-bootstrap applies the class to the modal-dialog element
     transform: translate3d(0, 0, 0);
     /* Slide in */
 }
+
+
+
+

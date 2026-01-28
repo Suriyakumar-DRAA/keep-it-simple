@@ -79,11 +79,21 @@
      border-bottom-color: #0d6efd;
  }
 
+
  /* START: SPLIT LAYOUT */
+
+ .main-workspace {
+     flex: 1;
+     min-height: 0;
+     overflow: hidden;
+ }
+
  .split-layout {
      display: flex;
      flex: 1;
      width: 100%;
+     height: 100%;
+     min-height: 0;
      overflow: hidden;
      position: relative;
      background-color: #f0f2f5;
@@ -91,15 +101,19 @@
 
  .left-panel {
      width: 0;
+     height: 100%;
+     min-height: 0;
+     max-height: 100%;
      opacity: 0;
      background: white;
-     transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease;
-     overflow-y: auto;
-     overflow-x: hidden;
+     /* Smoother transition for width expansion */
+     transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+     overflow: hidden;
      display: flex;
      flex-direction: column;
      position: relative;
-     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+     /* Slightly heavier shadow for depth */
      z-index: 10;
  }
 
@@ -111,14 +125,43 @@
  .left-panel-content {
      min-width: 550px;
      padding: 1.5rem;
+     flex: 1;
+     min-height: 0;
+     overflow-y: auto;
+     overflow-x: hidden;
+     /* Default State: Hidden and shifted left */
+     opacity: 0;
+     transform: translateX(-30px);
+     /* Smooth transition for the content arrival */
+     transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+ }
+
+ /* When panel is open, slide content in */
+ .left-panel.open .left-panel-content {
+     opacity: 1;
+     transform: translateX(0);
+     /* Delay ensures the sidebar opens a bit before content slides in */
+     transition-delay: 0.15s;
  }
 
  .right-panel {
      flex: 1;
+     height: 100%;
+     min-height: 0;
+     max-height: 100%;
      overflow-y: auto;
      position: relative;
-     transition: all 0.4s ease;
+     transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
      background-color: #f0f2f5;
+ }
+
+ /* Mobile Responsive: Overlay Sidebar instead of Split */
+ @media (max-width: 992px) {
+     .left-panel.open {
+         width: 100% !important;
+         position: absolute;
+         height: 100%;
+     }
  }
 
  /* END: SPLIT LAYOUT */

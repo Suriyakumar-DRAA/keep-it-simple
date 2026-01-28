@@ -1,46 +1,40 @@
- .patient-avatar {
-     width: 70px;
-     height: 70px;
-     background: #FF9E80;
- }
+.table-spacing tbody tr td {
+    padding: 8px 10px !important;
+}
 
- .table-spacing tbody tr td {
-     padding: 8px 10px !important;
- }
+.table-spacing thead tr th {
+    padding: 8px 10px !important;
+}
 
- .table-spacing thead tr th {
-     padding: 8px 10px !important;
- }
+/* Timeline Tabs */
+.timeline-tabs {
+    background: transparent;
+    padding: 8px 0;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+}
 
- /* Timeline Tabs */
- .timeline-tabs {
-     background: transparent;
-     padding: 8px 0;
-     display: flex;
-     gap: 8px;
-     overflow-x: auto;
- }
+.timeline-tab {
+    flex: 0 0 auto;
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
 
- .timeline-tab {
-     flex: 0 0 auto;
-     padding: 10px 20px;
-     background: white;
-     border: 1px solid #e0e0e0;
-     border-radius: 4px;
-     font-size: 13px;
-     font-weight: 500;
-     color: #333;
-     cursor: pointer;
-     transition: all 0.2s ease;
-     white-space: nowrap;
- }
+.timeline-tab:hover {
+    background: #f8f9fa;
+}
 
- .timeline-tab:hover {
-     background: #f8f9fa;
- }
-
- .timeline-tab.active {
-     background: #4A90E2;
-     color: white;
-     border-color: #4A90E2;
- }
+.timeline-tab.active {
+    background: #4A90E2;
+    color: white;
+    border-color: #4A90E2;
+}

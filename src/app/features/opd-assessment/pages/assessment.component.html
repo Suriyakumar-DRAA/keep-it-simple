@@ -1,6 +1,6 @@
 <div class="split-layout">
     <div class="left-panel border-end" [class.open]="isSidebarOpen"
-        [style.width.%]="isSidebarOpen ? splitConfig.left : 0" *ngIf="isSidebarOpen">
+        [style.width.%]="isSidebarOpen ? splitConfig.left : 0">
         <div class="left-panel-content">
             <app-patient-summary (close)="timelineCloseModal()"></app-patient-summary>
         </div>
@@ -32,7 +32,7 @@
                 </div>
             </ng-template>
 
-            <!-- <app-patient-journey> </app-patient-journey> -->
+            <app-patient-journey> </app-patient-journey>
 
             <!-- Tabs Navigation -->
             <div class="px-3 main-workspace">
