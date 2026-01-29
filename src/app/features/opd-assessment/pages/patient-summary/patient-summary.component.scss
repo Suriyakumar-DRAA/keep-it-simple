@@ -38,3 +38,10 @@
     color: white;
     border-color: #4A90E2;
 }
+
+.patient-summary-content {
+    max-width: 1200px;
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding-right: 10px;
+}
