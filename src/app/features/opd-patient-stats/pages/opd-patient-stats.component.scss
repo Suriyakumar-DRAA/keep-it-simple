@@ -1,11 +1,64 @@
-.sidebar-container {
-    width: 140px;
-    min-width: 140px;
+/* --- SIDEBAR STYLES --- */
+.queue-sidebar {
+    width: var(--vtab-width);
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+.queue-item {
+    width: 100%;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--vtab-text-default);
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 130%;
+    letter-spacing: -0.28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 4px;
+    border-left: 4px solid transparent;
+    transition: all 0.2s ease-in-out;
 }
 
 .queue-item:hover {
-    background-color: #f8f9fa;
+    background-color: #f1f1f1;
 }
+
+.queue-count {
+    display: block;
+    margin-bottom: 2px;
+    font-weight: 700;
+}
+
+.queue-label {
+    display: block;
+}
+
+.queue-item.active {
+    background-color: var(--vtab-bg-selected);
+    color: var(--vtab-text-selected);
+    border-left: 4px solid var(--vtab-text-selected);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    gap: 5px;
+    padding: 8px var(--spacer-03) 16px var(--spacer-03);
+}
+
+.queue-item.active .queue-count {
+    font-weight: 700;
+}
+
 
 .active-indicator {
     width: 4px;

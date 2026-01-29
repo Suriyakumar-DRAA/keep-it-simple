@@ -1,10 +1,10 @@
-<div class="queue-wrapper min-vh-100 d-flex position-relative bg-white border-end">
+<div class="ms-2 min-vh-100 d-flex position-relative bg-white">
     <div class="queue-content d-flex flex-column overflow-hidden transition-all"
-        [style.width]="visiblePatientQueue() ? '350px' : '0px'" [style.opacity]="visiblePatientQueue() ? '1' : '0'"
+        [style.width]="visiblePatientQueue() ? '400px' : '0px'" [style.opacity]="visiblePatientQueue() ? '1' : '0'"
         [style.visibility]="visiblePatientQueue() ? 'visible' : 'hidden'">
 
-        <div class="p-3 border-bottom bg-light">
-            <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="p-3 border-bottom">
+            <div class="d-flex align-items-center justify-content-between mb-2">
                 <h2 class="h5 fw-bold m-0 text-dark text-truncate" title="{{ queueLabel }}">{{ queueLabel }}</h2>
                 <div class="d-flex gap-1">
                     <small class="text-muted d-flex align-items-center me-2" style="font-size: 0.7rem;">Ctrl+B</small>

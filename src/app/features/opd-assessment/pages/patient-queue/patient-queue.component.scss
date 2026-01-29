@@ -2,6 +2,10 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.patient-card {
+    height: 104px;
+}
+
 .patient-card.hover-bg-light:hover {
     background-color: #f8f9fa;
 }
@@ -37,7 +41,7 @@
 }
 
 .bg-primary-subtle {
-    background-color: #eff6ff !important;
+    background-color: var(--vtab-bg-selected) !important;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
