@@ -1,0 +1,67 @@
+ .report-drawer {
+     position: fixed;
+     top: 0;
+     right: 0;
+     width: 900px;
+     height: 100vh;
+     z-index: 1050;
+     animation: slideIn 0.3s ease-out;
+     max-width: 90vw;
+ }
+
+ @keyframes slideIn {
+     from {
+         transform: translateX(100%);
+     }
+
+     to {
+         transform: translateX(0);
+     }
+ }
+
+ .thumbnail {
+     width: 55px;
+     height: 70px;
+     transition: all 0.2s ease;
+     border-width: 2px !important;
+ }
+
+ .thumbnail canvas {
+     width: 100%;
+     height: 100%;
+     object-fit: contain;
+ }
+
+ .thumbnail:hover {
+     border-color: var(--bs-primary) !important;
+     background-color: var(--bs-light) !important;
+ }
+
+ .active-thumb {
+     background-color: #cfe2ff !important;
+     /* Bootstrap primary-subtle */
+     box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+ }
+
+ .cursor-pointer {
+     cursor: pointer;
+ }
+
+ /* Custom Scrollbar for mini-map */
+ .custom-scrollbar::-webkit-scrollbar {
+     height: 6px;
+ }
+
+ .custom-scrollbar::-webkit-scrollbar-track {
+     background: #f1f1f1;
+     border-radius: 3px;
+ }
+
+ .custom-scrollbar::-webkit-scrollbar-thumb {
+     background: #c1c1c1;
+     border-radius: 3px;
+ }
+
+ .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+     background: #a8a8a8;
+ }

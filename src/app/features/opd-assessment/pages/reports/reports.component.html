@@ -1,0 +1,65 @@
+<div class="d-flex flex-column h-100 bg-light">
+    <!-- Reports Table -->
+    <div class="flex-grow-1 overflow-auto">
+        <div class="card border-0 shadow-sm">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4 py-3 text-secondary fw-medium small">Report name</th>
+                            <th class="py-3 text-secondary fw-medium small">Report type</th>
+                            <th class="py-3 text-secondary fw-medium small">Doctor name</th>
+                            <th class="py-3 text-secondary fw-medium small">Inference</th>
+                            <th class="py-3 text-secondary fw-medium small">Status</th>
+                            <th class="py-3 text-secondary fw-medium small">Date</th>
+                            <th class="py-3 text-secondary fw-medium small">Time</th>
+                            <th class="py-3 text-secondary fw-medium small">Facility</th>
+                            <th class="pe-4 py-3"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (reports().length === 0) {
+                        <tr>
+                            <td colspan="9" class="text-center py-5 text-muted">
+                                No reports found.
+                            </td>
+                        </tr>
+                        } @else {
+                        @for (report of reports(); track report.id) {
+                        <tr>
+                            <td class="ps-4 fw-medium">{{ report.report_name }}</td>
+                            <td class="text-muted">{{ report.report_type }}</td>
+                            <td>{{ report.doctor_name || '-' }}</td>
+                            <td class="text-truncate" style="max-width: 150px;" title="{{ report.inference }}">
+                                {{ report.inference || '-' }}
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border fw-normal">
+                                    {{ report.status }}
+                                </span>
+                            </td>
+                            <td class="text-muted">{{ report.report_date }}</td>
+                            <td class="text-muted small">{{ report.report_time }}</td>
+                            <td>{{ report.facility || '-' }}</td>
+                            <td class="pe-4 text-end">
+                                <button class="btn btn-light btn-sm text-primary hover-shadow"
+                                    (click)="selectedReport.set(report)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Viewer Modal -->
+    @if (selectedReport()) {
+    <app-pdf-viewer [report]="selectedReport()!" [patientName]="'Mr Rama Rao'" [patientAge]="54"
+        [patientGender]="'Male'" (close)="selectedReport.set(null)">
+    </app-pdf-viewer>
+    }
+</div>

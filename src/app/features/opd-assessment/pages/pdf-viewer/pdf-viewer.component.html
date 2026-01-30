@@ -1,0 +1,101 @@
+<!-- Backdrop -->
+<div class="modal-backdrop fade show" style="background-color: rgba(0,0,0,0.5); z-index: 1040;" (click)="close.emit()">
+</div>
+
+<!-- Right-side Drawer -->
+<div class="report-drawer d-flex flex-column bg-white shadow-lg" (click)="$event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="px-4 py-3 border-bottom d-flex justify-content-between align-items-center bg-white">
+        <h5 class="mb-0 fw-semibold text-dark">Reports</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="close.emit()"></button>
+    </div>
+
+    <!-- Patient & Report Details -->
+    <div class="px-4 py-3 border-bottom bg-white">
+        <div class="row g-3 small">
+            <div class="col-4">
+                <div class="text-secondary fw-medium mb-1">Name</div>
+                <div class="fw-medium text-dark">{{ patientName }}</div>
+            </div>
+            <div class="col-4">
+                <div class="text-secondary fw-medium mb-1">Scan name</div>
+                <div class="fw-medium text-dark">{{ report.report_name }}</div>
+            </div>
+            <div class="col-4">
+                <div class="text-secondary fw-medium mb-1">Age</div>
+                <div class="fw-medium text-dark">{{ patientAge }} years · {{ patientGender }}</div>
+            </div>
+            <div class="col-4">
+                <div class="text-secondary fw-medium mb-1">Status</div>
+                <span
+                    class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 fw-normal">
+                    {{ report.status }}
+                </span>
+            </div>
+            <div class="col-4">
+                <div class="text-secondary fw-medium mb-1">Technician name</div>
+                <div class="fw-medium text-dark">Ms. Supriya Kairi</div>
+            </div>
+            <div class="col-4">
+                <div class="text-secondary fw-medium mb-1">Doctor name</div>
+                <div class="fw-medium text-dark">{{ report.doctor_name || '-' }}</div>
+            </div>
+            <div class="col-4">
+                <div class="text-secondary fw-medium mb-1">Facility</div>
+                <div class="fw-medium text-dark">{{ report.facility || '-' }}</div>
+            </div>
+            <div class="col-4">
+                <div class="text-secondary fw-medium mb-1">Date & time</div>
+                <div class="fw-medium text-dark">{{ report.report_date }} | {{ report.report_time }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main PDF Area & Mini-Map -->
+    <div class="flex-grow-1 bg-light p-3 d-flex flex-column overflow-hidden">
+
+        <!-- Large PDF Preview Placeholder -->
+        <div
+            class="flex-grow-1 bg-white border rounded-3 shadow-sm mb-3 d-flex align-items-center justify-content-center position-relative overflow-hidden">
+            <div class="text-center p-5">
+                <canvas #mainCanvas></canvas>
+            </div>
+
+            <!-- Page Indicator Overlay -->
+            <div
+                class="position-absolute bottom-0 start-50 translate-middle-x mb-3 bg-dark bg-opacity-75 text-white px-3 py-1 rounded-pill small">
+                Page {{ selectedPage }} of {{ pages.length }}
+            </div>
+        </div>
+
+        <!-- Mini-Map / Thumbnails (Bottom Panel) -->
+        <div class="bg-white border rounded-3 shadow-sm p-3">
+            <div class="d-flex gap-2 overflow-auto custom-scrollbar pb-1">
+                @for (page of pages; track page) {
+                <div class="thumbnail-wrapper position-relative cursor-pointer" (click)="renderPage(page)">
+
+                    <!-- Thumbnail Card -->
+                    <div class="thumbnail border rounded-2 d-flex align-items-center justify-content-center bg-white"
+                        [class.border-primary]="selectedPage === page"
+                        [class.bg-primary-subtle]="selectedPage === page"
+                        [class.active-thumb]="selectedPage === page">
+
+                        <!-- REAL MINI MAP -->
+                        <canvas id="thumb-{{page}}"></canvas>
+                    </div>
+
+                    <!-- Page Number Label -->
+                    <div class="text-center mt-1">
+                        <span class="small fw-medium" [class.text-primary]="selectedPage === page"
+                            [class.text-muted]="selectedPage !== page">
+                            Page {{ page }}
+                        </span>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

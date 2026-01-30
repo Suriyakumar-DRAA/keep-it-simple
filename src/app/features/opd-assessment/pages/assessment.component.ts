@@ -18,6 +18,7 @@ import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { InvestigationComponent } from './investigation/investigation.component';
 import { PatientJourneyComponent } from './patient-journey/patient-journey.component';
 import { PatientSummaryComponent } from './patient-summary/patient-summary.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @Component({
     selector: 'app-assessment',
@@ -38,7 +39,8 @@ import { PatientSummaryComponent } from './patient-summary/patient-summary.compo
         AutoRefractionComponent,
         RefractionComponent,
         PatientJourneyComponent,
-        PatientSummaryComponent
+        PatientSummaryComponent,
+        ReportsComponent
     ],
     providers: [
         AssessmentService,
@@ -60,9 +62,9 @@ export class AssessmentComponent {
         { id: 'invest', label: 'Investigation', completed: false },
         { id: 'diag', label: 'Diagnosis', completed: true },
         { id: 'advice', label: 'Advice', completed: false },
+        { id: 'reports', label: 'Reports', completed: false },
         // { id: 'ref', label: 'Referral', completed: false },
         // { id: 'follow', label: 'Follow up', completed: false },
-        // { id: 'reports', label: 'Reports', completed: false },
     ];
     modalRef?: BsModalRef;
     currentSide: 'left' | 'right' = 'left';
