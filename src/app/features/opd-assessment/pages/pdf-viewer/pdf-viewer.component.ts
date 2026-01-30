@@ -62,7 +62,7 @@ export class PDFViewerComponent {
         this.selectedPage = pageNumber;
 
         const page = await this.pdfDoc.getPage(pageNumber);
-        const viewport = page.getViewport({ scale: 0.8 });
+        const viewport = page.getViewport({ scale: 0.85 });
 
         const canvas = this.mainCanvas.nativeElement;
         const ctx = canvas.getContext('2d')!;
