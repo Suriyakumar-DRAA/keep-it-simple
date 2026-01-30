@@ -28,8 +28,7 @@
 
  .thumbnail canvas {
      width: 100%;
-     height: 100%;
-     object-fit: contain;
+     height: auto;
  }
 
  .thumbnail:hover {
@@ -64,4 +63,19 @@
 
  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
      background: #a8a8a8;
+ }
+
+ .pdf-viewer-frame {
+     width: 100%;
+     height: 100%;
+     overflow: auto;
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
+ }
+
+ .pdf-viewer-frame canvas {
+     max-width: 100%;
+     height: 100%;
+     display: block;
  }

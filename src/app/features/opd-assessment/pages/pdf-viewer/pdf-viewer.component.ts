@@ -17,6 +17,7 @@ import * as pdfjsLib from 'pdfjs-dist';
     providers: []
 })
 export class PDFViewerComponent {
+    @ViewChild('viewerContainer') viewerContainer!: ElementRef<HTMLDivElement>;
     @ViewChild('mainCanvas', { static: false }) mainCanvas!: ElementRef<HTMLCanvasElement>;
 
     @Input({ required: true }) report!: any;
@@ -60,9 +61,18 @@ export class PDFViewerComponent {
 
     async renderPage(pageNumber: number) {
         this.selectedPage = pageNumber;
-
         const page = await this.pdfDoc.getPage(pageNumber);
-        const viewport = page.getViewport({ scale: 0.85 });
+
+        // Natural size
+        const unscaledViewport = page.getViewport({ scale: 1 });
+
+        // Container width
+        const containerWidth = this.viewerContainer.nativeElement.clientWidth;
+
+        // Compute scale to fit width
+        const scale = containerWidth / unscaledViewport.width;
+
+        const viewport = page.getViewport({ scale });
 
         const canvas = this.mainCanvas.nativeElement;
         const ctx = canvas.getContext('2d')!;
@@ -72,6 +82,51 @@ export class PDFViewerComponent {
 
         await page.render({ canvasContext: ctx, viewport }).promise;
     }
+
+    // async renderPage(pageNumber: number) {
+    //     this.selectedPage = pageNumber;
+    //     this.currentPage.set(pageNumber);
+
+    //     const page = await this.pdfDoc.getPage(pageNumber);
+
+    //     const container = this.viewerContainer.nativeElement;
+
+    //     // Get container size
+    //     const containerWidth = container.clientWidth;
+    //     const containerHeight = container.clientHeight;
+
+    //     // Get PDF natural size
+    //     const unscaledViewport = page.getViewport({ scale: 1 });
+
+    //     // Fit both width & height
+    //     const scale = Math.min(
+    //         containerWidth / unscaledViewport.width,
+    //         containerHeight / unscaledViewport.height
+    //     );
+
+    //     const viewport = page.getViewport({ scale });
+
+    //     const canvas = this.mainCanvas.nativeElement;
+    //     const ctx = canvas.getContext('2d')!;
+
+    //     // Handle retina screens
+    //     const outputScale = window.devicePixelRatio || 1;
+
+    //     canvas.width = Math.floor(viewport.width * outputScale);
+    //     canvas.height = Math.floor(viewport.height * outputScale);
+
+    //     canvas.style.width = `${viewport.width}px`;
+    //     canvas.style.height = `${viewport.height}px`;
+
+    //     ctx.setTransform(outputScale, 0, 0, outputScale, 0, 0);
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //     await page.render({
+    //         canvasContext: ctx,
+    //         viewport
+    //     }).promise;
+    // }
+
 
     async renderThumbnails() {
         for (let pageNum of this.pages) {
