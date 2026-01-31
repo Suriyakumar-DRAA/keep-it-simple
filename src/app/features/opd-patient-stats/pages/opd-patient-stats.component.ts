@@ -21,8 +21,7 @@ export class OPDPatientStatsComponent {
         { count: '05', label: 'All OP' },
         { count: '04', label: 'Completed' },
         { count: '20', label: 'Referrals' },
-        { count: '20', label: 'Unassigned' },
-        { count: '20', label: 'Not Arrived' },
+        { count: '', label: 'My Calendar' },
     ];
 
     constructor() { }
