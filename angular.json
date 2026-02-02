@@ -56,7 +56,9 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/ehr/",
+              "deployUrl": "/ehr/"
             },
             "development": {
               "optimization": false,

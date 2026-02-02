@@ -29,7 +29,8 @@ export class ReportsComponent {
             status: 'Finalized',
             report_date: '12 Jan 2024',
             report_time: '10:30 AM',
-            facility: 'Main Branch'
+            facility: 'Main Branch',
+            pdfPath: 'assets/pdf/operation_theatre.pdf'
         },
         {
             id: '2',
@@ -40,7 +41,8 @@ export class ReportsComponent {
             status: 'Pending Review',
             report_date: '10 Jan 2024',
             report_time: '02:15 PM',
-            facility: 'Gachibowli'
+            facility: 'Gachibowli',
+            pdfPath: 'assets/pdf/eye.pdf'
         },
         {
             id: '3',
@@ -51,7 +53,8 @@ export class ReportsComponent {
             status: 'Finalized',
             report_date: '05 Jan 2024',
             report_time: '11:00 AM',
-            facility: 'Main Branch'
+            facility: 'Main Branch',
+            pdfPath: 'assets/pdf/operation_theatre.pdf'
         }
     ]);
 

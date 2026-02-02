@@ -6,7 +6,7 @@ import moment from 'moment';
 import { forkJoin } from 'rxjs';
 import * as pdfjsLib from 'pdfjs-dist';
 
-(pdfjsLib as any).GlobalWorkerOptions.workerSrc = `/assets/pdfjs/pdf.worker.min.mjs`;
+(pdfjsLib as any).GlobalWorkerOptions.workerSrc = new URL('assets/pdfjs/pdf.worker.min.mjs', document.baseURI).toString()
 
 @Component({
     selector: 'app-pdf-viewer',
@@ -31,12 +31,12 @@ export class PDFViewerComponent {
     totalPages = 0;
     pages: number[] = [];
     selectedPage = 1;
-    // pdfSrc = '/assets/pdf/patient_note.pdf';
-    pdfSrc = '/assets/pdf/operation_theatre.pdf';
+    documentURI = document.baseURI;
 
     private assessmentService = inject(AssessmentService);
 
     constructor() {
+        console.log(document.baseURI);
     }
 
     async ngAfterViewInit() {
@@ -49,7 +49,8 @@ export class PDFViewerComponent {
     }
 
     async loadPdf() {
-        const loadingTask = pdfjsLib.getDocument(this.pdfSrc);
+        const src = new URL(this.report.pdfPath, this.documentURI).toString();
+        const loadingTask = pdfjsLib.getDocument(src);
         this.pdfDoc = await loadingTask.promise;
 
         this.totalPages = this.pdfDoc.numPages;
