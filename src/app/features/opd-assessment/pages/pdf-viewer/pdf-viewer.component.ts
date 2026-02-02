@@ -36,7 +36,6 @@ export class PDFViewerComponent {
     private assessmentService = inject(AssessmentService);
 
     constructor() {
-        console.log(document.baseURI);
     }
 
     async ngAfterViewInit() {
