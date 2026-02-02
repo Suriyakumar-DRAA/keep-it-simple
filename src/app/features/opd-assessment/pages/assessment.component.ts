@@ -59,10 +59,10 @@ export class AssessmentComponent {
     tabs = [
         { id: 'overview', label: 'Overview', completed: true },
         { id: 'exam', label: 'Examination', completed: true },
-        { id: 'invest', label: 'Investigation', completed: false },
+        { id: 'invest', label: 'Investigation', completed: true },
         { id: 'diag', label: 'Diagnosis', completed: true },
-        { id: 'advice', label: 'Advice', completed: false },
-        { id: 'reports', label: 'Reports', completed: false },
+        { id: 'advice', label: 'Advice', completed: true },
+        { id: 'reports', label: 'Reports', completed: true },
         // { id: 'ref', label: 'Referral', completed: false },
         // { id: 'follow', label: 'Follow up', completed: false },
     ];
