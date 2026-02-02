@@ -16,6 +16,7 @@ import { AssessmentService } from '@features/opd-assessment/services/assessment.
 })
 export class PatientJourneyComponent {
 
+    documentURI = document.baseURI;
     private assessmentService = inject(AssessmentService);
 
     constructor() {

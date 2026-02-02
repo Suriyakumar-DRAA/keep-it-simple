@@ -15,10 +15,8 @@ export class OPDPatientStatsComponent {
     @Output() selectQueue = new EventEmitter<string>();
 
     queueItems = [
-        { count: '150', label: 'All' },
-        { count: '07', label: 'My Queue' },
-        { count: '20', label: 'All Scheduled' },
-        { count: '05', label: 'All OP' },
+        { count: '10', label: 'My Appointments' },
+        { count: '02', label: 'My Queue' },
         { count: '04', label: 'Completed' },
         { count: '20', label: 'Referrals' },
         { count: '', label: 'My Calendar' },
