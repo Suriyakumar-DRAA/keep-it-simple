@@ -11,22 +11,28 @@ import { Component, computed, EventEmitter, inject, Input, Output, signal } from
 })
 export class SidebarComponent {
 
-    @Input({ required: true }) selectedQueue!: string;
-    @Output() selectQueue = new EventEmitter<string>();
+    // Signal to track the active menu item
+    activeItem = signal<string>('dashboard');
 
-    queueItems = [
-        { count: '150', label: 'All' },
-        { count: '07', label: 'My Queue' },
-        { count: '20', label: 'All Scheduled' },
-        { count: '05', label: 'All OP' },
-        { count: '04', label: 'Completed' },
-        { count: '20', label: 'Referrals' },
-        { count: '20', label: 'Unassigned' },
-        { count: '20', label: 'Not Arrived' },
+    // Menu items config based on the provided image
+    mainMenuItems = [
+        { id: 'dashboard', icon: 'bi-grid', label: 'Dashboard' },
+        { id: 'add-building', icon: 'bi-building-add', label: 'Add Building' },
+        { id: 'calendar', icon: 'bi-calendar3', label: 'Calendar' },
+        { id: 'users-staff', icon: 'bi-people', label: 'Staff' },
+        { id: 'users-patients', icon: 'bi-people', label: 'Patients' },
+        { id: 'add-house', icon: 'bi-house-add', label: 'Add House' },
+        { id: 'analytics', icon: 'bi-graph-up', label: 'Analytics' },
+        { id: 'help', icon: 'bi-question-circle', label: 'Help' },
     ];
 
     constructor() { }
 
     ngOnInit() {
+    }
+
+    selectItem(id: string, event: Event) {
+        event.preventDefault();
+        this.activeItem.set(id);
     }
 }

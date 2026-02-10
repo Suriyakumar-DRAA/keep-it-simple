@@ -11,6 +11,7 @@ export interface IPatient {
   ophthalmic_history?: string;
   previous_surgery?: string;
   previous_diagnosis?: string;
+  infectious_disease?: string;
   allergies?: string;
   created_at?: string;
   case: ICase;

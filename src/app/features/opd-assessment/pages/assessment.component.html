@@ -7,10 +7,6 @@
     </div>
 
     <div class="d-flex flex-grow-1 overflow-hidden right-panel">
-        <!-- Stats Count -->
-        <app-opd-patient-stats [selectedQueue]="selectedQueue" (selectQueue)="onQueueSelect($event)" *ngIf="!isSidebarOpen">
-        </app-opd-patient-stats>
-
         <!-- Queue -->
         <app-patient-queue [patients]="patients" [selectedPatientId]="selectedPatientId"
             (selectPatient)="onSelectPatient($event)" [queueLabel]="selectedQueue" *ngIf="!isSidebarOpen">

@@ -1,24 +1,26 @@
-<div class="sidebar-container bg-light border-end d-flex flex-column h-100">
+<!-- Sidebar Container -->
+<nav class="d-flex flex-column flex-shrink-0 bg-white h-100 shadow-sm sidebar-nav">
 
-    <!-- Queue List with Scroll -->
-    <div class="flex-grow-1 overflow-y-auto custom-scrollbar pt-2">
-        <button *ngFor="let item of queueItems" (click)="selectQueue.emit(item.label)"
-            class="queue-item btn border-0 text-start w-100 rounded-0 py-3 px-4 position-relative border-bottom"
-            [class.bg-white]="selectedQueue === item.label" [class.active-queue]="selectedQueue === item.label">
+    <!-- Top Menu Items -->
+    <ul class="nav flex-column mb-auto text-center w-100 p-0 m-0">
 
-            <!-- Active Indicator -->
-            <div *ngIf="selectedQueue === item.label"
-                class="active-indicator bg-primary position-absolute start-0 top-0 bottom-0"></div>
+        @for (item of mainMenuItems; track item.id) {
+        <li class="nav-item w-100">
+            <a href="#" class="nav-link py-3 d-flex justify-content-center align-items-center"
+                [class.active]="activeItem() === item.id" (click)="selectItem(item.id, $event)" [title]="item.label">
+                <i class="bi" [class]="item.icon"></i>
+            </a>
+        </li>
+        }
 
-            <div class="h4 fw-bold mb-1" [class.text-primary]="selectedQueue === item.label"
-                [class.text-secondary]="selectedQueue !== item.label">
-                {{ item.count }}
-            </div>
+    </ul>
 
-            <div class="small text-truncate" [class.text-primary]="selectedQueue === item.label"
-                [class.fw-bold]="selectedQueue === item.label" [class.text-muted]="selectedQueue !== item.label">
-                {{ item.label }}
-            </div>
-        </button>
+    <!-- Bottom Menu Items -->
+    <div class="w-100 text-center pb-3">
+        <a href="#" class="nav-link py-3 d-flex justify-content-center align-items-center text-muted bottom-icon"
+            title="All Apps">
+            <i class="bi bi-grid"></i>
+        </a>
     </div>
-</div>
+
+</nav>

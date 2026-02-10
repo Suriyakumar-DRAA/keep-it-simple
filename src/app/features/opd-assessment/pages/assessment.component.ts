@@ -99,13 +99,14 @@ export class AssessmentComponent {
             {
                 id: '1',
                 name: 'Suhasini',
-                mr_no: '20230001',
+                mr_no: 'NLR/2023/0001',
                 gender: 'Female',
                 age: 32,
                 systemic_history: 'Hypertension',
                 ophthalmic_history: 'None',
                 previous_surgery: 'None',
                 previous_diagnosis: 'None',
+                infectious_disease: 'None',
                 allergies: 'None',
                 phone: '9790897371',
                 case: {
@@ -116,10 +117,11 @@ export class AssessmentComponent {
             {
                 id: '2',
                 name: 'Rajesh Kumar',
-                mr_no: '20230002',
+                mr_no: 'NLR/2023/0002',
                 gender: 'Male',
                 age: 45,
                 systemic_history: 'Diabetes',
+                infectious_disease: 'None',
                 case: {
                     id: 'c2', patient_id: '2', visit_date: new Date(Date.now() - 15 * 60000).toISOString(),
                     status: 'Review', appointment_type: 'Free'
@@ -128,8 +130,9 @@ export class AssessmentComponent {
             {
                 id: '3',
                 name: 'Priya Sharma',
-                mr_no: '20230003',
+                mr_no: 'NLR/2023/0003',
                 gender: 'Female',
+                infectious_disease: 'None',
                 age: 28,
                 case: {
                     id: 'c3', patient_id: '3', visit_date: new Date(Date.now() - 45 * 60000).toISOString(),
@@ -139,9 +142,10 @@ export class AssessmentComponent {
             {
                 id: '4',
                 name: 'Amit Patel',
-                mr_no: '20230004',
+                mr_no: 'NLR/2023/0004',
                 gender: 'Male',
                 age: 60,
+                infectious_disease: 'None',
                 case: {
                     id: 'c4', patient_id: '4', visit_date: new Date(Date.now() - 120 * 60000).toISOString(),
                     status: 'Paid', appointment_type: 'Paid'
