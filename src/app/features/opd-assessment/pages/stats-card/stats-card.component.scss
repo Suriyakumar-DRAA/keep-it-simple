@@ -51,8 +51,8 @@
     justify-content: center;
     font-size: 16px;
     color: white;
-    position: relative;
-    overflow: hidden;
+    // position: relative;
+    // overflow: hidden;
     flex-shrink: 0;
     // transition: transform 0.2s ease;
 }
@@ -90,7 +90,7 @@
     font-weight: 500;
     margin: 2px 0 0 0;
     white-space: nowrap;
-    overflow: hidden;
+    // overflow: hidden;
     text-overflow: ellipsis;
 }
 
