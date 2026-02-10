@@ -1,0 +1,95 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row g-2">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="stats-card" [ngClass]="{'active': selectedCard === 'my_appointments'}"
+                    (click)="setSelectedCard('my_appointments')">
+                    <div class="compact-card-content">
+                        <div class="icon-wrapper square-icon">
+                            <i class="bi bi-clipboard-pulse"></i>
+                        </div>
+                        <div class="metric-info">
+                            <p class="metric-label">My appointments</p>
+                            <h4 class="metric-number">125</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="stats-card" [ngClass]="{'active': selectedCard === 'my_queue'}"
+                    (click)="setSelectedCard('my_queue')">
+                    <div class="compact-card-content">
+                        <div class="icon-wrapper square-icon">
+                            <i class="bi bi-person-walking"></i>
+                        </div>
+                        <div class="metric-info">
+                            <p class="metric-label">My Queues</p>
+                            <h4 class="metric-number">75</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="stats-card" [ngClass]="{'active': selectedCard === 'completed'}"
+                    (click)="setSelectedCard('completed')">
+                    <div class="compact-card-content">
+                        <div class="icon-wrapper square-icon">
+                            <i class="bi bi-check2-circle"></i>
+                        </div>
+                        <div class="metric-info">
+                            <p class="metric-label">Completed</p>
+                            <h4 class="metric-number">50</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="stats-card" [ngClass]="{'active': selectedCard === 'referrals'}"
+                    (click)="setSelectedCard('referrals')">
+                    <div class="compact-card-content">
+                        <div class="icon-wrapper square-icon">
+                            <i class="bi bi-file-earmark-zip"></i>
+                        </div>
+                        <div class="metric-info">
+                            <p class="metric-label">Referrals</p>
+                            <h4 class="metric-number">30</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="stats-card" [ngClass]="{'active': selectedCard === 'scheduled'}"
+                    (click)="setSelectedCard('scheduled')">
+                    <div class="compact-card-content">
+                        <div class="icon-wrapper square-icon">
+                            <i class="bi bi-bookmarks"></i>
+                        </div>
+                        <div class="metric-info">
+                            <p class="metric-label">Scheduled</p>
+                            <h4 class="metric-number">20</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-2">
+                <div class="stats-card" [ngClass]="{'active': selectedCard === 'my_calendar'}"
+                    (click)="setSelectedCard('my_calendar')">
+                    <div class="compact-card-content">
+                        <div class="icon-wrapper square-icon">
+                            <i class="bi bi-calendar4-week"></i>
+                        </div>
+                        <div class="metric-info">
+                            <p class="metric-label">My Calender</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
