@@ -19,6 +19,7 @@ import { PatientJourneyComponent } from './patient-journey/patient-journey.compo
 import { PatientSummaryComponent } from './patient-summary/patient-summary.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SplitWindowComponent } from './split-window/split-window.component';
+import { StatsCardComponent } from './stats-card/stats-card.component';
 
 @Component({
     selector: 'app-assessment',
@@ -32,7 +33,8 @@ import { SplitWindowComponent } from './split-window/split-window.component';
         PatientInfoComponent,
         PatientJourneyComponent,
         PatientSummaryComponent,
-        SplitWindowComponent
+        SplitWindowComponent,
+        StatsCardComponent
     ],
     providers: [
         AssessmentService,
