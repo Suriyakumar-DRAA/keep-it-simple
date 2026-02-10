@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
 import { BsModalService, BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
-import { OPDPatientStatsComponent } from '@features/opd-patient-stats/pages/opd-patient-stats.component';
 import { PatientQueueComponent } from '@features/opd-assessment/pages/patient-queue/patient-queue.component';
 import { PatientInfoComponent } from './patient-info/patient-info.component';
 import { PatientWithCase } from '../model/patient.model';
@@ -29,10 +28,8 @@ import { SplitWindowComponent } from './split-window/split-window.component';
     imports: [
         CommonModule,
         FormsModule,
-        OPDPatientStatsComponent,
         PatientQueueComponent,
         PatientInfoComponent,
-        
         PatientJourneyComponent,
         PatientSummaryComponent,
         SplitWindowComponent
