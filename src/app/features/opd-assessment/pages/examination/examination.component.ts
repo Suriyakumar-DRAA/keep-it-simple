@@ -4,6 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { AssessmentService } from '@features/opd-assessment/services/assessment.service';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
+interface EyeData {
+    size: 'Normal' | 'Micro' | 'Macro';
+    shape: string;
+    surface: string;
+    staining: string;
+}
 
 @Component({
     selector: 'app-examination',
@@ -17,6 +23,7 @@ export class ExaminationComponent {
 
     isEditing = false;
     expandedSections = new Set<string>(['cornea']);
+    activeSection: string = 'Cornea';
 
     private assessmentService = inject(AssessmentService);
 
@@ -75,4 +82,42 @@ export class ExaminationComponent {
     saveData() {
         console.log('Saving examination data...', this.data);
     }
+
+
+    reData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
+    leData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
+
+    // Options for dropdowns
+    shapes = ['Normal', 'Keratoconus', 'Globus',];
+    surfaces = ['Normal', 'Irregular', 'Hazy', 'Keratoconus', 'Keratoglobus'];
+    stainings = ['Normal', 'Punctate', 'Ulcer'];
+
+    copyReToLe() {
+        this.leData = { ...this.reData };
+    }
+
+    selectSection(label: string) {
+        this.activeSection = label;
+    }
+
+    // Example of how to handle the multi-click toggle logic
+    toggleSelection(data: any, field: string, value: string) {
+        if (!data[field]) {
+            data[field] = [];
+        }
+        const index = data[field].indexOf(value);
+        if (index > -1) {
+            data[field].splice(index, 1);
+        } else {
+            data[field].push(value);
+        }
+    }
+
+    isSelected(data: any, field: string, value: string): boolean {
+        return data[field]?.includes(value) || false;
+    }
+
+    mmRange = Array.from({ length: 12 }, (_, i) => i); // 0 to 35
+    timeRange = Array.from({ length: 12 }, (_, i) => i.toString().padStart(2, '0')); // 00 to 60
+
 }
