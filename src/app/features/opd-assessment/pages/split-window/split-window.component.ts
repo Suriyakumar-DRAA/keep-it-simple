@@ -6,21 +6,39 @@ import { forkJoin } from 'rxjs';
 import { IPatient } from '../../model/patient.model';
 import { ICase } from '../../model/case.model';
 import { AssessmentService } from '@features/opd-assessment/services/assessment.service';
+import { RefractionComponent } from '../refraction/refraction.component';
+import { OverviewComponent } from '../overview/overview.component';
+import { ExaminationComponent } from '../examination/examination.component';
+import { InvestigationComponent } from '../investigation/investigation.component';
+import { HistoryComponent } from '../history/history.component';
+import { AutoRefractionComponent } from '../auto-refraction/auto-refraction.component';
+import { ReportsComponent } from '../reports/reports.component';
 
 @Component({
     selector: 'app-split-window',
     standalone: true,
     templateUrl: './split-window.component.html',
     styleUrls: ['./split-window.component.scss'],
-    imports: [CommonModule, FormsModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        OverviewComponent,
+        ExaminationComponent,
+        // DiagnosisComponent,
+        InvestigationComponent,
+        HistoryComponent,
+        AutoRefractionComponent,
+        RefractionComponent,
+        ReportsComponent,
+    ],
     providers: []
 })
 export class SplitWindowComponent {
 
-    leftExpanded: boolean = true;
-    rightExpanded: boolean = false;
+    leftExpanded: boolean = false;
+    rightExpanded: boolean = true;
     selectedDateTab: string = '01-Jan-2026';
-    
+
     dateTabs = [
         '01-Jan-2026',
         '30-Dec-2025',
@@ -28,11 +46,25 @@ export class SplitWindowComponent {
         '20-Dec-2025',
         '15-Dec-2025'
     ];
-    
+
+    tabs = [
+        { id: 'overview', label: 'Overview', completed: true },
+        { id: 'exam', label: 'Examination', completed: true },
+        { id: 'invest', label: 'Investigation', completed: true },
+        { id: 'diag', label: 'Diagnosis', completed: true },
+        { id: 'advice', label: 'Advice', completed: true },
+        { id: 'reports', label: 'Reports', completed: true },
+    ];
+
+    activeTabId = 'overview';
+
+
     private assessmentService = inject(AssessmentService);
 
     constructor() {
         this.setupKeyboardShortcuts();
+        this.setDefaultTab();
+
     }
 
     ngOnInit() {
@@ -193,5 +225,13 @@ export class SplitWindowComponent {
         if (typeof window !== 'undefined') {
             window.removeEventListener('keydown', () => { });
         }
+    }
+
+    setDefaultTab() {
+        this.activeTabId = 'overview';
+    }
+
+    setActiveTab(tabId: string) {
+        this.activeTabId = tabId;
     }
 }

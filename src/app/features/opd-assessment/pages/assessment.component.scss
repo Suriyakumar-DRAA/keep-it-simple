@@ -49,36 +49,6 @@
      border-radius: 3px;
  }
 
- .nav-tabs .nav-link {
-     font-size: 15px;
-     color: #181818;
-     border: 1px solid #e4f0ff;
-     border-bottom: none;
-     border-radius: 6px 6px 0 0;
-     padding: 10px 15px;
-     font-weight: 500;
-     margin-right: 2px;
-     background-color: #e4f0ff;
-     /* Light ground color for inactive tabs */
-     display: flex;
-     align-items: center;
- }
-
- .nav-tabs .nav-link:hover {
-     background-color: #d8e8fd;
-     border-color: #d8e8fd #d8e8fd #d8e8fd;
- }
-
- .nav-tabs .nav-link.active {
-     color: #0d6efd;
-     background-color: #e7f1ff;
-     border-bottom: 3px solid #0d6efd;
-     font-weight: 700;
-     border-radius: 6px 6px 0 0;
-     border-color: transparent;
-     border-bottom-color: #0d6efd;
- }
-
 
  /* START: SPLIT LAYOUT */
 
@@ -99,51 +69,6 @@
      background-color: #f0f2f5;
  }
 
- .left-panel {
-     width: 0;
-     height: 100%;
-     min-height: 0;
-     max-height: 100%;
-     opacity: 0;
-     background: white;
-     /* Smoother transition for width expansion */
-     transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-     overflow: hidden;
-     display: flex;
-     flex-direction: column;
-     position: relative;
-     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
-     /* Slightly heavier shadow for depth */
-     z-index: 10;
- }
-
- .left-panel.open {
-     /* Width is now handled by inline style binding in the template */
-     opacity: 1;
- }
-
- .left-panel-content {
-     min-width: 550px;
-     padding: 1.5rem;
-     flex: 1;
-     min-height: 0;
-     overflow-y: auto;
-     overflow-x: hidden;
-     /* Default State: Hidden and shifted left */
-     opacity: 0;
-     transform: translateX(-30px);
-     /* Smooth transition for the content arrival */
-     transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
- }
-
- /* When panel is open, slide content in */
- .left-panel.open .left-panel-content {
-     opacity: 1;
-     transform: translateX(0);
-     /* Delay ensures the sidebar opens a bit before content slides in */
-     transition-delay: 0.15s;
- }
-
  .right-panel {
      flex: 1;
      height: 100%;
@@ -153,15 +78,6 @@
      position: relative;
      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
      background-color: #f0f2f5;
- }
-
- /* Mobile Responsive: Overlay Sidebar instead of Split */
- @media (max-width: 992px) {
-     .left-panel.open {
-         width: 100% !important;
-         position: absolute;
-         height: 100%;
-     }
  }
 
  /* END: SPLIT LAYOUT */

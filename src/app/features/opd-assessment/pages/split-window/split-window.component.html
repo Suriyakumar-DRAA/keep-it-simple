@@ -7,8 +7,9 @@
                 <i class="bi bi-clock-history"></i>
                 Past Case Sheets
             </span>
-            <button class="btn btn-md btn-light border" (click)="toggleLeftPanel()" [title]="getLeftExpandTooltip()">
-                <i class="bi" [ngClass]="getLeftExpandIcon()"></i>
+            <button class="btn btn-md btn-light border left-panel-sidebar" (click)="toggleLeftPanel()"
+                [title]="getLeftExpandTooltip()" [ngClass]="{'selected': leftExpanded}">
+                <i [ngClass]="{'bi bi-layout-sidebar-inset': leftExpanded, 'bi bi-layout-split': !leftExpanded}"></i>
             </button>
         </div>
 
@@ -198,14 +199,43 @@
                 <i class="bi bi-pencil-square"></i>
                 Today Case Sheet (05-Dec-2025)
             </span>
-            <button class="btn btn-md btn-light border" (click)="toggleRightPanel()" [title]="getRightExpandTooltip()">
-                <i class="bi bi-layout-sidebar-inset-reverse" [ngClass]="getRightExpandIcon()"></i>
+            <button class="btn btn-md btn-light border right-panel-sidebar" (click)="toggleRightPanel()"
+                [title]="getRightExpandTooltip()" [ngClass]="{'selected': rightExpanded}">
+                <i
+                    [ngClass]="{'bi-layout-sidebar-inset-reverse': rightExpanded, 'bi-layout-split': !rightExpanded}"></i>
             </button>
         </div>
 
         <!-- Normal Content (visible when NOT collapsed) -->
         <div class="panel-content">
-
+            <div class="main-workspace">
+                <ul class="nav nav-tabs border-bottom-0">
+                    @for (tab of tabs; track tab.id) {
+                    <li class="nav-item">
+                        <button class="nav-link" [class.active]="activeTabId === tab.id" (click)="activeTabId = tab.id">
+                            {{ tab.label }}
+                            @if (tab.completed) {
+                            <i class="bi bi-check-circle-fill text-success ms-2" style="font-size: 0.8rem;"></i>
+                            }
+                        </button>
+                    </li>
+                    }
+                </ul>
+                <div class="tab-content flex-grow-1 bg-light px-3 py-3">
+                    <ng-container [ngSwitch]="activeTabId">
+                        <app-overview *ngSwitchCase="'overview'"></app-overview>
+                        <app-examination *ngSwitchCase="'examination'"></app-examination>
+                        <app-investigation *ngSwitchCase="'investigation'"></app-investigation>
+                        <app-reports *ngSwitchCase="'reports'"></app-reports>
+                        <div *ngSwitchDefault
+                            class="p-5 text-center text-muted h-100 d-flex flex-column justify-content-center align-items-center">
+                            <i class="bi bi-cone-striped display-4 mb-3 text-secondary opacity-50"></i>
+                            <h5 class="text-dark">{{ activeTabId | titlecase }} Content</h5>
+                            <p class="small">Content for this tab is not yet implemented.</p>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
         </div>
 
         <!-- Vertical Elements (visible when collapsed) -->

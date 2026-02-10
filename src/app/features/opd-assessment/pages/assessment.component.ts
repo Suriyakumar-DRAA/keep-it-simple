@@ -32,16 +32,9 @@ import { SplitWindowComponent } from './split-window/split-window.component';
         OPDPatientStatsComponent,
         PatientQueueComponent,
         PatientInfoComponent,
-        OverviewComponent,
-        ExaminationComponent,
-        // DiagnosisComponent,
-        InvestigationComponent,
-        HistoryComponent,
-        AutoRefractionComponent,
-        RefractionComponent,
+        
         PatientJourneyComponent,
         PatientSummaryComponent,
-        ReportsComponent,
         SplitWindowComponent
     ],
     providers: [
@@ -55,19 +48,9 @@ export class AssessmentComponent {
     patients: PatientWithCase[] = [];
     patient: PatientWithCase | null = null;
     selectedQueue = 'My Queue';
-    activeTabId = 'overview';
     isSidebarOpen = false;
     splitConfig = { left: 50, right: 50 };
-    tabs = [
-        { id: 'overview', label: 'Overview', completed: true },
-        { id: 'exam', label: 'Examination', completed: true },
-        { id: 'invest', label: 'Investigation', completed: true },
-        { id: 'diag', label: 'Diagnosis', completed: true },
-        { id: 'advice', label: 'Advice', completed: true },
-        { id: 'reports', label: 'Reports', completed: true },
-        // { id: 'ref', label: 'Referral', completed: false },
-        // { id: 'follow', label: 'Follow up', completed: false },
-    ];
+    
     modalRef?: BsModalRef;
     currentSide: 'left' | 'right' = 'left';
 
@@ -83,7 +66,6 @@ export class AssessmentComponent {
             this.selectedPatientId = this.patients[0].id;
             this.patient = this.patients.find(p => p.id === this.selectedPatientId) || null;
         }
-        this.setDefaultTab();
     }
 
     onQueueSelect(queueLabel: string) {
@@ -154,14 +136,6 @@ export class AssessmentComponent {
                 }
             }
         ];
-    }
-
-    setDefaultTab() {
-        this.activeTabId = 'overview';
-    }
-
-    setActiveTab(tabId: string) {
-        this.activeTabId = tabId;
     }
 
     timelineOpenModal(template: TemplateRef<any>, side: 'left' | 'right') {

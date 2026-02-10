@@ -1,17 +1,7 @@
-<div class="row g-2">
-    <!-- Previous Snapshot Card -->
-    <div class="col-12 col-lg-3">
+<div class="row g-2 mb-3">
+    <div class="col-12 col-md-5 col-lg-5">
         <div class="card h-100">
             <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="card-title-main mb-0">Previous snapshot</h5>
-                    <div class="mt-auto">
-                        <a class="btn btn-outline-primary btn-sm small" (click)="viewTimeline.emit()">
-                            Timeline
-                        </a>
-                    </div>
-                </div>
-
                 <div class="mb-3">
                     <div class="section-label mb-1">Chief Complaints</div>
                     <div class="section-value">Burning sensation in both eyes.</div>
@@ -59,112 +49,81 @@
                     <div class="section-label mb-1">Findings</div>
                     <div class="section-value">Normal</div>
                 </div>
-
-
             </div>
         </div>
     </div>
-
-    <!-- Right Column -->
-    <div class="col-12 col-lg-9">
-        <div class="row g-2">
-            <!-- Current Visit Card -->
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div class="d-flex align-items-center gap-2">
-                                <h5 class="card-title-main mb-0">Current Visit</h5>
-                            </div>
-                            <svg class="external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
-                            </svg>
+    <div class="col-12 col-md-7 col-lg-7 d-flex flex-column gap-2">
+        <div class="card flex-fill mb-2">
+            <div class="card-body">
+                <div class="row g-3 pb-3">
+                    <div class="col-12 col-md-4">
+                        <div class="section-label mb-1">Visit Reason</div>
+                        <div class="section-value">Follow up / Review</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="section-label mb-1">Ophthalmic History</div>
+                        <div class="section-value">Using Glasses for<br>LE since 2 yrs, RE since 2
+                            yrs</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="section-label mb-1">Special condition</div>
+                        <div class="section-value">Pregnancy</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="section-label mb-2">Chief Complaints</div>
+                        <div class="section-value">
+                            <div class="mb-1">• Burning sensation in both eyes.</div>
+                            <div>• Redness and irritation</div>
                         </div>
-                        <div class="row g-3 pb-3">
-                            <div class="col-12 col-md-4">
-                                <div class="section-label mb-1">Visit Reason</div>
-                                <div class="section-value">Follow up / Review</div>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <div class="section-label mb-1">Ophthalmic History</div>
-                                <div class="section-value">Using Glasses for<br>LE since 2 yrs, RE since 2 yrs</div>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <div class="section-label mb-1">Special condition</div>
-                                <div class="section-value">Pregnancy</div>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <div class="section-label mb-2">Chief Complaints</div>
-                                <div class="section-value">
-                                    <div class="mb-1">• Burning sensation in both eyes.</div>
-                                    <div>• Redness and irritation</div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <div class="section-label mb-2">Systemic History</div>
-                                <div class="section-value">
-                                    <div>• Thyroid disorder — 8 years</div>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="section-label mb-2">Systemic History</div>
+                        <div class="section-value">
+                            <div>• Thyroid disorder — 8 years</div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Vision & Refraction Details Card -->
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="card-title-main mb-0">Vision & Refraction details</h5>
-                            <svg class="external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
-                            </svg>
-                        </div>
-
-                        <div class="table-responsive">
-                            <table class="table table-sm small mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th style="width: 200px;"></th>
-                                        <th>Right Eye</th>
-                                        <th>Left Eye</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-muted">
-                                    <tr>
-                                        <td class="fw-semibold text-dark">Auto Refraction</td>
-                                        <td>Sph +1.00 | Cyl −0.50 | Axis 90</td>
-                                        <td>Sph +1.00 | Cyl −0.50 | Axis 90</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-semibold text-dark">IOP</td>
-                                        <td>13 @ 3:46 PM</td>
-                                        <td>13 @ 3:46 PM</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-semibold text-dark">Keratometry</td>
-                                        <td>42.00 @ 180 | 41.20 @ 90</td>
-                                        <td>42.00 @ 180 | 41.20 @ 90</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-semibold text-dark">VA</td>
-                                        <td>6/6 UCVA | Near: N10 | PH: 6/6</td>
-                                        <td>6/6 UCVA | Near: N10 | PH: 6/6</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-semibold text-dark">Dry Refraction</td>
-                                        <td>+0.50 | −0.50 X 90 (6/6) &nbsp;&nbsp; Near: +1.75</td>
-                                        <td>+0.50 | −0.50 X 90 (6/6) &nbsp;&nbsp; Near: +1.75</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+        </div>
+        <div class="card flex-fill">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table small mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="40%"></th>
+                                <th>Right Eye</th>
+                                <th>Left Eye</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-muted">
+                            <tr>
+                                <td class="text-dark">Auto Refraction</td>
+                                <td>Sph +1.00 | Cyl −0.50 | Axis 90</td>
+                                <td>Sph +1.00 | Cyl −0.50 | Axis 90</td>
+                            </tr>
+                            <tr>
+                                <td class="text-dark">IOP</td>
+                                <td>13 @ 3:46 PM</td>
+                                <td>13 @ 3:46 PM</td>
+                            </tr>
+                            <tr>
+                                <td class="text-dark">Keratometry</td>
+                                <td>42.00 @ 180 | 41.20 @ 90</td>
+                                <td>42.00 @ 180 | 41.20 @ 90</td>
+                            </tr>
+                            <tr>
+                                <td class="text-dark">VA</td>
+                                <td>6/6 UCVA | Near: N10 | PH: 6/6</td>
+                                <td>6/6 UCVA | Near: N10 | PH: 6/6</td>
+                            </tr>
+                            <tr>
+                                <td class="text-dark">Dry Refraction</td>
+                                <td>+0.50 | −0.50 X 90 (6/6) &nbsp;&nbsp; Near: +1.75</td>
+                                <td>+0.50 | −0.50 X 90 (6/6) &nbsp;&nbsp; Near: +1.75</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
