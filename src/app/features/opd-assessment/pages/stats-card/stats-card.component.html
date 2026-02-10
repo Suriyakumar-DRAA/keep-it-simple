@@ -1,5 +1,5 @@
-<div class="bg-light g-2 py-2 pe-2 row">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+<div class="bg-light g-2 py-2 pe-2 d-flex">
+    <div class="flex-fill px-2">
         <div class="stats-card" [ngClass]="{'active': selectedCard === 'my_appointments'}"
             (click)="setSelectedCard('my_appointments')">
             <div class="compact-card-content">
@@ -13,8 +13,7 @@
             </div>
         </div>
     </div>
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+    <div class="flex-fill px-2">
         <div class="stats-card" [ngClass]="{'active': selectedCard === 'my_queue'}"
             (click)="setSelectedCard('my_queue')">
             <div class="compact-card-content">
@@ -28,8 +27,7 @@
             </div>
         </div>
     </div>
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+    <div class="flex-fill px-2">
         <div class="stats-card" [ngClass]="{'active': selectedCard === 'completed'}"
             (click)="setSelectedCard('completed')">
             <div class="compact-card-content">
@@ -43,8 +41,7 @@
             </div>
         </div>
     </div>
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+    <div class="flex-fill px-2">
         <div class="stats-card" [ngClass]="{'active': selectedCard === 'referrals'}"
             (click)="setSelectedCard('referrals')">
             <div class="compact-card-content">
@@ -58,23 +55,7 @@
             </div>
         </div>
     </div>
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-        <div class="stats-card" [ngClass]="{'active': selectedCard === 'scheduled'}"
-            (click)="setSelectedCard('scheduled')">
-            <div class="compact-card-content">
-                <div class="icon-wrapper square-icon">
-                    <i class="bi bi-bookmarks"></i>
-                </div>
-                <div class="metric-info">
-                    <p class="metric-label">Scheduled</p>
-                    <h4 class="metric-number">20</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+    <div class="flex-fill px-2">
         <div class="stats-card" [ngClass]="{'active': selectedCard === 'my_calendar'}"
             (click)="setSelectedCard('my_calendar')">
             <div class="compact-card-content">
