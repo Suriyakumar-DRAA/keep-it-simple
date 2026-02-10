@@ -1,0 +1,217 @@
+<div class="split-container bg-light">
+    <!-- Left Panel -->
+    <div [ngClass]="getLeftPanelClasses()">
+        <!-- Normal Header (visible when NOT collapsed) -->
+        <div class="panel-header">
+            <span class="panel-title">
+                <i class="bi bi-clock-history"></i>
+                Past Case Sheets
+            </span>
+            <button class="btn btn-md btn-light border" (click)="toggleLeftPanel()" [title]="getLeftExpandTooltip()">
+                <i class="bi" [ngClass]="getLeftExpandIcon()"></i>
+            </button>
+        </div>
+
+        <!-- Normal Content (visible when NOT collapsed) -->
+        <div class="panel-content">
+            <div class="d-flex flex-column h-100">
+                <!-- Toggle Button Group -->
+                <div class="d-flex justify-content-end">
+                    <div class="btn-group mb-2" role="group" aria-label="Toggle Views">
+                        <button type="button" class="btn btn-light btn-sm rounded mx-1 border" title="360° View">
+                            <i class="bi bi-compass"> 360</i>
+                        </button>
+                        <button type="button" class="btn btn-light btn-sm rounded mx-1 border" title="Case Sheets">
+                            <i class="bi bi-journal-medical"> Case Sheets</i>
+                        </button>
+                        <button type="button" class="btn btn-light btn-sm rounded mx-1 border" title="Investigations">
+                            <i class="bi bi-flask"> Investigations</i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Horizontal Date Tabs -->
+                <div class="horizontal-tabs-container ">
+                    <div class="horizontal-tabs-wrapper">
+                        <div *ngFor="let date of dateTabs" class="horizontal-tab-item"
+                            [class.active]="selectedDateTab === date" (click)="selectDateTab(date)">
+                            <span>{{ date }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content for selected date -->
+                <div class="flex-grow-1 overflow-auto mt-3">
+                    @if (selectedDateTab === '01-Jan-2026') {
+                    <div class="row g-2 mb-3">
+                        <div class="col-12 col-md-5 col-lg-5">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <div class="section-label mb-1">Chief Complaints</div>
+                                        <div class="section-value">Burning sensation in both eyes.</div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="section-label mb-1">Last VA</div>
+                                        <div class="d-flex gap-4">
+                                            <span class="section-value">RE: 6/12</span>
+                                            <span class="section-value">LE: 6/12</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="section-label mb-1">Last IOP</div>
+                                        <div class="d-flex gap-4">
+                                            <span class="section-value">RE: 16</span>
+                                            <span class="section-value">LE: 15</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="section-label mb-1">Last Diagnosis</div>
+                                        <div class="section-value">Dry Eye</div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="section-label mb-1">Allergies</div>
+                                        <div class="section-value">Sulpha</div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="section-label mb-1">Medication</div>
+                                        <div class="section-value">Refresh Tears drops</div>
+                                        <div class="section-value">Morning - 2 drops each in BE</div>
+                                        <div class="section-value">Evening - 2 drops each in BE</div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="section-label mb-1">Follow up</div>
+                                        <div class="section-value">After 2 weeks - 12 Jan 2026</div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="section-label mb-1">Findings</div>
+                                        <div class="section-value">Normal</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-7 col-lg-7 d-flex flex-column gap-2">
+                            <div class="card flex-fill mb-2">
+                                <div class="card-body">
+                                    <div class="row g-3 pb-3">
+                                        <div class="col-12 col-md-4">
+                                            <div class="section-label mb-1">Visit Reason</div>
+                                            <div class="section-value">Follow up / Review</div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="section-label mb-1">Ophthalmic History</div>
+                                            <div class="section-value">Using Glasses for<br>LE since 2 yrs, RE since 2
+                                                yrs</div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="section-label mb-1">Special condition</div>
+                                            <div class="section-value">Pregnancy</div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="section-label mb-2">Chief Complaints</div>
+                                            <div class="section-value">
+                                                <div class="mb-1">• Burning sensation in both eyes.</div>
+                                                <div>• Redness and irritation</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="section-label mb-2">Systemic History</div>
+                                            <div class="section-value">
+                                                <div>• Thyroid disorder — 8 years</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card flex-fill">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table small mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th width="40%"></th>
+                                                    <th>Right Eye</th>
+                                                    <th>Left Eye</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-muted">
+                                                <tr>
+                                                    <td class="text-dark">Auto Refraction</td>
+                                                    <td>Sph +1.00 | Cyl −0.50 | Axis 90</td>
+                                                    <td>Sph +1.00 | Cyl −0.50 | Axis 90</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-dark">IOP</td>
+                                                    <td>13 @ 3:46 PM</td>
+                                                    <td>13 @ 3:46 PM</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-dark">Keratometry</td>
+                                                    <td>42.00 @ 180 | 41.20 @ 90</td>
+                                                    <td>42.00 @ 180 | 41.20 @ 90</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-dark">VA</td>
+                                                    <td>6/6 UCVA | Near: N10 | PH: 6/6</td>
+                                                    <td>6/6 UCVA | Near: N10 | PH: 6/6</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-dark">Dry Refraction</td>
+                                                    <td>+0.50 | −0.50 X 90 (6/6) &nbsp;&nbsp; Near: +1.75</td>
+                                                    <td>+0.50 | −0.50 X 90 (6/6) &nbsp;&nbsp; Near: +1.75</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    } @else {
+                    <div class="p-3 bg-white border rounded">
+                        <h5 class="mb-3">No Content Available</h5>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Vertical Elements (visible when collapsed) -->
+        <button class="vertical-btn" (click)="toggleLeftPanel()" title="Expand Past Case Sheets">
+            <i class="bi bi-layout-sidebar-inset"></i>
+        </button>
+        <div class="vertical-text">Past Case Sheets</div>
+    </div>
+
+    <!-- Right Panel -->
+    <div [ngClass]="getRightPanelClasses()">
+        <!-- Normal Header (visible when NOT collapsed) -->
+        <div class="panel-header">
+            <span class="panel-title">
+                <i class="bi bi-pencil-square"></i>
+                Today Case Sheet (05-Dec-2025)
+            </span>
+            <button class="btn btn-md btn-light border" (click)="toggleRightPanel()" [title]="getRightExpandTooltip()">
+                <i class="bi bi-layout-sidebar-inset-reverse" [ngClass]="getRightExpandIcon()"></i>
+            </button>
+        </div>
+
+        <!-- Normal Content (visible when NOT collapsed) -->
+        <div class="panel-content">
+
+        </div>
+
+        <!-- Vertical Elements (visible when collapsed) -->
+        <button class="vertical-btn" (click)="toggleRightPanel()" title="Expand Today Case Sheet">
+            <i class="bi bi-layout-sidebar-inset-reverse"></i>
+        </button>
+        <div class="vertical-text">Today Case Sheet (05-Dec-2025)</div>
+    </div>
+</div>

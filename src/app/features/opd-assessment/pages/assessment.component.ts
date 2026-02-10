@@ -19,6 +19,7 @@ import { InvestigationComponent } from './investigation/investigation.component'
 import { PatientJourneyComponent } from './patient-journey/patient-journey.component';
 import { PatientSummaryComponent } from './patient-summary/patient-summary.component';
 import { ReportsComponent } from './reports/reports.component';
+import { SplitWindowComponent } from './split-window/split-window.component';
 
 @Component({
     selector: 'app-assessment',
@@ -40,7 +41,8 @@ import { ReportsComponent } from './reports/reports.component';
         RefractionComponent,
         PatientJourneyComponent,
         PatientSummaryComponent,
-        ReportsComponent
+        ReportsComponent,
+        SplitWindowComponent
     ],
     providers: [
         AssessmentService,

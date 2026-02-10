@@ -19,7 +19,6 @@ export class SidebarComponent {
         { id: 'dashboard', icon: 'bi-grid', label: 'Dashboard' },
         { id: 'add-building', icon: 'bi-building-add', label: 'Add Building' },
         { id: 'calendar', icon: 'bi-calendar3', label: 'Calendar' },
-        { id: 'users-staff', icon: 'bi-people', label: 'Staff' },
         { id: 'users-patients', icon: 'bi-people', label: 'Patients' },
         { id: 'add-house', icon: 'bi-house-add', label: 'Add House' },
         { id: 'analytics', icon: 'bi-graph-up', label: 'Analytics' },
