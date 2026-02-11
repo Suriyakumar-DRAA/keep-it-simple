@@ -26,9 +26,9 @@ import { ReportsComponent } from '../reports/reports.component';
         ExaminationComponent,
         // DiagnosisComponent,
         InvestigationComponent,
-        HistoryComponent,
-        AutoRefractionComponent,
-        RefractionComponent,
+        // HistoryComponent,
+        // AutoRefractionComponent,
+        // RefractionComponent,
         ReportsComponent,
     ],
     providers: []
@@ -49,7 +49,7 @@ export class SplitWindowComponent {
 
     tabs = [
         { id: 'overview', label: 'Overview', completed: true },
-        { id: 'exam', label: 'Examination', completed: true },
+        { id: 'examination', label: 'Examination', completed: true },
         { id: 'invest', label: 'Investigation', completed: true },
         { id: 'diag', label: 'Diagnosis', completed: true },
         { id: 'advice', label: 'Advice', completed: true },
