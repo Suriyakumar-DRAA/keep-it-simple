@@ -26,9 +26,9 @@ import { ReportsComponent } from '../reports/reports.component';
         ExaminationComponent,
         // DiagnosisComponent,
         InvestigationComponent,
-        HistoryComponent,
-        AutoRefractionComponent,
-        RefractionComponent,
+        // HistoryComponent,
+        // AutoRefractionComponent,
+        // RefractionComponent,
         ReportsComponent,
     ],
     providers: []

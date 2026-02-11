@@ -31,8 +31,8 @@ import { StatsCardComponent } from './stats-card/stats-card.component';
         FormsModule,
         PatientQueueComponent,
         PatientInfoComponent,
-        PatientJourneyComponent,
-        PatientSummaryComponent,
+        // PatientJourneyComponent,
+        // PatientSummaryComponent,
         SplitWindowComponent,
         StatsCardComponent
     ],
