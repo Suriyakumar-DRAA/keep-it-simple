@@ -100,43 +100,39 @@
 
         <div class="control-row">
             <span class="meta-label" style="width: 50px;">Type 1</span>
-            <div class="segmented-control">
-                <div class="segmented-control__segment">
-                    <select [(ngModel)]="data.schirmer1_mm">
-                        @for(val of mmRange; track val) { <option [value]="val">{{val}}</option> }
-                    </select>
-                </div>
-                <div class="segmented-control__segment">
-                    <select [(ngModel)]="data.schirmer1_min">
-                        @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
-                    </select>
-                </div>
-                <div class="segmented-control__segment">
-                    <select [(ngModel)]="data.schirmer1_sec">
-                        @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
-                    </select>
-                </div>
+            <div class="col-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer1_mm">
+                    @for(val of mmRange; track val) { <option [value]="val">{{val}}</option> }
+                </select>
+            </div>
+            <div class="col-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer1_min">
+                    @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
+                </select>
+            </div>
+            <div class="col-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer1_sec">
+                    @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
+                </select>
             </div>
         </div>
 
         <div class="control-row">
             <span class="meta-label" style="width: 50px;">Type 2</span>
-            <div class="segmented-control">
-                <div class="segmented-control__segment">
-                    <select [(ngModel)]="data.schirmer2_mm">
-                        @for(val of mmRange; track val) { <option [value]="val">{{val}}</option> }
-                    </select>
-                </div>
-                <div class="segmented-control__segment">
-                    <select [(ngModel)]="data.schirmer2_min">
-                        @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
-                    </select>
-                </div>
-                <div class="segmented-control__segment">
-                    <select [(ngModel)]="data.schirmer2_sec">
-                        @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
-                    </select>
-                </div>
+            <div class="col-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer2_mm">
+                    @for(val of mmRange; track val) { <option [value]="val">{{val}}</option> }
+                </select>
+            </div>
+            <div class="col-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer2_min">
+                    @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
+                </select>
+            </div>
+            <div class="col-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer2_sec">
+                    @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
+                </select>
             </div>
         </div>
     </div>

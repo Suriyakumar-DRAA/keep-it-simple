@@ -209,7 +209,7 @@
         <!-- Normal Content (visible when NOT collapsed) -->
         <div class="panel-content">
             <div class="main-workspace">
-                <ul class="nav nav-tabs border-bottom-0">
+                <ul class="nav nav-tabs border-bottom-1">
                     @for (tab of tabs; track tab.id) {
                     <li class="nav-item">
                         <button class="nav-link" [class.active]="activeTabId === tab.id" (click)="activeTabId = tab.id">
@@ -221,7 +221,7 @@
                     </li>
                     }
                 </ul>
-                <div class="tab-content flex-grow-1 bg-light px-3 py-3">
+                <div class="tab-content flex-grow-1 px-2 py-3">
                     <ng-container [ngSwitch]="activeTabId">
                         <app-overview *ngSwitchCase="'overview'"></app-overview>
                         <app-examination *ngSwitchCase="'examination'"></app-examination>

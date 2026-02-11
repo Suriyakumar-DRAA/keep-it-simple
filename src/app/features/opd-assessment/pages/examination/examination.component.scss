@@ -15,7 +15,7 @@ $text-muted: #64748b;
 /* Navigation Tabs */
 .panel-nav {
   border-bottom: 1px solid $ui-border;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 
   .nav-list {
     display: flex;
@@ -25,7 +25,7 @@ $text-muted: #64748b;
     padding: 0;
 
     .nav-btn {
-      padding: 0.8rem 0.5rem;
+      padding: 0.5rem;
       font-size: 0.875rem;
       color: $text-muted;
       border: none;
@@ -144,49 +144,3 @@ $text-muted: #64748b;
   margin-bottom: 0.75rem;
 }
 
-/* Segmented Dropdown (Merged Inputs) */
-.segmented-control {
-  display: flex;
-  gap: 8px;
-  width: 100%;
-
-  &__segment {
-    flex: 1;
-    position: relative;
-    border: 1px solid $ui-border;
-    border-radius: 6px;
-    background: #ffffff;
-    overflow: hidden;
-
-    /* Custom Down Arrow Icon */
-    &::after {
-      content: "\F282"; /* Bootstrap Icons Chevron Down */
-      font-family: "bootstrap-icons";
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.7rem;
-      color: $text-muted;
-      pointer-events: none;
-    }
-
-    select {
-      width: 100%;
-      border: none;
-      background: transparent;
-      padding: 0.4rem 1.5rem 0.4rem 0.4rem;
-      font-size: 0.85rem;
-      text-align: center;
-      text-align-last: center;
-      outline: none;
-      cursor: pointer;
-      appearance: none;
-      color: $text-main;
-
-      &:focus {
-        background-color: $brand-bg-active;
-      }
-    }
-  }
-}
