@@ -1,0 +1,323 @@
+ .report-drawer {
+     position: fixed;
+     top: 0;
+     right: 0;
+     width: 400px;
+     height: 100vh;
+     z-index: 1050;
+     animation: slideIn 0.3s ease-out;
+     max-width: 90vw;
+     overflow-y: auto;
+ }
+
+ @keyframes slideIn {
+     from {
+         transform: translateX(100%);
+     }
+
+     to {
+         transform: translateX(0);
+     }
+ }
+
+ .thumbnail {
+     width: 55px;
+     height: 70px;
+     transition: all 0.2s ease;
+     border-width: 2px !important;
+ }
+
+ .thumbnail canvas {
+     width: 100%;
+     height: auto;
+ }
+
+ .thumbnail:hover {
+     border-color: var(--bs-primary) !important;
+     background-color: var(--bs-light) !important;
+ }
+
+ .active-thumb {
+     background-color: #cfe2ff !important;
+     /* Bootstrap primary-subtle */
+     box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+ }
+
+ .cursor-pointer {
+     cursor: pointer;
+ }
+
+ /* Custom Scrollbar for mini-map */
+ .custom-scrollbar::-webkit-scrollbar {
+     height: 6px;
+ }
+
+ .custom-scrollbar::-webkit-scrollbar-track {
+     background: #f1f1f1;
+     border-radius: 3px;
+ }
+
+ .custom-scrollbar::-webkit-scrollbar-thumb {
+     background: #c1c1c1;
+     border-radius: 3px;
+ }
+
+ .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+     background: #a8a8a8;
+ }
+
+
+
+ .patient-journey-container {
+     background: white;
+     border: 2px solid #4A90E2;
+     border-radius: 6px;
+     padding: 15px 20px;
+     margin: 10px;
+ }
+
+ /* Header Layout */
+ .journey-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     //    margin-bottom: 15px;
+     flex-wrap: wrap;
+     gap: 20px;
+ }
+
+ .header-left {
+     display: flex;
+     align-items: baseline;
+     gap: 10px;
+ }
+
+ .header-right {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .journey-title {
+     font-size: 1.1rem;
+     font-weight: 700;
+     color: #1a1a1a;
+     margin: 0;
+ }
+
+ /* HIGHLIGHTED TOTAL TIME: Badge Style */
+ .total-time {
+     background-color: #f2f7fd;
+     padding: 5px 10px;
+     border-radius: 4px;
+     font-size: 0.7rem;
+     white-space: nowrap;
+ }
+
+ .total-time-label {
+     text-transform: uppercase;
+     letter-spacing: 0.5px;
+ }
+
+ /* Journey Content */
+
+ .journey-content {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+
+
+ .journey-steps-wrapper {
+     flex: 1;
+     border-radius: 6px;
+     overflow-y: auto;
+     overflow-x: visible;
+     white-space: normal;
+     height: 100%;
+     padding: 0 10px;
+ }
+
+ /* Custom Scrollbar Styling */
+
+ .journey-steps-wrapper::-webkit-scrollbar {
+     width: 6px;
+ }
+
+ .journey-steps-wrapper::-webkit-scrollbar-track {
+     background: #f1f1f1;
+     border-radius: 3px;
+ }
+
+ .journey-steps-wrapper::-webkit-scrollbar-thumb {
+     background: #c1c1c1;
+     border-radius: 3px;
+ }
+
+ .journey-steps-wrapper::-webkit-scrollbar-thumb:hover {
+     background: #a8a8a8;
+ }
+
+
+ .journey-steps {
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+     justify-content: flex-start;
+     position: relative;
+     flex-wrap: nowrap;
+     padding: 15px 10px;
+     gap: 0;
+ }
+
+
+ .step-item {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     position: relative;
+     z-index: 2;
+     min-height: 70px;
+     margin-bottom: 0;
+     flex: 0 0 auto;
+     padding: 0;
+ }
+
+
+ /* UPDATED: Remove top padding for first item to ensure perfect horizontal alignment */
+ .step-item:first-child {
+     padding-top: 0;
+ }
+
+
+ /* Connecting Lines for vertical */
+ .step-item::after {
+     content: '';
+     position: absolute;
+     left: 24px;
+     top: calc(50% + 25px);
+     height: calc(100% - 50px);
+     width: 2px;
+     background-color: #E0E0E0;
+     z-index: 0;
+ }
+
+ .step-item:last-child::after {
+     display: none;
+ }
+
+ .step-item.completed-step::after {
+     background-color: #4CAF50;
+ }
+
+
+ .step-icon-wrapper {
+     width: 50px;
+     height: 50px;
+     border-radius: 100px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-right: 15px;
+     margin-bottom: 0;
+     position: relative;
+     z-index: 2;
+     border: 3px solid #4CAF50;
+ }
+
+ //    .step-icon-wrapper.completed {
+ //        background-color: #d7f2d9;
+ //    }
+
+ .step-icon-wrapper.current {
+     //    background-color: #E3F2FD;
+     border: 2px solid #4A90E2;
+ }
+
+ .ophthal-icon-wrapper {
+     background-color: white;
+     border: 2px solid #4A90E2;
+ }
+
+ .ophthal-illustration {
+     width: 34px;
+     height: 34px;
+ }
+
+ /* Scaled down */
+
+ .step-status-indicator {
+     position: absolute;
+     bottom: -3px;
+     right: -3px;
+     width: 16px;
+     height: 16px;
+     border-radius: 50%;
+     border: 2px solid white;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     z-index: 3;
+ }
+
+ .step-status-indicator.completed {
+     background-color: #4CAF50;
+ }
+
+ .step-status-indicator.incomplete {
+     background-color: #f84949;
+ }
+
+ .step-status-indicator.engage {
+     background-color: #2196F3;
+ }
+
+ .step-status-indicator.waiting {
+     background-color: #fbc934;
+ }
+
+ .step-status-indicator svg {
+     width: 10px;
+     height: 10px;
+ }
+
+
+ .step-label {
+     color: #747B88;
+     font-size: 0.73rem;
+     font-weight: 500;
+     text-align: left;
+     margin-right: 10px;
+ }
+
+ .step-time {
+     font-size: 0.75rem;
+     text-align: left;
+     margin-left: 10px;
+ }
+
+ @media (max-width: 992px) {
+     .journey-header {
+         flex-direction: column;
+         align-items: flex-start;
+     }
+
+     .header-right {
+         width: 100%;
+         flex-wrap: wrap;
+         margin-top: 10px;
+     }
+
+     .send-patient-controls {
+         width: 100%;
+         flex-wrap: wrap;
+     }
+
+     .search-wrapper {
+         width: 100%;
+     }
+
+     .department-select {
+         width: 100%;
+     }
+ }
