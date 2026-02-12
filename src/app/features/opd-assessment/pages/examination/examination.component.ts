@@ -22,8 +22,8 @@ interface EyeData {
 export class ExaminationComponent {
 
     isEditing = false;
-    expandedSections = new Set<string>(['cornea']);
-    activeSection: string = 'Cornea';
+    expandedSections = new Set<string>(['appendages']);
+    activeSection: string = 'Appendages';
 
     private assessmentService = inject(AssessmentService);
 

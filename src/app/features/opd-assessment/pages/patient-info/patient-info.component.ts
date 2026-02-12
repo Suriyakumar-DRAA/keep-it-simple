@@ -14,7 +14,7 @@ import { PatientJourneyVerticalComponent } from '../patient-journey-vertical/pat
     standalone: true,
     templateUrl: './patient-info.component.html',
     styleUrls: ['./patient-info.component.scss'],
-    imports: [CommonModule, FormsModule, PatientJourneyHorizontalComponent, PatientJourneyVerticalComponent],
+    imports: [CommonModule, FormsModule],
     providers: []
 })
 export class PatientInfoComponent {
