@@ -40,7 +40,26 @@
                         <img src="assets/images/patient-info.png" alt="{{ patient.name }}"
                             class="img-fluid rounded-circle">
                     </div>
-                    <div class="flex-grow-1 d-flex flex-column">
+                    <!-- Patient Info Details -->
+                    <div class="flex-grow-1 d-flex flex-column patient-info-details">
+                        <!-- Patient Journey Buttons -->
+                        <div class="d-flex gap-2">
+                            <div class="position-absolute end-0" style="z-index: 2; top:5%">
+                                <button class="btn btn-light btn-md shadow"
+                                    (click)="openJourneyButton('horizontal', true); $event.stopPropagation()"
+                                    title="View Horizontal Patient Journey">
+                                    <i class="bi bi-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="position-absolute end-0" style="z-index: 2; top:13%">
+                                <button class="btn btn-light btn-md shadow"
+                                    (click)="openJourneyButton('vertical', true); $event.stopPropagation()"
+                                    title="View Vertical Patient Journey">
+                                    <i class="bi bi-arrow-down"></i>
+                                </button>
+                            </div>
+                        </div>
+
                         <div class="row g-2">
                             <div class="col-6 col-md-3">
                                 <label class="d-block text-dark fw-bold small mb-1 opacity-75">MR No</label>
@@ -51,11 +70,15 @@
                                 <p class="text-secondary small mb-0">{{ patient.previous_surgery || 'None' }}</p>
                             </div>
                             <div class="col-6 col-md-3">
-                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">Previous Diagnosis</label>
+                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">
+                                    Previous Diagnosis
+                                </label>
                                 <p class="text-secondary small mb-0">{{ patient.previous_diagnosis || 'None' }}</p>
                             </div>
                             <div class="col-6 col-md-3">
-                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">Infectious Disease</label>
+                                <label class="d-block text-dark fw-bold small mb-1 opacity-75">
+                                    Infectious Disease
+                                </label>
                                 <p class="text-secondary small mb-0">{{ patient.infectious_disease || 'None' }}</p>
                             </div>
                             <div class="col-6 col-md-3">
@@ -72,7 +95,8 @@
                             </div>
                             <div class="col-6 col-md-3">
                                 <label class="d-block text-dark fw-bold small mb-1 opacity-75">Registration Date</label>
-                                <span class="text-secondary small mb-0">{{ caseData.visit_date | date:'mediumDate' }}</span>
+                                <span class="text-secondary small mb-0">{{ caseData.visit_date | date:'mediumDate'
+                                    }}</span>
                             </div>
                         </div>
                     </div>

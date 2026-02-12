@@ -6,13 +6,15 @@ import { forkJoin } from 'rxjs';
 import { IPatient } from '../../model/patient.model';
 import { ICase } from '../../model/case.model';
 import { AssessmentService } from '@features/opd-assessment/services/assessment.service';
+import { PatientJourneyHorizontalComponent } from '../patient-journey-horizontal/patient-journey-horizontal.component';
+import { PatientJourneyVerticalComponent } from '../patient-journey-vertical/patient-journey-vertical.component';
 
 @Component({
     selector: 'app-patient-info',
     standalone: true,
     templateUrl: './patient-info.component.html',
     styleUrls: ['./patient-info.component.scss'],
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, PatientJourneyHorizontalComponent, PatientJourneyVerticalComponent],
     providers: []
 })
 export class PatientInfoComponent {
@@ -20,10 +22,18 @@ export class PatientInfoComponent {
     @Input({ required: true }) patient!: IPatient;
     @Input({ required: true, alias: 'case' }) caseData!: ICase;
 
+    showPatientJourneyHorizontal = false;
+    showPatientJourneyVertical = false;
+
     private assessmentService = inject(AssessmentService);
 
     constructor() {
     }
+
+    showVerticalJourney = computed(() => {
+        const verticalVisible = this.assessmentService.getVerticalPatientJourney();
+        return verticalVisible;
+    });
 
     ngOnInit() {
         this.patient;
@@ -58,5 +68,15 @@ export class PatientInfoComponent {
         const minutes = diffMinutes % 60;
         if (hours > 0) return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}m`;
         return `${String(minutes).padStart(2, '0')}m`;
+    }
+
+    openJourneyButton(position: string, isOpen: boolean): void {
+        if (position === 'horizontal') {
+            this.showPatientJourneyHorizontal = !this.assessmentService.getHorizontalPatientJourney()();
+            this.assessmentService.setHorizontalPatientJourney(this.showPatientJourneyHorizontal);
+        } else if (position === 'vertical') {
+            this.showPatientJourneyVertical = !this.assessmentService.getVerticalPatientJourney()();
+            this.assessmentService.setVerticalPatientJourney(this.showPatientJourneyVertical);
+        }
     }
 }

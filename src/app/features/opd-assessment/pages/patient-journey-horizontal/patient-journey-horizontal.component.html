@@ -1,13 +1,4 @@
-<div class="d-flex justify-content-end">
-    <button
-        class="expand-btn btn btn-light border shadow-lg start-0 rounded-end d-flex align-items-center position-relative justify-content-center p-2 me-3"
-        style="width: 20px; height: 25px; z-index: 10;top: -86px ; background-color: white" 
-        (click)="showPatientJourney()">
-        <i class="bi bi-chevron-down small"></i>
-    </button>
-</div>
-@if(isShowPatientJourney){
-    <div class="px-3 py-3">
+<div class="px-3 py-3">
     <!-- Header: Title on Left, Controls on Right -->
     <div class="journey-header">
         <div class="header-left">
@@ -24,12 +15,8 @@
                 <!-- Reception (Completed) -->
                 <div class="step-item completed-step">
                     <div class="step-icon-wrapper completed">
-                        <img 
-                            src="assets/images/patient-journey/reception.png" 
-                            alt="Reception Icon" 
-                            class="step-icon" 
-                            style="height:35px"
-                        />
+                        <img src="assets/images/patient-journey/reception.png" alt="Reception Icon" class="step-icon"
+                            style="height:35px" />
                     </div>
                     <div class="step-time">12 min</div>
                 </div>
@@ -37,12 +24,8 @@
                 <!-- Waiting (Completed) -->
                 <div class="step-item completed-step">
                     <div class="step-icon-wrapper completed">
-                      <img 
-                            src="assets/images/patient-journey/waiting.png" 
-                            alt="Waiting Icon" 
-                            class="step-icon" 
-                            style="height:35px"
-                        />
+                        <img src="assets/images/patient-journey/waiting.png" alt="Waiting Icon" class="step-icon"
+                            style="height:35px" />
                     </div>
                     <div class="step-time">32 min</div>
                 </div>
@@ -50,12 +33,8 @@
                 <!-- AR / NCT (Completed) -->
                 <div class="step-item completed-step">
                     <div class="step-icon-wrapper completed">
-                        <img 
-                            src="assets/images/patient-journey/ar_nct.png" 
-                            alt="AR / NCT Icon" 
-                            class="step-icon" 
-                            style="height:35px"
-                        />
+                        <img src="assets/images/patient-journey/ar_nct.png" alt="AR / NCT Icon" class="step-icon"
+                            style="height:35px" />
                     </div>
                     <div class="step-time">10 min</div>
                 </div>
@@ -63,12 +42,8 @@
                 <!-- Optom (Completed) -->
                 <div class="step-item completed-step">
                     <div class="step-icon-wrapper completed">
-                        <img 
-                            src="assets/images/patient-journey/optom.png" 
-                            alt="Optom Icon" 
-                            class="step-icon" 
-                            style="height:35px"
-                        />
+                        <img src="assets/images/patient-journey/optom.png" alt="Optom Icon" class="step-icon"
+                            style="height:35px" />
                     </div>
                     <div class="step-time">25 min</div>
                 </div>
@@ -76,12 +51,8 @@
                 <!-- Dilatation (Incomplete) -->
                 <div class="step-item">
                     <div class="step-icon-wrapper completed">
-                        <img 
-                            src="assets/images/patient-journey/dilation.png" 
-                            alt="Dilation Icon" 
-                            class="step-icon" 
-                            style="height:35px"
-                        />
+                        <img src="assets/images/patient-journey/dilation.png" alt="Dilation Icon" class="step-icon"
+                            style="height:35px" />
                         <!-- Status Indicator - Incomplete/Dash -->
                         <div class="step-status-indicator incomplete">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,12 +66,8 @@
                 <!-- Ophthal -->
                 <div class="step-item">
                     <div class="step-icon-wrapper current ophthal-icon-wrapper">
-                       <img 
-                            src="assets/images/patient-journey/ophthal.png" 
-                            alt="Ophthal Icon" 
-                            class="step-icon" 
-                            style="height:28px"
-                        />
+                        <img src="assets/images/patient-journey/ophthal.png" alt="Ophthal Icon" class="step-icon"
+                            style="height:28px" />
                         <!-- Status Indicator - Engage/Pulsing -->
                         <div class="step-status-indicator engage">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -114,4 +81,3 @@
         </div>
     </div>
 </div>
-}

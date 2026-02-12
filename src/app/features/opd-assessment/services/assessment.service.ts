@@ -12,6 +12,9 @@ export class AssessmentService {
 
     private apiUrl = environment.apiUrl;
     private visiblePatientQueue = signal(true);
+    
+    private horizontalPatientJourney = signal(false);
+    private verticalPatientJourney = signal(false);
 
     constructor(private http: HttpClient) {
     }
@@ -22,5 +25,21 @@ export class AssessmentService {
 
     setVisiblePatientQueue(visible: boolean) {
         this.visiblePatientQueue.set(visible);
+    }
+
+    getHorizontalPatientJourney() {
+        return this.horizontalPatientJourney.asReadonly();
+    }
+
+    setHorizontalPatientJourney(visible: boolean) {
+        this.horizontalPatientJourney.set(visible);
+    }   
+    
+    getVerticalPatientJourney() {
+        return this.verticalPatientJourney.asReadonly();
+    }
+
+    setVerticalPatientJourney(visible: boolean) {
+        this.verticalPatientJourney.set(visible);
     }
 }

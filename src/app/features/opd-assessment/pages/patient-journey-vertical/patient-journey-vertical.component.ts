@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { AssessmentService } from '@features/opd-assessment/services/assessment.service';
 
 @Component({
@@ -10,16 +10,12 @@ import { AssessmentService } from '@features/opd-assessment/services/assessment.
   styleUrl: './patient-journey-vertical.component.scss'
 })
 export class PatientJourneyVerticalComponent {
-  @Output() close = new EventEmitter<void>();
-  showPatientJourney!: boolean;
-  constructor(private assessmentService: AssessmentService) { }
 
-  openPatientjourney() {
-    this.showPatientJourney = true;
-  }
+  private assessmentService = inject(AssessmentService);
+
+  constructor() { }
 
   closePatientJourney() {
-    this.showPatientJourney = false;
+    this.assessmentService.setHorizontalPatientJourney(false);
   }
-
 }

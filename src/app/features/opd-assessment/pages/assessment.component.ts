@@ -20,6 +20,8 @@ import { PatientSummaryComponent } from './patient-summary/patient-summary.compo
 import { ReportsComponent } from './reports/reports.component';
 import { SplitWindowComponent } from './split-window/split-window.component';
 import { StatsCardComponent } from './stats-card/stats-card.component';
+import { PatientJourneyHorizontalComponent } from './patient-journey-horizontal/patient-journey-horizontal.component';
+import { PatientJourneyVerticalComponent } from './patient-journey-vertical/patient-journey-vertical.component';
 
 @Component({
     selector: 'app-assessment',
@@ -32,6 +34,8 @@ import { StatsCardComponent } from './stats-card/stats-card.component';
         PatientQueueComponent,
         PatientInfoComponent,
         // PatientJourneyComponent,
+        PatientJourneyHorizontalComponent,
+        PatientJourneyVerticalComponent,
         // PatientSummaryComponent,
         SplitWindowComponent,
         StatsCardComponent
@@ -53,11 +57,20 @@ export class AssessmentComponent {
     modalRef?: BsModalRef;
     currentSide: 'left' | 'right' = 'left';
 
-
     private assessmentService = inject(AssessmentService);
 
     constructor(private modalService: BsModalService) {
     }
+
+    showHorizontalJourney = computed(() => {
+        const horizontalVisible = this.assessmentService.getHorizontalPatientJourney();
+        return horizontalVisible();
+    });
+
+    showVerticalJourney = computed(() => {
+        const verticalVisible = this.assessmentService.getVerticalPatientJourney();
+        return verticalVisible();
+    });
 
     ngOnInit() {
         this.patients = this.loadMockPatients();
