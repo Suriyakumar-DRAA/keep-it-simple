@@ -1,9 +1,9 @@
 <!-- Expand Button -->
 
-<div class="mb-2">
+<div class="d-flex justify-content-end">
     <button
-        class="expand-btn btn btn-light border shadow-s start-0 rounded-end d-flex align-items-center justify-content-center p-2 ms-auto"
-        style="width: 20px; height: 25px; z-index: 10;top: 23px" title="Expand Queue (Ctrl+B)"
+        class="expand-btn btn  border shadow-s start-0 rounded-end d-flex align-items-center position-relative justify-content-center p-2 me-3"
+        style="width: 20px; height: 25px; z-index: 10;top: 150px; background-color: white" 
         (click)="openPatientjourney()">
         <i class="bi bi-chevron-right small"></i>
     </button>
@@ -23,8 +23,11 @@
         <h5 class="mb-0 fw-semibold text-dark"><i class="bi bi-clock me-1"></i>Patient Journey</h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="closePatientJourney()"></button>
     </div>
-
-
+ <div class="d-flex justify-content-end mt-2">
+  <div class="total-time">
+                <span class="total-time-label">TOTAL TIME</span> <strong> 01:23 min</strong>
+            </div>
+ </div>
     <div class="px-3 ">
         <div class="journey-content mt-2">
             <div class="journey-steps-wrapper">

@@ -321,3 +321,17 @@
          width: 100%;
      }
  }
+
+ /* HIGHLIGHTED TOTAL TIME: Badge Style */
+   .total-time {
+       background-color: #f2f7fd;
+       padding: 5px 10px;
+       border-radius: 4px;
+       font-size: 0.7rem;
+       white-space: nowrap;
+   }
+
+   .total-time-label {
+       text-transform: uppercase;
+       letter-spacing: 0.5px;
+   }
