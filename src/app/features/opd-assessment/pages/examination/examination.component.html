@@ -14,29 +14,87 @@
 
     <div class="container-fluid mt-4">
         @if(activeSection === 'Cornea'){
-        <div class="mb-3">
-            <h6 class="field-label" style="font-size: 1rem;">Cornea</h6>
-        </div>
-
-        <div class="row gx-4">
-            <div class="col-md-6">
-                <div class="data-card">
-                    <div class="data-card__header">
-                        <h5 class="data-card__title">Right Side (RE)</h5>
-                        <button class="data-card__action" (click)="copyReToLe()">
-                            Copy to Left <i class="bi bi-arrow-right"></i>
-                        </button>
+        <div>
+            <div class="mb-3">
+                <h6 class="field-label" style="font-size: 1rem;">Cornea</h6>
+            </div>
+            <div class="row gx-4">
+                <div class="col-md-6">
+                    <div class="data-card">
+                        <div class="data-card__header">
+                            <h5 class="data-card__title">Right Side (RE)</h5>
+                            <button class="data-card__action" (click)="copyReToLe()">
+                                Copy to Left <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                        <ng-container *ngTemplateOutlet="corneaForm; context: { data: reData }"></ng-container>
                     </div>
-                    <ng-container *ngTemplateOutlet="genericForm; context: { data: reData }"></ng-container>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="data-card">
+                        <div class="data-card__header">
+                            <h5 class="data-card__title">Left Side (LE)</h5>
+                        </div>
+                        <ng-container *ngTemplateOutlet="corneaForm; context: { data: leData }"></ng-container>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-md-6">
-                <div class="data-card">
-                    <div class="data-card__header">
-                        <h5 class="data-card__title">Left Side (LE)</h5>
+        </div>
+        }@else if (activeSection === 'Appendages') {
+        <div>
+            <div class="mb-3">
+                <h6 class="field-label" style="font-size: 1rem;">Apprarance</h6>
+            </div>
+            <div class="row gx-4">
+                <div class="col-md-6">
+                    <div class="data-card">
+                        <div class="data-card__header">
+                            <h5 class="data-card__title">Right Side (RE)</h5>
+                            <button class="data-card__action" (click)="copyReToLe()">
+                                Copy to Left <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                        <ng-container *ngTemplateOutlet="appendagesForm; context: { data: reData }"></ng-container>
                     </div>
-                    <ng-container *ngTemplateOutlet="genericForm; context: { data: leData }"></ng-container>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="data-card">
+                        <div class="data-card__header">
+                            <h5 class="data-card__title">Left Side (LE)</h5>
+                        </div>
+                        <ng-container *ngTemplateOutlet="appendagesForm; context: { data: leData }"></ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+        @else if (activeSection === 'Conjunctiva') {
+        <div>
+            <div class="mb-3">
+                <h6 class="field-label" style="font-size: 1rem;">Cornea</h6>
+            </div>
+            <div class="row gx-4">
+                <div class="col-md-6">
+                    <div class="data-card">
+                        <div class="data-card__header">
+                            <h5 class="data-card__title">Right Side (RE)</h5>
+                            <button class="data-card__action" (click)="copyReToLe()">
+                                Copy to Left <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
+                        <ng-container *ngTemplateOutlet="corneaForm; context: { data: reData }"></ng-container>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="data-card">
+                        <div class="data-card__header">
+                            <h5 class="data-card__title">Left Side (LE)</h5>
+                        </div>
+                        <ng-container *ngTemplateOutlet="corneaForm; context: { data: leData }"></ng-container>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,7 +102,7 @@
     </div>
 </div>
 
-<ng-template #genericForm let-data="data">
+<ng-template #corneaForm let-data="data">
     <div class="field-group">
         <label class="field-label">Size</label>
         <div class="chip-list">
@@ -136,4 +194,107 @@
             </div>
         </div>
     </div>
+</ng-template>
+
+
+<ng-template #appendagesForm let-data="data">
+
+    <div class="d-flex flex-wrap gap-4 mb-3">
+
+        <div class="field-group">
+            <label class="field-label">Phthisis Bulbi</label>
+            <div class="chip-list">
+                <button type="button" class="select-chip" [class.is-active]="data.phthisisBulbi === false"
+                    (click)="data.phthisisBulbi = false">No</button>
+                <button type="button" class="select-chip" [class.is-active]="data.phthisisBulbi === true"
+                    (click)="data.phthisisBulbi = true">Yes</button>
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Anophthalmos</label>
+            <div class="chip-list">
+                <button type="button" class="select-chip" [class.is-active]="data.anophthalmos === false"
+                    (click)="data.anophthalmos = false">No</button>
+                <button type="button" class="select-chip" [class.is-active]="data.anophthalmos === true"
+                    (click)="data.anophthalmos = true">Yes</button>
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Microphthalmos</label>
+            <div class="chip-list">
+                <button type="button" class="select-chip" [class.is-active]="data.microphthalmos === false"
+                    (click)="data.microphthalmos = false">No</button>
+                <button type="button" class="select-chip" [class.is-active]="data.microphthalmos === true"
+                    (click)="data.microphthalmos = true">Yes</button>
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Artificial</label>
+            <div class="chip-list">
+                <button type="button" class="select-chip" [class.is-active]="data.artificial === false"
+                    (click)="data.artificial = false">No</button>
+                <button type="button" class="select-chip" [class.is-active]="data.artificial === true"
+                    (click)="data.artificial = true">Yes</button>
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Proptosis</label>
+            <div class="chip-list">
+                <button type="button" class="select-chip" [class.is-active]="data.proptosis === false"
+                    (click)="data.proptosis = false">No</button>
+                <button type="button" class="select-chip" [class.is-active]="data.proptosis === true"
+                    (click)="data.proptosis = true">Yes</button>
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Dystopia</label>
+            <div class="chip-list">
+                <button type="button" class="select-chip" [class.is-active]="data.dystopia === false"
+                    (click)="data.dystopia = false">No</button>
+                <button type="button" class="select-chip" [class.is-active]="data.dystopia === true"
+                    (click)="data.dystopia = true">Yes</button>
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Injured</label>
+            <div class="chip-list">
+                <button type="button" class="select-chip" [class.is-active]="data.injured === false"
+                    (click)="data.injured = false">No</button>
+                <button type="button" class="select-chip" [class.is-active]="data.injured === true"
+                    (click)="data.injured = true">Yes</button>
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Swollen</label>
+            <div class="chip-list">
+                <button type="button" class="select-chip" [class.is-active]="data.swollen === false"
+                    (click)="data.swollen = false">No</button>
+                <button type="button" class="select-chip" [class.is-active]="data.swollen === true"
+                    (click)="data.swollen = true">Yes</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="d-flex align-items-center mb-2">
+        <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
+            (click)="data.showComments = !data.showComments">
+            Comments
+            <i class="bi" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
+        </a>
+    </div>
+
+    @if(data.showComments) {
+    <div class="field-group">
+        <textarea class="form-control" rows="3" [(ngModel)]="data.comments"
+            placeholder="Enter comments here..."></textarea>
+    </div>
+    }
 </ng-template>
