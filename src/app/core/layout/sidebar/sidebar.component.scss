@@ -1,10 +1,14 @@
 /* Sidebar Structure */
 .sidebar-nav {
+position: fixed;
+    left: 0;
     width: 64px;
-    /* Narrow width standard for icon-only sidebars */
+    height: 100vh;
     z-index: 1000;
     border-right: 1px solid #dee2e6;
+    overflow-y: auto;
 }
+
 
 /* Icon Styling */
 .bi {
@@ -40,4 +44,9 @@
     /* Primary blue text/icon */
     border-left-color: #1967d2;
     /* Solid blue left border */
+}
+
+.item-label{
+    font-size: 10px;
+    font-weight: bold;
 }
