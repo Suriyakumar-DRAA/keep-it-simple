@@ -105,52 +105,55 @@
 </div>
 
 <ng-template #corneaForm let-data="data">
-    <div class="field-group">
-        <label class="field-label">Size</label>
-        <div class="chip-list">
-            @for(sz of ['Normal', 'Micro', 'Macro']; track sz) {
-            <button type="button" class="select-chip" [class.is-active]="data.size === sz" (click)="data.size = sz">
-                {{sz}}
-            </button>
-            }
+    <div class="d-flex flex-wrap justify-content-between gap-3 mb-2">
+        <div class="field-group">
+            <label class="field-label">Size</label>
+            <div class="chip-list">
+                @for(sz of ['Normal', 'Micro', 'Macro']; track sz) {
+                <button type="button" class="select-chip" [class.is-active]="data.size === sz" (click)="data.size = sz">
+                    {{sz}}
+                </button>
+                }
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Shape</label>
+            <div class="chip-list">
+                @for(s of shapes; track s) {
+                <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'shapes', s)"
+                    (click)="toggleSelection(data, 'shapes', s)">
+                    {{s}}
+                </button>
+                }
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Surface</label>
+            <div class="chip-list">
+                @for(surf of surfaces; track surf) {
+                <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'surfaces', surf)"
+                    (click)="toggleSelection(data, 'surfaces', surf)">
+                    {{surf}}
+                </button>
+                }
+            </div>
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Staining</label>
+            <div class="chip-list">
+                @for(st of stainings; track st) {
+                <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'stainings', st)"
+                    (click)="toggleSelection(data, 'stainings', st)">
+                    {{st}}
+                </button>
+                }
+            </div>
         </div>
     </div>
 
-    <div class="field-group">
-        <label class="field-label">Shape</label>
-        <div class="chip-list">
-            @for(s of shapes; track s) {
-            <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'shapes', s)"
-                (click)="toggleSelection(data, 'shapes', s)">
-                {{s}}
-            </button>
-            }
-        </div>
-    </div>
-
-    <div class="field-group">
-        <label class="field-label">Surface</label>
-        <div class="chip-list">
-            @for(surf of surfaces; track surf) {
-            <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'surfaces', surf)"
-                (click)="toggleSelection(data, 'surfaces', surf)">
-                {{surf}}
-            </button>
-            }
-        </div>
-    </div>
-
-    <div class="field-group">
-        <label class="field-label">Staining</label>
-        <div class="chip-list">
-            @for(st of stainings; track st) {
-            <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'stainings', st)"
-                (click)="toggleSelection(data, 'stainings', st)">
-                {{st}}
-            </button>
-            }
-        </div>
-    </div>
 
     <div class="input-section">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
@@ -201,7 +204,7 @@
 
 <ng-template #appendagesForm let-data="data">
 
-    <div class="d-flex flex-wrap justify-content-between gap-4 mb-2">
+    <div class="d-flex flex-wrap justify-content-between gap-3 mb-2">
         <div class="field-group">
             <label class="field-label">Phthisis Bulbi</label>
             <div class="chip-list">
