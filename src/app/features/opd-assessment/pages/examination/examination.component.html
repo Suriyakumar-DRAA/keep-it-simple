@@ -1,104 +1,106 @@
 <div class="exam-wrapper">
-    <nav class="panel-nav">
-        <ul class="nav-list">
-            @for(section of sections; track section.id) {
-            <li class="nav-item">
-                <button type="button" class="nav-btn" [class.is-active]="section.label === activeSection"
-                    (click)="selectSection(section.label)">
-                    {{section.label}}
-                </button>
-            </li>
+    <div class="exam-layout">
+        <nav class="panel-nav">
+            <ul class="nav-list">
+                @for(section of sections; track section.id) {
+                <li class="nav-item">
+                    <button type="button" class="nav-btn" [class.is-active]="section.label === activeSection"
+                        (click)="selectSection(section.label)">
+                        {{section.label}}
+                    </button>
+                </li>
+                }
+            </ul>
+        </nav>
+
+        <div class="exam-content">
+            @if(activeSection === 'Cornea'){
+            <div>
+                <div class="mb-2">
+                    <h6 class="field-label" style="font-size: 1rem;">Cornea</h6>
+                </div>
+                <div class="row gx-4">
+                    <div class="col-md-6">
+                        <div class="data-card">
+                            <div class="data-card__header">
+                                <h5 class="data-card__title">Right Side (RE)</h5>
+                                <button class="data-card__action" (click)="copyReToLe()">
+                                    Copy to Left <i class="bi bi-arrow-right"></i>
+                                </button>
+                            </div>
+                            <ng-container *ngTemplateOutlet="corneaForm; context: { data: reData }"></ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="data-card">
+                            <div class="data-card__header">
+                                <h5 class="data-card__title">Left Side (LE)</h5>
+                            </div>
+                            <ng-container *ngTemplateOutlet="corneaForm; context: { data: leData }"></ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }@else if (activeSection === 'Appendages') {
+            <div>
+                <div class="mb-2">
+                    <h6 class="field-label" style="font-size: 1rem;">Apprarance</h6>
+                </div>
+                <div class="row gx-4">
+                    <div class="col-md-6">
+                        <div class="data-card">
+                            <div class="data-card__header">
+                                <h5 class="data-card__title">Right Side (RE)</h5>
+                                <button class="data-card__action" (click)="copyReToLe()">
+                                    Copy to Left <i class="bi bi-arrow-right"></i>
+                                </button>
+                            </div>
+                            <ng-container *ngTemplateOutlet="appendagesForm; context: { data: reData }"></ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="data-card">
+                            <div class="data-card__header">
+                                <h5 class="data-card__title">Left Side (LE)</h5>
+                            </div>
+                            <ng-container *ngTemplateOutlet="appendagesForm; context: { data: leData }"></ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
             }
-        </ul>
-    </nav>
-
-    <div class="container-fluid mt-4">
-        @if(activeSection === 'Cornea'){
-        <div>
-            <div class="mb-3">
-                <h6 class="field-label" style="font-size: 1rem;">Cornea</h6>
-            </div>
-            <div class="row gx-4">
-                <div class="col-md-6">
-                    <div class="data-card">
-                        <div class="data-card__header">
-                            <h5 class="data-card__title">Right Side (RE)</h5>
-                            <button class="data-card__action" (click)="copyReToLe()">
-                                Copy to Left <i class="bi bi-arrow-right"></i>
-                            </button>
-                        </div>
-                        <ng-container *ngTemplateOutlet="corneaForm; context: { data: reData }"></ng-container>
-                    </div>
+            @else if (activeSection === 'Conjunctiva') {
+            <div>
+                <div class="mb-2">
+                    <h6 class="field-label" style="font-size: 1rem;">Cornea</h6>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="data-card">
-                        <div class="data-card__header">
-                            <h5 class="data-card__title">Left Side (LE)</h5>
+                <div class="row gx-4">
+                    <div class="col-md-6">
+                        <div class="data-card">
+                            <div class="data-card__header">
+                                <h5 class="data-card__title">Right Side (RE)</h5>
+                                <button class="data-card__action" (click)="copyReToLe()">
+                                    Copy to Left <i class="bi bi-arrow-right"></i>
+                                </button>
+                            </div>
+                            <ng-container *ngTemplateOutlet="corneaForm; context: { data: reData }"></ng-container>
                         </div>
-                        <ng-container *ngTemplateOutlet="corneaForm; context: { data: leData }"></ng-container>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="data-card">
+                            <div class="data-card__header">
+                                <h5 class="data-card__title">Left Side (LE)</h5>
+                            </div>
+                            <ng-container *ngTemplateOutlet="corneaForm; context: { data: leData }"></ng-container>
+                        </div>
                     </div>
                 </div>
             </div>
+            }
         </div>
-        }@else if (activeSection === 'Appendages') {
-        <div>
-            <div class="mb-3">
-                <h6 class="field-label" style="font-size: 1rem;">Apprarance</h6>
-            </div>
-            <div class="row gx-4">
-                <div class="col-md-6">
-                    <div class="data-card">
-                        <div class="data-card__header">
-                            <h5 class="data-card__title">Right Side (RE)</h5>
-                            <button class="data-card__action" (click)="copyReToLe()">
-                                Copy to Left <i class="bi bi-arrow-right"></i>
-                            </button>
-                        </div>
-                        <ng-container *ngTemplateOutlet="appendagesForm; context: { data: reData }"></ng-container>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="data-card">
-                        <div class="data-card__header">
-                            <h5 class="data-card__title">Left Side (LE)</h5>
-                        </div>
-                        <ng-container *ngTemplateOutlet="appendagesForm; context: { data: leData }"></ng-container>
-                    </div>
-                </div>
-            </div>
-        </div>
-        }
-        @else if (activeSection === 'Conjunctiva') {
-        <div>
-            <div class="mb-3">
-                <h6 class="field-label" style="font-size: 1rem;">Cornea</h6>
-            </div>
-            <div class="row gx-4">
-                <div class="col-md-6">
-                    <div class="data-card">
-                        <div class="data-card__header">
-                            <h5 class="data-card__title">Right Side (RE)</h5>
-                            <button class="data-card__action" (click)="copyReToLe()">
-                                Copy to Left <i class="bi bi-arrow-right"></i>
-                            </button>
-                        </div>
-                        <ng-container *ngTemplateOutlet="corneaForm; context: { data: reData }"></ng-container>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="data-card">
-                        <div class="data-card__header">
-                            <h5 class="data-card__title">Left Side (LE)</h5>
-                        </div>
-                        <ng-container *ngTemplateOutlet="corneaForm; context: { data: leData }"></ng-container>
-                    </div>
-                </div>
-            </div>
-        </div>
-        }
     </div>
 </div>
 
@@ -199,8 +201,7 @@
 
 <ng-template #appendagesForm let-data="data">
 
-    <div class="d-flex flex-wrap gap-4 mb-3">
-
+    <div class="d-flex flex-wrap justify-content-between gap-4 mb-2">
         <div class="field-group">
             <label class="field-label">Phthisis Bulbi</label>
             <div class="chip-list">
