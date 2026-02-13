@@ -7,8 +7,8 @@
     "outDir": "./out-tsc/app",
     "types": [],
     "paths": {
-      "@features/*": [
-        "src/app/features/*"
+      "@views/*": [
+        "src/app/views/*"
       ],
       "@shared/service/*": [
         "src/app/shared/service/*"

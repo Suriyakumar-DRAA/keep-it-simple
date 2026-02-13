@@ -8,6 +8,6 @@ export const routes: Routes = [
     },
     {
         path: 'outpatients',
-        loadComponent: () => import('./features/opd-assessment/pages/assessment.component').then(m => m.AssessmentComponent)
+        loadComponent: () => import('./views/opd-assessment/components/assessment.component').then(m => m.AssessmentComponent)
     }
 ];

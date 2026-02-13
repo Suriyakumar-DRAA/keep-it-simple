@@ -2,14 +2,13 @@ import { Component, computed, HostListener, inject, signal, TemplateRef, ViewChi
 import { RouterOutlet } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HeaderComponent } from './core/layout/header/header.component';
-import { SubHeaderComponent } from './core/layout/sub-header/sub-header.component';
 import { UserRole } from '@shared/model/role.model';
 import { CommonService } from '@shared/service/common.service';
 import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule, HeaderComponent, SubHeaderComponent, SidebarComponent],
+  imports: [RouterOutlet, FormsModule, HeaderComponent, SidebarComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -29,9 +28,6 @@ export class App {
   ngOnInit() {
     
   }
-
-
-
   
 }
 
