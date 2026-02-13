@@ -1,26 +1,31 @@
 <!-- Sidebar Container -->
-<nav class="d-flex flex-column flex-shrink-0 bg-white h-100 shadow-sm sidebar-nav me-2">
-
+<nav class="d-flex flex-column flex-shrink-0 bg-white shadow-sm sidebar-nav me-2 mt-5">
     <!-- Top Menu Items -->
-    <ul class="nav flex-column mb-auto text-center w-100 p-0">
-
+         <ul class="nav flex-column mb-auto text-center w-100">
         @for (item of mainMenuItems; track item.id) {
         <li class="nav-item w-100">
-            <a href="#" class="nav-link py-3 d-flex justify-content-center align-items-center"
+                     <a href="#" class="nav-link  justify-content-center align-content-center p-0 mb-2"
                 [class.active]="activeItem() === item.id" (click)="selectItem(item.id, $event)" [title]="item.label">
-                <i class="bi" [class]="item.icon"></i>
+                <i class="bi text-muted" [class]="item.icon"></i>
+           <p class="m-0 item-label">{{ item.label }}</p>
             </a>
         </li>
         }
 
     </ul>
-
     <!-- Bottom Menu Items -->
-    <div class="w-100 text-center pb-3">
+    <div class="w-100 text-center mb-5 pb-3">
         <a href="#" class="nav-link py-3 d-flex justify-content-center align-items-center text-muted bottom-icon"
             title="All Apps">
-            <i class="bi bi-grid"></i>
+            <i class="bi bi-bell"></i>
+        </a>
+             <a href="#" class="nav-link py-3 d-flex justify-content-center align-items-center text-muted bottom-icon"
+            title="All Apps">
+           <i class="bi bi-question-circle"></i>
+        </a>
+         <a href="#" class="nav-link py-3 d-flex justify-content-center align-items-center text-muted bottom-icon"
+            title="All Apps">
+          <i class="bi bi-gear"></i>
         </a>
     </div>
-
 </nav>

@@ -16,18 +16,16 @@ export class SidebarComponent {
 
     // Menu items config based on the provided image
     mainMenuItems = [
-        { id: 'dashboard', icon: 'bi-grid', label: 'Dashboard' },
-        { id: 'add-building', icon: 'bi-building-add', label: 'Add Building' },
+        {id:'opd', icon : 'bi-door-open', label: 'OPD'},
+        {id:'ipd', icon : 'bi-hospital', label: 'IPD' },
         { id: 'calendar', icon: 'bi-calendar3', label: 'Calendar' },
-        { id: 'users-patients', icon: 'bi-people', label: 'Patients' },
-        { id: 'add-house', icon: 'bi-house-add', label: 'Add House' },
-        { id: 'analytics', icon: 'bi-graph-up', label: 'Analytics' },
-        { id: 'help', icon: 'bi-question-circle', label: 'Help' },
+        
     ];
 
     constructor() { }
 
     ngOnInit() {
+        this.activeItem.set('opd')
     }
 
     selectItem(id: string, event: Event) {
