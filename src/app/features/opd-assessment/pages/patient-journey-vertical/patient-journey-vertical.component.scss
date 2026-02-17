@@ -1,8 +1,17 @@
+ .modal-layout{
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1040;
+ }
+ 
+ .status-icon{
+    background-color: #d9edff;
+ }
+ 
  .report-drawer {
      position: fixed;
      top: 0;
      right: 0;
-     width: 400px;
+     width: 600px;
      height: 100vh;
      z-index: 1050;
      animation: slideIn 0.3s ease-out;
@@ -66,8 +75,6 @@
      background: #a8a8a8;
  }
 
-
-
  .patient-journey-container {
      background: white;
      border: 2px solid #4A90E2;
@@ -120,218 +127,154 @@
  }
 
  /* Journey Content */
+.journey-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f7fd;
+}
 
- .journey-content {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
- }
+.current-step-icon {
+    width: 50px;
+    left: 10px;
+}
 
+.status-mark {
+    font-size: 11px;
+    border-bottom-right-radius: 4px;
+}
 
- .journey-steps-wrapper {
-     flex: 1;
-     border-radius: 6px;
-     overflow-y: auto;
-     overflow-x: visible;
-     white-space: normal;
-     height: 100%;
-     padding: 0 10px;
- }
+.time-pill {
+    background-color: #d9edff;
+    border-radius: 20px;
+}
 
- /* Custom Scrollbar Styling */
-
- .journey-steps-wrapper::-webkit-scrollbar {
-     width: 6px;
- }
-
- .journey-steps-wrapper::-webkit-scrollbar-track {
-     background: #f1f1f1;
-     border-radius: 3px;
- }
-
- .journey-steps-wrapper::-webkit-scrollbar-thumb {
-     background: #c1c1c1;
-     border-radius: 3px;
- }
-
- .journey-steps-wrapper::-webkit-scrollbar-thumb:hover {
-     background: #a8a8a8;
- }
+.total-time-section {
+    background-color: #f4f7fa;
+}
 
 
- .journey-steps {
-     display: flex;
-     flex-direction: column;
-     align-items: flex-start;
-     justify-content: flex-start;
-     position: relative;
-     flex-wrap: nowrap;
-     padding: 15px 10px;
-     gap: 0;
- }
+.timeline-container {
+    max-width: 300px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 37px;
+    top: 95px;
+    bottom: 60px;
+    width: 2px;
+    background-color: #144CA7;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 25px;
+    left: 17px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 16px;
+    top: 30px;
+    width: 10px;
+    height: 10px;
+    background-color: #144CA7;
+    border-radius: 50%;
+}
+
+.timeline-dot.blue {
+    background-color: #144CA7;
+    box-shadow: 0 0 0 2px #144CA7;
+}
 
 
- .step-item {
-     display: flex;
-     flex-direction: row;
-     align-items: center;
-     position: relative;
-     z-index: 2;
-     min-height: 70px;
-     margin-bottom: 0;
-     flex: 0 0 auto;
-     padding: 0;
- }
 
 
- /* UPDATED: Remove top padding for first item to ensure perfect horizontal alignment */
- .step-item:first-child {
-     padding-top: 0;
- }
+.start-end-card {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px 15px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.checkmark {
+    color: #198754;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.start-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #B9D8F6;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.start-card.active {
+    border: 2px solid #144CA7;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+}
+
+.compact-card-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+}
+
+.icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
 
 
- /* Connecting Lines for vertical */
- .step-item::after {
-     content: '';
-     position: absolute;
-     left: 24px;
-     top: calc(50% + 25px);
-     height: calc(100% - 50px);
-     width: 2px;
-     background-color: #E0E0E0;
-     z-index: 0;
- }
+.metric-number {
+    font-size: 12px;
+    line-height: 1;
+    background-clip: text;
+}
 
- .step-item:last-child::after {
-     display: none;
- }
+.metric-label {
+    font-size: 12px;
+    font-weight: 500;
+    margin: 2px 0 0 0;
+    white-space: nowrap;
+    color: #A3A7B0;
+    text-overflow: ellipsis;
+}
 
- .step-item.completed-step::after {
-     background-color: #4CAF50;
- }
+.square-icon {
+    color: #0375D9;
+    background: #D9EDFF;
+}
 
+.square-icon.pending {
+    color: #9e9e9e;
+    background: #e0e0e0;
+}
 
- .step-icon-wrapper {
-     width: 50px;
-     height: 50px;
-     border-radius: 100px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     margin-right: 15px;
-     margin-bottom: 0;
-     position: relative;
-     z-index: 2;
-     border: 3px solid #4CAF50;
- }
-
- //    .step-icon-wrapper.completed {
- //        background-color: #d7f2d9;
- //    }
-
- .step-icon-wrapper.current {
-     //    background-color: #E3F2FD;
-     border: 2px solid #4A90E2;
- }
-
- .ophthal-icon-wrapper {
-     background-color: white;
-     border: 2px solid #4A90E2;
- }
-
- .ophthal-illustration {
-     width: 34px;
-     height: 34px;
- }
-
- /* Scaled down */
-
- .step-status-indicator {
-     position: absolute;
-     bottom: -3px;
-     right: -3px;
-     width: 16px;
-     height: 16px;
-     border-radius: 50%;
-     border: 2px solid white;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     z-index: 3;
- }
-
- .step-status-indicator.completed {
-     background-color: #4CAF50;
- }
-
- .step-status-indicator.incomplete {
-     background-color: #f84949;
- }
-
- .step-status-indicator.engage {
-     background-color: #2196F3;
- }
-
- .step-status-indicator.waiting {
-     background-color: #fbc934;
- }
-
- .step-status-indicator svg {
-     width: 10px;
-     height: 10px;
- }
-
-
- .step-label {
-     color: #747B88;
-     font-size: 0.73rem;
-     font-weight: 500;
-     text-align: left;
-     margin-right: 10px;
- }
-
- .step-time {
-     font-size: 0.75rem;
-     text-align: left;
-     margin-left: 10px;
- }
-
- @media (max-width: 992px) {
-     .journey-header {
-         flex-direction: column;
-         align-items: flex-start;
-     }
-
-     .header-right {
-         width: 100%;
-         flex-wrap: wrap;
-         margin-top: 10px;
-     }
-
-     .send-patient-controls {
-         width: 100%;
-         flex-wrap: wrap;
-     }
-
-     .search-wrapper {
-         width: 100%;
-     }
-
-     .department-select {
-         width: 100%;
-     }
- }
-
- /* HIGHLIGHTED TOTAL TIME: Badge Style */
-   .total-time {
-       background-color: #f2f7fd;
-       padding: 5px 10px;
-       border-radius: 4px;
-       font-size: 0.7rem;
-       white-space: nowrap;
-   }
-
-   .total-time-label {
-       text-transform: uppercase;
-       letter-spacing: 0.5px;
-   }
+.completed-status {
+    position: absolute;
+    font-size: 11px;
+    border-radius: 50%;
+    top: -7px;
+    right: -7px;
+    font-size: 15px;
+    color: #32CD32;
+}
