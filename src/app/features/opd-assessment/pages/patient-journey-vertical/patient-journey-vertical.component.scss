@@ -83,12 +83,10 @@
      margin: 10px;
  }
 
- /* Header Layout */
  .journey-header {
      display: flex;
      justify-content: space-between;
      align-items: center;
-     //    margin-bottom: 15px;
      flex-wrap: wrap;
      gap: 20px;
  }
@@ -112,7 +110,6 @@
      margin: 0;
  }
 
- /* HIGHLIGHTED TOTAL TIME: Badge Style */
  .total-time {
      background-color: #f2f7fd;
      padding: 5px 10px;
@@ -126,7 +123,6 @@
      letter-spacing: 0.5px;
  }
 
- /* Journey Content */
 .journey-content {
     display: flex;
     flex-direction: column;
@@ -190,9 +186,6 @@
     box-shadow: 0 0 0 2px #144CA7;
 }
 
-
-
-
 .start-end-card {
     background-color: white;
     border: 1px solid #dee2e6;
@@ -209,7 +202,7 @@
     font-weight: bold;
 }
 
-.start-card {
+.status-card {
     background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     border-radius: 5px;
     padding: 10px;
@@ -220,7 +213,7 @@
     align-items: center;
 }
 
-.start-card.active {
+.status-card.active {
     border: 2px solid #144CA7;
     background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
 }
@@ -243,7 +236,6 @@
     flex-shrink: 0;
 }
 
-
 .metric-number {
     font-size: 12px;
     line-height: 1;
@@ -251,11 +243,11 @@
 }
 
 .metric-label {
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
     margin: 2px 0 0 0;
     white-space: nowrap;
-    color: #A3A7B0;
+    color: #50535a;
     text-overflow: ellipsis;
 }
 
