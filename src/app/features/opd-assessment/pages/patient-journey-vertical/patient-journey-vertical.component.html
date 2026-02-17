@@ -52,7 +52,7 @@
         <div class="timeline-container ms-5 m-0">
         @for(timeline of timelineData ; track timeline.id ; let i = $index ; let isFirst = $first ; let isLast = $last){
         @if(isFirst){
-        <div class="w-75 px-2 mt-4 mb-4">
+        <div class="w-100 px-2 mt-4 mb-4">
             <div class="status-card " [ngClass]="{'active': timeline.status === 'current'}">
                 <div class="compact-card-content">
                     <div class="icon-wrapper square-icon  position-relative">
@@ -75,7 +75,7 @@
         @else if(!isFirst && !isLast){
         <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <div class="w-75 px-2 m-0">
+            <div class="w-100 px-2 m-0">
                 <div class="status-card " [ngClass]="{'active': timeline.status === 'current'}">
                     <div class="compact-card-content">
                         <div class="icon-wrapper square-icon  position-relative">
@@ -98,7 +98,7 @@
         <div class="timeline-line"></div>
         }
         @if(isLast){
-        <div class="w-75 px-2 mt-4 mb-4">
+        <div class="w-100 px-2 mt-4 mb-4">
             <div class="status-card">
                 <div class="compact-card-content">
                     <div class="icon-wrapper square-icon">
