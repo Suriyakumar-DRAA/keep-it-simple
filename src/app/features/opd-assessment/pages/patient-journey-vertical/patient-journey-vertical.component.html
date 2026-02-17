@@ -58,8 +58,10 @@
                     <div class="icon-wrapper square-icon  position-relative">
                         @if(timeline.status === 'completed'){
                         <div class="completed-status "><i class="bi bi-patch-check-fill"></i></div>
-                        }@else {
+                        }@else if(timeline.status === 'current') {
                         <div class="completed-status text-warning "><i class="bi bi-patch-exclamation-fill"></i></div>
+                        }@else{
+                        <div class="completed-status text-muted "><i class="bi bi-patch-question-fill"></i></div>
                         }
                         <img src={{timeline.icon}} alt="Waiting Icon" class="current-step-icon w-75 h-75">
                     </div>
@@ -81,8 +83,10 @@
                         <div class="icon-wrapper square-icon  position-relative">
                             @if(timeline.status === 'completed'){
                             <div class="completed-status "><i class="bi bi-patch-check-fill"></i></div>
-                            }@else {
+                            }@else if(timeline.status === 'current') {
                             <div class="completed-status text-warning "><i class="bi bi-patch-exclamation-fill"></i></div>
+                            }@else{
+                            <div class="completed-status text-muted "><i class="bi bi-patch-question-fill"></i></div>
                             }
                             <img src={{timeline.icon}} alt="Waiting Icon" class="current-step-icon w-75 h-75">
                         </div>
@@ -101,7 +105,14 @@
         <div class="w-100 px-2 mt-4 mb-4">
             <div class="status-card">
                 <div class="compact-card-content">
-                    <div class="icon-wrapper square-icon">
+                    <div class="icon-wrapper square-icon position-relative">
+                        @if(timeline.status === 'completed'){
+                        <div class="completed-status "><i class="bi bi-patch-check-fill"></i></div>
+                        }@else if(timeline.status === 'current') {
+                        <div class="completed-status text-warning "><i class="bi bi-patch-exclamation-fill"></i></div>
+                        }@else{
+                        <div class="completed-status text-muted "><i class="bi bi-patch-question-fill"></i></div>
+                        }
                         <i class="bi bi-door-open text-dark"></i>
                     </div>
                     <div class="flex-column ms-2">
