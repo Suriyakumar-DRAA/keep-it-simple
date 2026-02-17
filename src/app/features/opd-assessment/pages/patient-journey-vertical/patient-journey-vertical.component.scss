@@ -83,33 +83,6 @@
      margin: 10px;
  }
 
- .journey-header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     flex-wrap: wrap;
-     gap: 20px;
- }
-
- .header-left {
-     display: flex;
-     align-items: baseline;
-     gap: 10px;
- }
-
- .header-right {
-     display: flex;
-     align-items: center;
-     gap: 10px;
- }
-
- .journey-title {
-     font-size: 1.1rem;
-     font-weight: 700;
-     color: #1a1a1a;
-     margin: 0;
- }
-
  .total-time {
      background-color: #f2f7fd;
      padding: 5px 10px;
@@ -179,21 +152,6 @@
     height: 10px;
     background-color: #144CA7;
     border-radius: 50%;
-}
-
-.timeline-dot.blue {
-    background-color: #144CA7;
-    box-shadow: 0 0 0 2px #144CA7;
-}
-
-.start-end-card {
-    background-color: white;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    padding: 10px 15px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
 }
 
 .checkmark {
