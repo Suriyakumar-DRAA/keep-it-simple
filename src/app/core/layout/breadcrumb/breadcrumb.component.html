@@ -1,0 +1,17 @@
+<header class="sub-header d-flex align-items-center justify-content-between px-3 mt-2 mx-2 rounded bg-white border-bottom">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0">
+            @for (item of breadcrumbs; track item.label; let last = $last) {
+                <li class="breadcrumb-item" [class.active]="last" [attr.aria-current]="last ? 'page' : null">
+                    @if (!last && item.url) {
+                        <a [routerLink]="item.url">
+                            {{ item.label }}
+                        </a>
+                    } @else {
+                        <span>{{ item.label }}</span>
+                    }
+                </li>
+            }
+        </ol>
+    </nav>
+</header>
