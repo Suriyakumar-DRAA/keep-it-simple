@@ -5,6 +5,7 @@ $ui-border: #e2e8f0;
 $ui-bg-subtle: rgba(216, 216, 216, 0.1);
 $text-main: #1e293b;
 $text-muted: #64748b;
+@use "sass:color";
 
 /* Main Layout */
 .exam-wrapper {
@@ -170,7 +171,7 @@ $text-muted: #64748b;
   transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    background-color: darken(#ffffff, 2%);
+    background-color: color.scale(#ffffff, $lightness: -2%);
   }
 
   &.is-active {

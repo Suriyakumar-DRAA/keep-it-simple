@@ -22,8 +22,8 @@ interface EyeData {
 export class ExaminationComponent {
 
     isEditing = false;
-    expandedSections = new Set<string>(['appendages']);
-    activeSection: string = 'Appendages';
+    expandedSections = new Set<string>(['appearance']);
+    activeSection: string = 'Appearance';
 
     private assessmentService = inject(AssessmentService);
 
@@ -35,6 +35,8 @@ export class ExaminationComponent {
 
     // Define sections for mapping in template to avoid repetition
     sections: any[] = [
+        { id: 'appearance', label: 'Appearance', statusKey: 'appearance_status', notesKey: 'appearance_notes' },
+        { id: 'injury', label: 'Injury', statusKey: 'injury_status', notesKey: 'injury_notes' },
         { id: 'appendages', label: 'Appendages', statusKey: 'appendages_status', notesKey: 'appendages_notes' },
         { id: 'conjunctiva', label: 'Conjunctiva', statusKey: 'conjunctiva_status', notesKey: 'conjunctiva_notes' },
         { id: 'sclera', label: 'Sclera', statusKey: 'sclera_status', notesKey: 'sclera_notes' },
@@ -91,6 +93,35 @@ export class ExaminationComponent {
     shapes = ['Normal', 'Keratoconus', 'Globus',];
     surfaces = ['Normal', 'Irregular', 'Hazy', 'Keratoconus', 'Keratoglobus'];
     stainings = ['Normal', 'Punctate', 'Ulcer'];
+
+    //Appendages
+    appendagesMain = ['Eyelids', 'Eyelashes', 'Lacrimal Sac', 'Syringing'];
+    eyelidOptions = ['Chalazion', 'Ptosis', 'Swelling', 'Entropion', 'Ectropion', 'Mass', 'Meibomitis'];
+    eyelashOptions = ['Trichiasis', 'Dystrichiasis'];
+    lacrimalSacOptions = ['Swelling', 'Roplas'];
+    syringingOptions = ['Syringing'];
+
+    conjunctivaOptions = [
+        'Congestion',
+        'Tear',
+        'Conjuctival Bleb',
+        'SubConjunctival Haemorrhage',
+        'Foreign Body',
+        'Follicles',
+        'Papillae',
+        'Pinguecula',
+        'Pterygium',
+        'Phlycten',
+        'Discharge'
+    ];
+
+    acOptions = [
+        'Cell',
+        'Flare',
+        'Hyphema',
+        'Hypopyon',
+        'Foreign Body'
+    ];
 
     copyReToLe() {
         this.leData = { ...this.reData };
