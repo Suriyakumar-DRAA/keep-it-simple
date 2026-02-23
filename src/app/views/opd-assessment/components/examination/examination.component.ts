@@ -101,6 +101,7 @@ export class ExaminationComponent {
     lacrimalSacOptions = ['Swelling', 'Roplas'];
     syringingOptions = ['Syringing'];
 
+    //conjunctivaForm
     conjunctivaOptions = [
         'Congestion',
         'Tear',
@@ -114,7 +115,9 @@ export class ExaminationComponent {
         'Phlycten',
         'Discharge'
     ];
-
+    conjunctivaCongestion = ['Generalized', 'Localized', 'Ciliary'];
+    
+    //anteriorChamberForm
     acOptions = [
         'Cell',
         'Flare',
@@ -122,6 +125,28 @@ export class ExaminationComponent {
         'Hypopyon',
         'Foreign Body'
     ];
+    depth = ['Normal', 'Shallow', 'Deep'];
+
+    //injuryForm
+    injuryOpenGlobe = ['Rupture', 'Penetrating', 'IOFB', 'Perforating', 'Mixed'];
+    injuryClosedGlobe = ['Contusion', 'Lamellar Laceration', 'Superficial Foreign Body', 'Mixed'];
+    injuryRuptureDetails = ['Endophthalmitis', 'Panophthalmitis'];
+    injuryInvolvementDetails = [
+        'External (Limited to Bulbar Conjunctiva, Sclera, Cornea)',
+        'Anterior Segment (Involving Structures Internal to Cornea like AC, Lens, Posterior Capsule, Pars Plicata)',
+        'Structures Posterior to Posterior Lens'
+    ];
+    injuryIOFBMaterial = ['Pellet', 'Stone', 'Vegetative', 'Non Metallic', 'Glass'];
+    injuryStoneLocation = [
+        'Isolated to Cornea (Including Coreo Scleral Limbus)',
+        'Corneo Scleral Limbus to a point 5MM Posterior to Sclera',
+        'Posterior to Anterior 5MM of Sclera'
+    ];
+
+    //pupilForm
+    pupilShape = ['Round', 'Eccentric', 'Irregular', 'Oval', 'Polycoria'];
+    pupilDirect = ['Normal', 'Sluggish', 'Absent'];
+    pupilConsensual = ['Normal', 'Sluggish', 'Absent'];
 
     copyReToLe() {
         this.leData = { ...this.reData };
