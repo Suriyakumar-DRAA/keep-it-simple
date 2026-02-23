@@ -148,6 +148,46 @@ export class ExaminationComponent {
     pupilDirect = ['Normal', 'Sluggish', 'Absent'];
     pupilConsensual = ['Normal', 'Sluggish', 'Absent'];
 
+    // --- Gonioscopy Dropdown Options ---
+  gonioOptions = [
+    'Select',
+    'Grade 0', 
+    'Grade 1', 
+    'Grade 2', 
+    'Grade 3', 
+    'Grade 4',
+    'Closed',
+    'Slit'
+  ];
+
+  // --- Fundus Form L
+
+  cdRatioOptions = ['0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9', '1.0'];
+
+  maculaOptions = [
+    'Foveal Reflex', 'Hard Exudates', 'Microaneurysm', 'Hemorrhages',
+    'Subretinal Hemorrhages', 'Scar', 'Atrophic area', 'Pigment Alteration',
+    'Drusen', 'Subretinal Fluid', 'Cystoid', 'Thickening', 'Whitening',
+    'Cotton Wool Spots', 'Pigment Epithelial Detachment', 'Altered Foveal Reflex',
+    'Vascular Abnormalities', 'Pigmentary Changes', 'Epiretinal Membrane',
+    'FTMH', 'Lamellar Hole', 'ILM Striae', 'White Dots', 'Yellow Flecks', 'Cherry Red Spot'
+  ];
+
+  // Optional: Function to handle the "Normal" button click at the top of the form
+  setFundusNormal(data: any) {
+    data.fundusMediaSelect = 'Clear';
+    data.fundusPvd = 'Absent';
+    data.opticDiscSize = 'Normal';
+    data.cdRatio = '0.3'; // or whatever your clinical baseline is
+    data.bloodVesselsSelect = 'Normal';
+    data.maculaLesions = []; // clears macula chips
+    data.fovealReflex = 'Present';
+    data.vitreousSelect = 'Clear';
+    data.retinalDetachmentSelect = 'Absent';
+    data.peripheralLesionsSelect = 'Absent';
+    data.fundusText = 'Normal limits';
+  }
+
     copyReToLe() {
         this.leData = { ...this.reData };
     }

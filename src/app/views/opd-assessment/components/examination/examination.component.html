@@ -52,6 +52,10 @@
                                 *ngTemplateOutlet="lensForm; context: { data: reData }"></ng-container> }
                             @case ('IOP') { <ng-container
                                 *ngTemplateOutlet="iopForm; context: { data: reData }"></ng-container> }
+                            @case ('Gonioscopy') { <ng-container
+                                *ngTemplateOutlet="gonioscopyForm; context: { data: reData }"></ng-container> }
+                            @case ('Fundus') { <ng-container
+                                *ngTemplateOutlet="fundusForm; context: { data: reData }"></ng-container> }
                             }
 
                         </div>
@@ -86,6 +90,10 @@
                                 *ngTemplateOutlet="lensForm; context: { data: leData }"></ng-container> }
                             @case ('IOP') { <ng-container
                                 *ngTemplateOutlet="iopForm; context: { data: leData }"></ng-container> }
+                            @case ('Gonioscopy') { <ng-container
+                                *ngTemplateOutlet="gonioscopyForm; context: { data: leData }"></ng-container> }
+                            @case ('Fundus') { <ng-container
+                                *ngTemplateOutlet="fundusForm; context: { data: leData }"></ng-container> }
                             }
                         </div>
                     </div>
@@ -528,7 +536,7 @@
 </ng-template>
 
 <ng-template #conjunctivaForm let-data="data">
-    <div class="d-flex flex-wrap gap-4 align-items-start justify-content-between">
+    <div class="d-flex flex-wrap gap-4 mb-3 align-items-start justify-content-between">
         @for(item of conjunctivaOptions; track item) {
         <div class="field-group">
             <label class="field-label mb-1">{{item}}</label>
@@ -593,7 +601,7 @@
 </ng-template>
 
 <ng-template #anteriorChamberForm let-data="data">
-    <div class="d-flex flex-column gap-3 mb-3">
+    <div class="d-flex flex-column mb-3">
         <div class="field-group">
             <label class="field-label mb-1">Depth</label>
             <div class="chip-list">
@@ -610,7 +618,7 @@
                 <input type="text" class="form-control form-control-sm" placeholder="Enter {{data.acDepth}} details..."
                     [(ngModel)]="data.acDepthDetails">
             </div>
-        }
+            }
         </div>
 
         <div class="row g-4 mt-1">
@@ -876,9 +884,256 @@
 </ng-template>
 
 <ng-template #gonioscopyForm let-data="data">
+    <div class="d-flex flex-column align-items-center p-3">
 
+        <div class="d-flex align-items-center gap-2 mb-4">
+            <span class="field-label m-0 me-2">Superior:</span>
+            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioSuperior1">
+                <option value="Select" [defaultSelected]="'selected'" disabled selected>Select</option>
+                @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+            </select>
+            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioSuperior2">
+                <option value="" disabled selected>Select</option>
+                @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+            </select>
+            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioSuperior3">
+                <option value="" disabled selected>Select</option>
+                @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+            </select>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center gap-4 w-100 my-2">
+
+            <div class="d-flex flex-column gap-2">
+                <span class="field-label mb-1">Temporal:</span>
+                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioTemporal1">
+                    <option value="" disabled selected>Select</option>
+                    @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+                </select>
+                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioTemporal2">
+                    <option value="" disabled selected>Select</option>
+                    @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+                </select>
+                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioTemporal3">
+                    <option value="" disabled selected>Select</option>
+                    @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+                </select>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center px-4">
+                <svg width="120" height="120" viewBox="0 0 100 100">
+                    <line x1="10" y1="10" x2="90" y2="90" stroke="#334155" stroke-width="3" stroke-linecap="round" />
+                    <line x1="90" y1="10" x2="10" y2="90" stroke="#334155" stroke-width="3" stroke-linecap="round" />
+                </svg>
+            </div>
+
+            <div class="d-flex flex-column gap-2">
+                <span class="field-label mb-1">Nasal:</span>
+                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioNasal1">
+                    <option value="" disabled selected>Select</option>
+                    @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+                </select>
+                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioNasal2">
+                    <option value="" disabled selected>Select</option>
+                    @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+                </select>
+                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioNasal3">
+                    <option value="" disabled selected>Select</option>
+                    @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+                </select>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-2 mt-4">
+            <span class="field-label m-0 me-2" style="min-width: 70px; text-align: right;">Inferior:</span>
+            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioInferior1">
+                <option value="" disabled selected>Select</option>
+                @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+            </select>
+            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioInferior2">
+                <option value="" disabled selected>Select</option>
+                @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+            </select>
+            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioInferior3">
+                <option value="" disabled selected>Select</option>
+                @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
+            </select>
+        </div>
+
+    </div>
+    <div class="d-flex align-items-center mb-2">
+        <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
+            (click)="data.showComments = !data.showComments">
+            Comments
+            <i class="bi" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
+        </a>
+    </div>
+
+    @if(data.showComments) {
+    <div class="field-group">
+        <textarea class="form-control" rows="3" [(ngModel)]="data.comments"
+            placeholder="Enter comments here..."></textarea>
+    </div>
+    }
 </ng-template>
 
 <ng-template #fundusForm let-data="data">
+    <div class="d-flex justify-content-end mb-3">
+        <button type="button" class="btn btn-sm btn-outline-secondary" (click)="setFundusNormal(data)">Normal</button>
+    </div>
 
+    <div class="d-flex flex-column gap-3">
+
+        <div class="row align-items-center">
+            <div class="col-md-3"><label class="field-label m-0">Media</label></div>
+            <div class="col-md-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.fundusMediaSelect">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Clear">Clear</option>
+                    <option value="Hazy">Hazy</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="data.fundusMediaText">
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-3"><label class="field-label m-0">PVD</label></div>
+            <div class="col-md-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.fundusPvd">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Absent">Absent</option>
+                    <option value="Present">Present</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-3"><label class="field-label m-0">Optic Disc Size</label></div>
+            <div class="col-md-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.opticDiscSize">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Small">Small</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Large">Large</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-3"><label class="field-label m-0">Cup/Disc Ratio (C/D)</label></div>
+            <div class="col-md-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.cdRatio">
+                    <option value="" disabled selected>Select</option>
+                    @for(val of cdRatioOptions; track val) { <option [value]="val">{{val}}</option> }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="data.cdRatioText">
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-3"><label class="field-label m-0">Optic Disc</label></div>
+            <div class="col-md-9">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="data.opticDiscText">
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-3"><label class="field-label m-0">Blood Vessels</label></div>
+            <div class="col-md-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.bloodVesselsSelect">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Abnormal">Abnormal</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="data.bloodVesselsText">
+            </div>
+        </div>
+
+        <div class="row align-items-start">
+            <div class="col-md-3"><label class="field-label mt-1 m-0">Macula</label></div>
+            <div class="col-md-9">
+                <div class="chip-list flex-wrap gap-2">
+                    @for(item of maculaOptions; track item) {
+                    <button type="button" class="select-chip" 
+                        [class.is-active]="isSelected(data, 'maculaLesions', item)"
+                        (click)="toggleSelection(data, 'maculaLesions', item)">
+                        {{item}}
+                    </button>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-start">
+            <div class="col-md-3"><label class="field-label mt-1 m-0">Foveal Reflex</label></div>
+            <div class="col-md-9">
+                <div class="chip-list mb-2">
+                    @for(fr of ['Present', 'Absent', 'Dull']; track fr) {
+                    <button type="button" class="select-chip" 
+                        [class.is-active]="data.fovealReflex === fr"
+                        (click)="data.fovealReflex = fr">
+                        {{fr}}
+                    </button>
+                    }
+                </div>
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="data.fovealReflexText">
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-3"><label class="field-label m-0">Vitreous</label></div>
+            <div class="col-md-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.vitreousSelect">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Clear">Clear</option>
+                    <option value="Haze">Haze</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="data.vitreousText">
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-3"><label class="field-label m-0">Retinal Detachment</label></div>
+            <div class="col-md-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.retinalDetachmentSelect">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Absent">Absent</option>
+                    <option value="Present">Present</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="data.retinalDetachmentText">
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-3"><label class="field-label m-0">Peripheral Lesions</label></div>
+            <div class="col-md-3">
+                <select class="form-select form-select-sm" [(ngModel)]="data.peripheralLesionsSelect">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Absent">Absent</option>
+                    <option value="Present">Present</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="data.peripheralLesionsText">
+            </div>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-md-3"><label class="field-label m-0">Fundus</label></div>
+            <div class="col-md-9">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="data.fundusText">
+            </div>
+        </div>
+
+    </div>
 </ng-template>
