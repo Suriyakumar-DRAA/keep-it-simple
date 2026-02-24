@@ -1,6 +1,6 @@
 <div class="exam-wrapper">
     <div class="exam-layout">
-        <nav class="panel-nav">
+        <nav class="right-panel-vertical-nav">
             <ul class="nav-list">
                 @for(section of sections; track section.id) {
                 <li class="nav-item">
@@ -21,10 +21,10 @@
 
                 <div class="row gx-4">
                     <div class="col-md-6">
-                        <div class="data-card">
-                            <div class="data-card__header">
-                                <h5 class="data-card__title">Right Side (RE)</h5>
-                                <button class="data-card__action" (click)="copyReToLe()">
+                        <div class="right-panel-data-card">
+                            <div class="right-panel-data-card__header">
+                                <h5 class="right-panel-data-card__title">Right Side (RE)</h5>
+                                <button class="right-panel-data-card__action" (click)="copyReToLe()">
                                     Copy to Left <i class="bi bi-arrow-right"></i>
                                 </button>
                             </div>
@@ -62,9 +62,9 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="data-card">
-                            <div class="data-card__header">
-                                <h5 class="data-card__title">Left Side (LE)</h5>
+                        <div class="right-panel-data-card">
+                            <div class="right-panel-data-card__header">
+                                <h5 class="right-panel-data-card__title">Left Side (LE)</h5>
                             </div>
 
                             @switch (activeSection) {
