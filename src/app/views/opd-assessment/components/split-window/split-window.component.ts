@@ -20,17 +20,18 @@ import { ReportsComponent } from '../reports/reports.component';
     templateUrl: './split-window.component.html',
     styleUrls: ['./split-window.component.scss'],
     imports: [
-        CommonModule,
-        FormsModule,
-        OverviewComponent,
-        ExaminationComponent,
-        // DiagnosisComponent,
-        InvestigationComponent,
-        // HistoryComponent,
-        // AutoRefractionComponent,
-        // RefractionComponent,
-        ReportsComponent,
-    ],
+    CommonModule,
+    FormsModule,
+    OverviewComponent,
+    ExaminationComponent,
+    // DiagnosisComponent,
+    InvestigationComponent,
+    // HistoryComponent,
+    // AutoRefractionComponent,
+    // RefractionComponent,
+    ReportsComponent,
+    RefractionComponent
+],
     providers: []
 })
 export class SplitWindowComponent {
@@ -50,6 +51,7 @@ export class SplitWindowComponent {
     tabs = [
         { id: 'overview', label: 'Overview', completed: true },
         { id: 'examination', label: 'Examination', completed: true },
+        { id: 'refraction', label: 'Refraction', completed: true },
         { id: 'invest', label: 'Investigation', completed: true },
         { id: 'diag', label: 'Diagnosis', completed: true },
         { id: 'advice', label: 'Advice', completed: true },
@@ -228,7 +230,7 @@ export class SplitWindowComponent {
     }
 
     setDefaultTab() {
-        this.activeTabId = 'overview';
+        this.activeTabId = 'refraction';
     }
 
     setActiveTab(tabId: string) {

@@ -224,6 +224,7 @@
                 <div class="tab-content flex-grow-1 px-2 py-3">
                     <ng-container [ngSwitch]="activeTabId">
                         <app-overview *ngSwitchCase="'overview'"></app-overview>
+                        <app-refraction *ngSwitchCase="'refraction'"></app-refraction>
                         <app-examination *ngSwitchCase="'examination'"></app-examination>
                         <app-investigation *ngSwitchCase="'investigation'"></app-investigation>
                         <app-reports *ngSwitchCase="'reports'"></app-reports>
