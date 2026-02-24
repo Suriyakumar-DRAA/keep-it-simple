@@ -6,20 +6,20 @@ $text-muted: #303338;
 @import url(../split-window/split-window.component.scss);
 
 /* Main Layout */
-.exam-wrapper {
+.refraction-wrapper {
   background-color: #ffffff;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.exam-layout {
+.refraction-layout {
   display: flex;
   flex: 1;
   overflow: hidden;
 }
 
-.exam-content {
+.refraction-content {
   flex: 1;
   overflow-y: auto;
   padding: 1rem;
