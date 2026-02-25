@@ -30,16 +30,21 @@
                             </div>
 
                             @switch (activeSection) {
-                            @case ('Cornea') { <ng-container
-                                *ngTemplateOutlet="corneaForm; context: { data: reData }"></ng-container> }
-                            @case ('Appearance') { <ng-container
-                                *ngTemplateOutlet="appearanceForm; context: { data: reData }"></ng-container> }
-                            @case ('Conjunctiva') { <ng-container
-                                *ngTemplateOutlet="conjunctivaForm; context: { data: reData }"></ng-container> }
-                            @case ('Injury') { <ng-container
-                                *ngTemplateOutlet="injuryForm; context: { data: reData }"></ng-container> }
-                            @case ('Appendages') { <ng-container
-                                *ngTemplateOutlet="appendagesForm; context: { data: reData }"></ng-container> }
+                            @case ('Cornea') {
+                                <ng-container *ngTemplateOutlet="corneaForm; context: { data: corneaRightSideData, side: 'RE'}"></ng-container>
+                            }
+                            @case ('Appearance') {
+                                <ng-container *ngTemplateOutlet="appearanceForm; context: { data: appearanceRightSideData, side: 'RE' }"></ng-container>
+                            }
+                            @case ('Conjunctiva') { 
+                                <ng-container *ngTemplateOutlet="conjunctivaForm; context: { data: conjunctivaRightSideData, side: 'RE' }"></ng-container> 
+                            }
+                            @case ('Injury') { 
+                                <ng-container *ngTemplateOutlet="injuryForm; context: { data: injuryRightSideData, side: 'RE' }"></ng-container>
+                            }
+                            @case ('Appendages') { 
+                                <ng-container *ngTemplateOutlet="appendagesForm; context: { data: appendagesRightSideData, side: 'RE' }"></ng-container> 
+                            }
                             @case ('Sclera') { <ng-container
                                 *ngTemplateOutlet="scleraForm; context: { data: reData }"></ng-container> }
                             @case ('Anterior Chamber') { <ng-container
@@ -68,16 +73,20 @@
                             </div>
 
                             @switch (activeSection) {
-                            @case ('Cornea') { <ng-container
-                                *ngTemplateOutlet="corneaForm; context: { data: leData }"></ng-container> }
-                            @case ('Appearance') { <ng-container
-                                *ngTemplateOutlet="appearanceForm; context: { data: leData }"></ng-container> }
-                            @case ('Conjunctiva') { <ng-container
-                                *ngTemplateOutlet="conjunctivaForm; context: { data: leData }"></ng-container> }
-                            @case ('Injury') { <ng-container
-                                *ngTemplateOutlet="injuryForm; context: { data: leData }"></ng-container> }
-                            @case ('Appendages') { <ng-container
-                                *ngTemplateOutlet="appendagesForm; context: { data: leData }"></ng-container> }
+                            @case ('Cornea') { 
+                                <ng-container *ngTemplateOutlet="corneaForm; context: { data: corneaLeftSideData, side: 'LE'}"></ng-container> }
+                            @case ('Appearance') {
+                                <ng-container *ngTemplateOutlet="appearanceForm; context: { data: appearanceLeftSideData, side: 'LE' }"></ng-container>
+                            }
+                            @case ('Conjunctiva') { 
+                                <ng-container *ngTemplateOutlet="conjunctivaForm; context: { data: conjunctivaLeftSideData, side: 'LE' }"></ng-container> 
+                            }
+                            @case ('Injury') { 
+                                <ng-container *ngTemplateOutlet="injuryForm; context: { data: injuryLeftSideData, side: 'LE' }"></ng-container>
+                            }
+                            @case ('Appendages') { 
+                                <ng-container *ngTemplateOutlet="appendagesForm; context:  { data: appendagesRightSideData, side: 'RE' }"></ng-container> 
+                            }
                             @case ('Sclera') { <ng-container
                                 *ngTemplateOutlet="scleraForm; context: { data: leData }"></ng-container> }
                             @case ('Anterior Chamber') { <ng-container
@@ -103,484 +112,390 @@
     </div>
 </div>
 
-<ng-template #corneaForm let-data="data">
-    <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
-        <div class="field-group">
-            <label class="field-label">Size</label>
-            <div class="chip-list">
-                @for(sz of ['Normal', 'Micro', 'Macro']; track sz) {
-                <button type="button" class="select-chip" [class.is-active]="data.size === sz" (click)="data.size = sz">
-                    {{sz}}
-                </button>
-                }
+<ng-template #corneaForm let-data="data" let-side="side">
+    <div class="d-flex flex-wrap justify-content-between gap-3 mb-4">
+        
+        <div class="col-auto">
+            <label class="form-label small fw-semibold text-secondary mb-1">Size</label>
+            <div class="d-flex flex-column">
+                <div class="chip-group" role="group">
+                    @for(sz of sizes; track sz) {
+                        <input type="radio" class="btn-check"
+                                [name]="side + 'size'" 
+                                [id]="side + sz" 
+                                [(ngModel)]="data.size" 
+                                [value]="sz">
+                        <label class="btn btn-sm me-1 border select-chip" [for]="side + sz">{{sz}}</label>
+                    }
+                </div>
             </div>
         </div>
 
-        <div class="field-group">
-            <label class="field-label">Shape</label>
-            <div class="chip-list">
+        <div class="col-auto">
+            <label class="form-label small fw-semibold text-secondary mb-1">Shape</label>
+            <div class="d-flex gap-1">
+                <div class="chip-group" role="group">
                 @for(s of shapes; track s) {
-                <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'shapes', s)"
-                    (click)="toggleSelection(data, 'shapes', s)">
-                    {{s}}
-                </button>
+                    <input type="checkbox" class="btn-check" [id]="side + 'shape' + s" 
+                           [(ngModel)]="data.shapes[s]">
+                    <label class="btn btn-sm me-1 select-chip border" [for]="side + 'shape' + s">{{s}}</label>
                 }
+                </div>
             </div>
         </div>
 
-        <div class="field-group">
-            <label class="field-label">Surface</label>
-            <div class="chip-list">
+        <div class="col-auto">
+            <label class="form-label small fw-semibold text-secondary mb-1">Surface</label>
+            <div class="d-flex gap-1">
+                 <div class="chip-group" role="group">
                 @for(surf of surfaces; track surf) {
-                <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'surfaces', surf)"
-                    (click)="toggleSelection(data, 'surfaces', surf)">
-                    {{surf}}
-                </button>
+                    <input type="checkbox" class="btn-check" [id]="side + 'surf' + surf" 
+                           [(ngModel)]="data.surfaces[surf]">
+                    <label class="btn btn-sm me-1 select-chip border" [for]="side + 'surf' + surf">{{surf}}</label>
                 }
-            </div>
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">Staining</label>
-            <div class="chip-list">
-                @for(st of stainings; track st) {
-                <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'stainings', st)"
-                    (click)="toggleSelection(data, 'stainings', st)">
-                    {{st}}
-                </button>
-                }
+                </div>
             </div>
         </div>
     </div>
 
-
-    <div class="input-section">
-        <div class="d-flex justify-content-between align-items-baseline mb-2">
-            <label class="field-label m-0">Test Results</label>
-            <span class="meta-label">mm / min / sec</span>
+    <div class="bg-light p-3 rounded-3 mb-3 border border-light-subtle">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="m-0 text-dark fw-bold" style="font-size: 0.85rem;">Test Results</h6>
+            <span class="badge bg-secondary-subtle text-secondary fw-normal">mm / min / sec</span>
         </div>
 
-        <div class="control-row">
-            <span class="meta-label" style="width: 50px;">Type 1</span>
+        <div class="row g-2 align-items-center mb-2">
+            <div class="col-2 small fw-semibold text-muted">Type 1</div>
             <div class="col-3">
-                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer1_mm">
-                    @for(val of mmRange; track val) { <option [value]="val">{{val}}</option> }
+                <select class="form-select form-select-sm border-0" [(ngModel)]="data.schirmer1_mm">
+                    @for(val of mmRange; track val) { <option [value]="val">{{val}} mm</option> }
                 </select>
             </div>
             <div class="col-3">
-                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer1_min">
-                    @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
+                <select class="form-select form-select-sm border-0" [(ngModel)]="data.schirmer1_min">
+                    @for(val of timeRange; track val) { <option [value]="val">{{val}} min</option> }
                 </select>
             </div>
             <div class="col-3">
-                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer1_sec">
-                    @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
+                <select class="form-select form-select-sm border-0" [(ngModel)]="data.schirmer1_sec">
+                    @for(val of timeRange; track val) { <option [value]="val">{{val}} sec</option> }
                 </select>
             </div>
         </div>
 
-        <div class="control-row">
-            <span class="meta-label" style="width: 50px;">Type 2</span>
+        <div class="row g-2 align-items-center">
+            <div class="col-2 small fw-semibold text-muted">Type 2</div>
             <div class="col-3">
-                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer2_mm">
-                    @for(val of mmRange; track val) { <option [value]="val">{{val}}</option> }
+                <select class="form-select form-select-sm border-0" [(ngModel)]="data.schirmer2_mm">
+                    @for(val of mmRange; track val) { <option [value]="val">{{val}} mm</option> }
                 </select>
             </div>
             <div class="col-3">
-                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer2_min">
-                    @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
+                <select class="form-select form-select-sm border-0" [(ngModel)]="data.schirmer2_min">
+                    @for(val of timeRange; track val) { <option [value]="val">{{val}} min</option> }
                 </select>
             </div>
             <div class="col-3">
-                <select class="form-select form-select-sm" [(ngModel)]="data.schirmer2_sec">
-                    @for(val of timeRange; track val) { <option [value]="val">{{val}}</option> }
+                <select class="form-select form-select-sm border-0" [(ngModel)]="data.schirmer2_sec">
+                    @for(val of timeRange; track val) { <option [value]="val">{{val}} sec</option> }
                 </select>
             </div>
         </div>
     </div>
 
-    <div class="d-flex align-items-center mb-2">
-        <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
+    <div class="mt-3">
+        <button class="btn btn-link btn-sm text-decoration-none p-0 fw-bold border-0" type="button"
             (click)="data.showComments = !data.showComments">
+            <i class="bi me-1" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
             Comments
-            <i class="bi" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
-        </a>
-    </div>
+        </button>
 
-    @if(data.showComments) {
-    <div class="field-group">
-        <textarea class="form-control" rows="3" [(ngModel)]="data.comments"
-            placeholder="Enter comments here..."></textarea>
+        @if(data.showComments) {
+        <div class="mt-2 animate-fade-in">
+            <textarea class="form-control form-control-sm border-light-subtle" rows="3"
+                [(ngModel)]="data.comments" placeholder="Enter findings (e.g., thinning, scarring)..."></textarea>
+        </div>
+        }
     </div>
-    }
 </ng-template>
 
-
-<ng-template #appearanceForm let-data="data">
-
+<ng-template #appearanceForm let-data="data" let-side="side">
     <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
-        <div class="field-group">
-            <label class="field-label">Phthisis Bulbi</label>
-            <div class="chip-list">
-                <button type="button" class="select-chip" [class.is-active]="data.phthisisBulbi === false"
-                    (click)="data.phthisisBulbi = false">No</button>
-                <button type="button" class="select-chip" [class.is-active]="data.phthisisBulbi === true"
-                    (click)="data.phthisisBulbi = true">Yes</button>
+        @for (field of appearanceFields; track field.key) {
+        <div class="col-auto">
+            <label class="form-label small fw-semibold text-secondary mb-1" style="font-size: 0.75rem;">
+                {{ field.label }}
+            </label>
+
+            <div class="d-flex flex-column">
+                <div class="chip-group" role="group">
+                    <input type="radio" class="btn-check" 
+                           [name]="side + field.key" 
+                           [id]="side + field.key + 'No'"
+                           [(ngModel)]="data[field.key]" 
+                           [value]="false">
+                    <label class="btn btn-sm me-1 border select-chip" [for]="side + field.key + 'No'">No</label>
+
+                    <input type="radio" class="btn-check" 
+                           [name]="side + field.key" 
+                           [id]="side + field.key + 'Yes'"
+                           [(ngModel)]="data[field.key]" 
+                           [value]="true">
+                    <label class="btn btn-sm border select-chip" [for]="side + field.key + 'Yes'">Yes</label>
+                </div>
             </div>
         </div>
-
-        <div class="field-group">
-            <label class="field-label">Anophthalmos</label>
-            <div class="chip-list">
-                <button type="button" class="select-chip" [class.is-active]="data.anophthalmos === false"
-                    (click)="data.anophthalmos = false">No</button>
-                <button type="button" class="select-chip" [class.is-active]="data.anophthalmos === true"
-                    (click)="data.anophthalmos = true">Yes</button>
-            </div>
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">Microphthalmos</label>
-            <div class="chip-list">
-                <button type="button" class="select-chip" [class.is-active]="data.microphthalmos === false"
-                    (click)="data.microphthalmos = false">No</button>
-                <button type="button" class="select-chip" [class.is-active]="data.microphthalmos === true"
-                    (click)="data.microphthalmos = true">Yes</button>
-            </div>
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">Artificial</label>
-            <div class="chip-list">
-                <button type="button" class="select-chip" [class.is-active]="data.artificial === false"
-                    (click)="data.artificial = false">No</button>
-                <button type="button" class="select-chip" [class.is-active]="data.artificial === true"
-                    (click)="data.artificial = true">Yes</button>
-            </div>
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">Proptosis</label>
-            <div class="chip-list">
-                <button type="button" class="select-chip" [class.is-active]="data.proptosis === false"
-                    (click)="data.proptosis = false">No</button>
-                <button type="button" class="select-chip" [class.is-active]="data.proptosis === true"
-                    (click)="data.proptosis = true">Yes</button>
-            </div>
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">Dystopia</label>
-            <div class="chip-list">
-                <button type="button" class="select-chip" [class.is-active]="data.dystopia === false"
-                    (click)="data.dystopia = false">No</button>
-                <button type="button" class="select-chip" [class.is-active]="data.dystopia === true"
-                    (click)="data.dystopia = true">Yes</button>
-            </div>
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">Injured</label>
-            <div class="chip-list">
-                <button type="button" class="select-chip" [class.is-active]="data.injured === false"
-                    (click)="data.injured = false">No</button>
-                <button type="button" class="select-chip" [class.is-active]="data.injured === true"
-                    (click)="data.injured = true">Yes</button>
-            </div>
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">Swollen</label>
-            <div class="chip-list">
-                <button type="button" class="select-chip" [class.is-active]="data.swollen === false"
-                    (click)="data.swollen = false">No</button>
-                <button type="button" class="select-chip" [class.is-active]="data.swollen === true"
-                    (click)="data.swollen = true">Yes</button>
-            </div>
-        </div>
-
+        }
     </div>
 
-    <div class="d-flex align-items-center mb-2">
-        <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
+    <div class="mt-4 pt-2">
+        <button class="btn btn-link btn-sm text-decoration-none p-0 fw-bold border-0" type="button"
             (click)="data.showComments = !data.showComments">
+            <i class="bi me-1" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
             Comments
-            <i class="bi" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
-        </a>
-    </div>
+        </button>
 
-    @if(data.showComments) {
-    <div class="field-group">
-        <textarea class="form-control" rows="3" [(ngModel)]="data.comments"
-            placeholder="Enter comments here..."></textarea>
+        @if(data.showComments) {
+        <div class="mt-2">
+            <textarea class="form-control form-control-sm border-light-subtle" rows="3"
+                [(ngModel)]="data.comments" placeholder="Enter clinical observations...">
+            </textarea>
+        </div>
+        }
     </div>
-    }
 </ng-template>
 
-<ng-template #injuryForm let-data="data">
+<ng-template #injuryForm let-data="data" let-side="side">
     <div class="field-group mb-3">
-        <label class="field-label">Nature of Injury</label>
-        <div class="chip-list">
-            <button type="button" class="select-chip" [class.is-active]="data.natureOfInjury === 'Open Globe'"
-                (click)="data.natureOfInjury = 'Open Globe'">Open Globe</button>
-            <button type="button" class="select-chip" [class.is-active]="data.natureOfInjury === 'Closed Globe'"
-                (click)="data.natureOfInjury = 'Closed Globe'">Closed Globe</button>
+        <label class="form-label small fw-semibold text-secondary mb-1">Nature of Injury</label>
+        <div class="chip-group" role="group">
+            <input type="radio" class="btn-check" 
+                [name]="side + 'nature'" 
+                [id]="side + 'open'" 
+                [(ngModel)]="data.natureOfInjury" 
+                value="Open Globe">
+            <label class="btn btn-sm me-1 border select-chip" [for]="side + 'open'">Open Globe</label>
+
+            <input type="radio" class="btn-check" 
+                [name]="side + 'nature'" 
+                [id]="side + 'closed'" 
+                [(ngModel)]="data.natureOfInjury"
+                value="Closed Globe">
+            <label class="btn btn-sm me-1 border select-chip" [for]="side + 'closed'">Closed Globe</label>
         </div>
     </div>
 
     @if(data.natureOfInjury === 'Open Globe') {
-    <div class="field-group mb-3">
-        <label class="field-label">Open Globe Injuries</label>
-        <div class="chip-list">
-            @for(type of injuryOpenGlobe; track type) {
-            <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'openGlobeTypes', type)"
-                (click)="toggleSelection(data, 'openGlobeTypes', type)">
-                {{type}}
-            </button>
-            }
-        </div>
-    </div>
+        <div class="ms-3 border-start ps-3 animate-fade-in">
+            <label class="form-label small fw-bold text-primary mb-1">Open Globe Types</label>
+            <div class="chip-group">
+                @for(type of injuryOpenGlobe; track type) {
+                    <input type="checkbox" class="btn-check" [id]="side + 'og' + type" [(ngModel)]="data.openGlobeTypes[type]">
+                    <label class="btn btn-sm me-1 border select-chip" [for]="side + 'og' + type">{{type}}</label>
+                }
+            </div>
 
-    @if(isSelected(data, 'openGlobeTypes', 'Rupture')) {
-    <div class="field-group mb-3 ms-3 border-start ps-3">
-        <label class="field-label">Rupture Details</label>
-        <div class="chip-list">
-            @for(r of injuryRuptureDetails; track r) {
-            <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'ruptureDetails', r)"
-                (click)="toggleSelection(data, 'ruptureDetails', r)">
-                {{r}}
-            </button>
+            @if(data.openGlobeTypes['Rupture']) {
+                <div class="mb-3">
+                    <label class="form-label small text-muted mb-1">Rupture Details</label>
+                    <div class="chip-group">
+                        @for(r of injuryRuptureDetails; track r) {
+                            <input type="checkbox" class="btn-check" [id]="side + 'rup' + r" [(ngModel)]="data.ruptureDetails[r]">
+                            <label class="btn btn-sm me-1 border select-chip" [for]="side + 'rup' + r">{{r}}</label>
+                        }
+                    </div>
+                </div>
             }
         </div>
-    </div>
     }
 
-    @if(isSelected(data, 'openGlobeTypes', 'IOFB')) {
-    <div class="field-group mb-3 ms-3 border-start ps-3">
-        <label class="field-label">IOFB Material</label>
-        <div class="chip-list">
-            @for(item of injuryIOFBMaterial; track item) {
-            <button type="button" class="select-chip" [class.is-active]="data.iofbMaterial === item"
-                (click)="data.iofbMaterial = item">
-                {{item}}
-            </button>
+    <div class="mt-3">
+        <button class="btn btn-link btn-sm text-decoration-none p-0 fw-bold border-0" type="button"
+            (click)="data.showComments = !data.showComments">
+            <i class="bi me-1" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
+            Injury Comments
+        </button>
+        @if(data.showComments) {
+            <textarea class="form-control form-control-sm mt-2" rows="3" [(ngModel)]="data.comments"></textarea>
+        }
+    </div>
+</ng-template>
+
+<ng-template #appendagesForm let-data="data" let-side="side">
+    <div class="field-group mb-3">
+        <label class="form-label small fw-semibold text-secondary mb-1">Appendages Involved</label>
+        <div class="chip-group" role="group">
+            @for(main of appendagesMain; track main) {
+                <input type="checkbox" class="btn-check" 
+                    [id]="side + 'app' + main"
+                    [(ngModel)]="data.appendagesMain[main]"> 
+                <label class="btn btn-sm me-1 border select-chip" [for]="side + 'app' + main">{{main}}</label>
             }
         </div>
+    </div>
 
-        @if(data.iofbMaterial === 'Stone') {
-        <div class="mt-3">
-            <label class="field-label">Stone Location</label>
-            <div class="chip-list flex-column align-items-start">
-                @for(loc of injuryStoneLocation; track loc) {
-                <button type="button" class="select-chip mb-1 w-100 text-start"
-                    [class.is-active]="data.stoneLocation === loc" (click)="data.stoneLocation = loc">
-                    {{loc}}
-                </button>
+    @if(data.appendagesMain['Eyelids']) {
+        <div class="ms-3 border-start ps-3 mb-3 animate-fade-in">
+            <h6 class="small fw-bold text-primary mb-2">Eyelids Assessment</h6>
+            <div class="d-flex flex-wrap gap-3">
+                @for(item of eyelidOptions; track item) {
+                    <div class="col-auto" role="group">
+                        <label class="form-label small text-muted mb-0 d-block">{{item}}</label>
+                        <div class="chip-group"> 
+                            <input type="radio" class="btn-check" 
+                                [name]="side + 'lid' + item" 
+                                [id]="side + 'lidNo' + item" 
+                                [(ngModel)]="data['eyelids_' + item]" 
+                                [value]="false">
+                            <label class="btn btn-sm me-1 border select-chip" [for]="side + 'lidNo' + item">No</label>
+
+                            <input type="radio" class="btn-check" 
+                                [name]="side + 'lid' + item" 
+                                [id]="side + 'lidYes' + item" 
+                                [(ngModel)]="data['eyelids_' + item]" 
+                                [value]="true">
+                            <label class="btn btn-sm border select-chip" [for]="side + 'lidYes' + item">Yes</label>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if(data.appendagesMain['Eyelashes']) {
+        <div class="ms-3 border-start ps-3 mb-3 animate-fade-in">
+            <h6 class="small fw-bold text-primary mb-2">Eyelashes Assessment</h6>
+            <div class="d-flex flex-wrap gap-3">
+                @for(item of eyelashOptions; track item) {
+                    <div class="col-auto">
+                        <label class="form-label small text-muted mb-0 d-block">{{item}}</label>
+                        <div class="chip-group">
+                            <input type="radio" class="btn-check" 
+                                [name]="side + 'lash' + item" 
+                                [id]="side + 'lashNo' + item" 
+                                [(ngModel)]="data['eyelashes_' + item]" 
+                                [value]="false">
+                            <label class="btn btn-sm me-1 border select-chip" [for]="side + 'lashNo' + item">No</label>
+
+                            <input type="radio" class="btn-check" 
+                                [name]="side + 'lash' + item" 
+                                [id]="side + 'lashYes' + item" 
+                                [(ngModel)]="data['eyelashes_' + item]" 
+                                [value]="true">
+                            <label class="btn btn-sm border select-chip" [for]="side + 'lashYes' + item">Yes</label>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if(data.appendagesMain['Syringing']) {
+        <div class="ms-3 border-start ps-3 mb-3 animate-fade-in">
+            <h6 class="small fw-bold text-primary mb-2">Syringing</h6>
+            <div class="d-flex flex-wrap gap-3">
+                @for(item of syringingOptions; track item) {
+                    <div class="col-auto">
+                        <label class="form-label small text-muted mb-0 d-block">{{item}}</label>
+                        <div class="chip-group" role="group">
+                            <input type="radio" class="btn-check" 
+                                [name]="side + 'syr' + item" 
+                                [id]="side + 'syrP' + item" 
+                                [(ngModel)]="data['syringing_' + item]" 
+                                [value]="false">
+                            <label class="btn btn-sm me-1 border select-chip" [for]="side + 'syrP' + item">Patent</label>
+
+                            <input type="radio" class="btn-check" 
+                                [name]="side + 'syr' + item" 
+                                [id]="side + 'syrB' + item" 
+                                [(ngModel)]="data['syringing_' + item]" 
+                                [value]="true">
+                            <label class="btn btn-sm border select-chip" [for]="side + 'syrB' + item">Blocked</label>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="mt-4 pt-2">
+        <button class="btn btn-link btn-sm text-decoration-none p-0 fw-bold border-0" type="button"
+            (click)="data.showComments = !data.showComments">
+            <i class="bi me-1" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
+            Comments
+        </button>
+        @if(data.showComments) {
+            <textarea class="form-control form-control-sm mt-2 shadow-sm" rows="3" [(ngModel)]="data.comments" placeholder="Enter clinical notes..."></textarea>
+        }
+    </div>
+</ng-template>
+
+<ng-template #conjunctivaForm let-data="data" let-side="side">
+    <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
+        @for(item of conjunctivaOptions; track item) {
+        <div class="col-auto">
+            <label class="form-label small fw-semibold text-secondary mb-1" style="font-size: 0.75rem;">
+                {{ item }}
+            </label>
+
+            <div class="d-flex flex-column">
+                <div class="chip-group" role="group">
+                    <input type="radio" class="btn-check" 
+                           [name]="side + item" 
+                           [id]="side + item + 'No'"
+                           [(ngModel)]="data['conjunctiva_' + item]" 
+                           [value]="false">
+                    <label class="btn btn-sm me-1 border select-chip" [for]="side + item + 'No'">No</label>
+
+                    <input type="radio" class="btn-check" 
+                           [name]="side + item" 
+                           [id]="side + item + 'Yes'"
+                           [(ngModel)]="data['conjunctiva_' + item]" 
+                           [value]="true">
+                    <label class="btn btn-sm border select-chip" [for]="side + item + 'Yes'">Yes</label>
+                </div>
+
+                @if(item === 'Congestion' && data['conjunctiva_Congestion'] === true) {
+                <div class="mt-1 ms-1 ps-2 border-start animate-fade-in">
+                    <label class="form-label text-primary fw-bold" style="font-size: 0.7rem;">TYPE</label>
+                    <div class="d-flex flex-row gap-1 chip-group">
+                        @for(type of conjunctivaCongestion; track type) {
+                        <div class="position-relative">
+                            <input type="radio" class="btn-check" 
+                                   [name]="side + 'CongType'" 
+                                   [id]="side + type"
+                                   [(ngModel)]="data.congestionType" 
+                                   [value]="type">
+                            <label class="btn btn-sm select-chip w-100 text-start border" 
+                                   [for]="side + type" 
+                                   style="font-size: 0.75rem;">
+                                {{type}}
+                            </label>
+                        </div>
+                        }
+                    </div>
+                </div>
                 }
             </div>
         </div>
         }
     </div>
-    }
-    }@else if (data.natureOfInjury === 'Closed Globe') {
-    <div class="field-group mb-3">
-        <label class="field-label">Closed Globe Injuries</label>
-        <div class="chip-list">
-            @for(type of injuryClosedGlobe; track type) {
-            <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'closedGlobeTypes', type)"
-                (click)="toggleSelection(data, 'closedGlobeTypes', type)">
-                {{type}}
-            </button>
-            }
-        </div>
-    </div>
 
-    @if(isSelected(data, 'closedGlobeTypes', 'Lamellar Laceration')) {
-    <div class="field-group mb-3 ms-3 border-start ps-3">
-        <label class="field-label text-primary">Involvement Details</label>
-        <div class="chip-list flex-column align-items-start">
-            @for(r of injuryInvolvementDetails; track r) {
-            <button type="button" class="select-chip mb-1 w-100 text-start"
-                [class.is-active]="isSelected(data, 'lamellarDetails', r)"
-                (click)="toggleSelection(data, 'lamellarDetails', r)">
-                {{r}}
-            </button>
-            }
-        </div>
-    </div>
-    }
-    }
-    <div class="d-flex align-items-center mb-2">
-        <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
+    <div class="mt-4 pt-2">
+        <button class="btn btn-link btn-sm text-decoration-none p-0 fw-bold border-0" type="button"
             (click)="data.showComments = !data.showComments">
+            <i class="bi me-1" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
             Comments
-            <i class="bi" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
-        </a>
-    </div>
+        </button>
 
-    @if(data.showComments) {
-    <div class="field-group">
-        <textarea class="form-control" rows="3" [(ngModel)]="data.comments"
-            placeholder="Enter comments here..."></textarea>
-    </div>
-    }
-</ng-template>
-
-<ng-template #appendagesForm let-data="data">
-
-    <div class="field-group mb-3">
-        <label class="field-label">Appendages Involved</label>
-        <div class="chip-list">
-            @for(main of appendagesMain; track main) {
-            <button type="button" class="select-chip" [class.is-active]="isSelected(data, 'appendagesMain', main)"
-                (click)="toggleSelection(data, 'appendagesMain', main)">
-                {{main}}
-            </button>
-            }
-        </div>
-    </div>
-
-    @if(isSelected(data, 'appendagesMain', 'Eyelids')) {
-    <div class="ms-3 border-start ps-3 mb-3">
-        <h6 class="field-label text-primary mb-2">Eyelids Assessment</h6>
-
-        <div class="d-flex flex-wrap gap-4">
-            @for(item of eyelidOptions; track item) {
-            <div class="field-group">
-                <label class="field-label mb-1">{{item}}</label>
-                <div class="chip-list">
-                    <button type="button" class="select-chip" [class.is-active]="data['eyelids_' + item] === false"
-                        (click)="data['eyelids_' + item] = false">No</button>
-                    <button type="button" class="select-chip" [class.is-active]="data['eyelids_' + item] === true"
-                        (click)="data['eyelids_' + item] = true">Yes</button>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
-    }
-
-    @if(isSelected(data, 'appendagesMain', 'Eyelashes')) {
-    <div class="ms-3 border-start ps-3 mb-3">
-        <h6 class="field-label text-primary mb-2">Eyelashes Assessment</h6>
-
-        <div class="d-flex flex-wrap gap-4">
-            @for(item of eyelashOptions; track item) {
-            <div class="field-group">
-                <label class="field-label mb-1">{{item}}</label>
-                <div class="chip-list">
-                    <button type="button" class="select-chip" [class.is-active]="data['eyelashes_' + item] === false"
-                        (click)="data['eyelashes_' + item] = false">No</button>
-                    <button type="button" class="select-chip" [class.is-active]="data['eyelashes_' + item] === true"
-                        (click)="data['eyelashes_' + item] = true">Yes</button>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
-    }
-
-    @if(isSelected(data, 'appendagesMain', 'Lacrimal Sac')) {
-    <div class="ms-3 border-start ps-3 mb-3">
-        <h6 class="field-label text-primary mb-2">Lacrimal Sac Assessment</h6>
-
-        <div class="d-flex flex-wrap gap-4">
-            @for(item of lacrimalSacOptions; track item) {
-            <div class="field-group">
-                <label class="field-label mb-1">{{item}}</label>
-                <div class="chip-list">
-                    <button type="button" class="select-chip" [class.is-active]="data['lacrimalSac_' + item] === false"
-                        (click)="data['lacrimalSac_' + item] = false">No</button>
-                    <button type="button" class="select-chip" [class.is-active]="data['lacrimalSac_' + item] === true"
-                        (click)="data['lacrimalSac_' + item] = true">Yes</button>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
-    }
-
-    @if(isSelected(data, 'appendagesMain', 'Syringing')) {
-    <div class="ms-3 border-start ps-3 mb-3">
-        <h6 class="field-label text-primary mb-2">Syringing Assessment</h6>
-
-        <div class="d-flex flex-wrap gap-4">
-            @for(item of syringingOptions; track item) {
-            <div class="field-group">
-                <label class="field-label mb-1">{{item}}</label>
-                <div class="chip-list">
-                    <button type="button" class="select-chip" [class.is-active]="data['syringing_' + item] === false"
-                        (click)="data['syringing_' + item] = false">Patent</button>
-                    <button type="button" class="select-chip" [class.is-active]="data['syringing_' + item] === true"
-                        (click)="data['syringing_' + item] = true">Blocked</button>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
-    }
-    <div class="d-flex align-items-center mb-2">
-        <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
-            (click)="data.showComments = !data.showComments">
-            Comments
-            <i class="bi" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
-        </a>
-    </div>
-
-    @if(data.showComments) {
-    <div class="field-group">
-        <textarea class="form-control" rows="3" [(ngModel)]="data.comments"
-            placeholder="Enter comments here..."></textarea>
-    </div>
-    }
-</ng-template>
-
-<ng-template #conjunctivaForm let-data="data">
-    <div class="d-flex flex-wrap gap-4 mb-3 align-items-start justify-content-between">
-        @for(item of conjunctivaOptions; track item) {
-        <div class="field-group">
-            <label class="field-label mb-1">{{item}}</label>
-            <div class="chip-list">
-                <button type="button" class="select-chip" [class.is-active]="data['conjunctiva_' + item] === false"
-                    (click)="data['conjunctiva_' + item] = false">
-                    No
-                </button>
-                <button type="button" class="select-chip" [class.is-active]="data['conjunctiva_' + item] === true"
-                    (click)="data['conjunctiva_' + item] = true">
-                    Yes
-                </button>
-            </div>
-
-            @if(item === 'Congestion' && data['conjunctiva_Congestion'] === true) {
-            <div class="mt-2 ms-1 ps-2 border-start">
-                <label class="field-label text-primary" style="font-size: 0.85rem;">Type</label>
-                <div class="chip-list flex-column align-items-start">
-                    @for(type of conjunctivaCongestion; track type) {
-                    <button type="button" class="select-chip mb-1 w-100 text-start"
-                        [class.is-active]="data.congestionType === type" (click)="data.congestionType = type">
-                        {{type}}
-                    </button>
-                    }
-                </div>
-            </div>
-            }
+        @if(data.showComments) {
+        <div class="mt-2">
+            <textarea class="form-control form-control-sm border-light-subtle" rows="3"
+                [(ngModel)]="data.comments" placeholder="Enter clinical observations...">
+            </textarea>
         </div>
         }
     </div>
-    <div class="d-flex align-items-center mb-2">
-        <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
-            (click)="data.showComments = !data.showComments">
-            Comments
-            <i class="bi" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
-        </a>
-    </div>
-
-    @if(data.showComments) {
-    <div class="field-group">
-        <textarea class="form-control" rows="3" [(ngModel)]="data.comments"
-            placeholder="Enter comments here..."></textarea>
-    </div>
-    }
 </ng-template>
 
 <ng-template #scleraForm let-data="data">
@@ -865,7 +780,6 @@
     }
 </ng-template>
 
-
 <ng-template #iopForm let-data="data">
     <div class="d-flex align-items-center mb-2">
         <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
@@ -1060,7 +974,7 @@
             <div class="col-md-9">
                 <div class="chip-list flex-wrap gap-2">
                     @for(item of maculaOptions; track item) {
-                    <button type="button" class="select-chip" 
+                    <button type="button" class="select-chip"
                         [class.is-active]="isSelected(data, 'maculaLesions', item)"
                         (click)="toggleSelection(data, 'maculaLesions', item)">
                         {{item}}
@@ -1075,8 +989,7 @@
             <div class="col-md-9">
                 <div class="chip-list mb-2">
                     @for(fr of ['Present', 'Absent', 'Dull']; track fr) {
-                    <button type="button" class="select-chip" 
-                        [class.is-active]="data.fovealReflex === fr"
+                    <button type="button" class="select-chip" [class.is-active]="data.fovealReflex === fr"
                         (click)="data.fovealReflex = fr">
                         {{fr}}
                     </button>

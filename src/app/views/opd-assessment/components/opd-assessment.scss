@@ -43,6 +43,40 @@ $text-muted: #303338;
     }
 }
 
+
+/* Chips / Pills Selection */
+.chip-group {
+    .btn-check {
+        border-color: $ui-border;
+        &:checked + .select-chip {
+            border-radius: 8px;
+            background-color: $brand-bg-active !important;
+            border-color: $brand-primary !important;
+            color: $brand-primary !important;
+            font-weight: 500;
+        }
+    }
+
+    .select-chip {
+        background-color: #ffffff;
+        border: $ui-border;
+        border-radius: 8px;
+        border-right: 1px solid $ui-border;
+        color: $text-main;
+        font-size: 0.85rem;
+        padding: 0.25rem 0.85rem;
+        transition: all 0.2s ease;
+
+        &:last-of-type {
+            border-right: none;
+        }
+
+        &:hover {
+            background-color: #f8f9fa;
+        }
+    }
+}
+
 /* Chips / Pills Selection */
 .chip-list {
     display: flex;
