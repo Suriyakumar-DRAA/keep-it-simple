@@ -3,7 +3,9 @@
 }
 
 .patient-card {
+    padding: 8px;
     height: 104px;
+    border-radius: 8px;
 }
 
 .patient-card.hover-bg-light:hover {
@@ -42,6 +44,10 @@
 
 .bg-primary-subtle {
     background-color: var(--vtab-bg-selected) !important;
+}
+
+.selected-border {
+  border-color: #287DCE !important; 
 }
 
 .custom-scrollbar::-webkit-scrollbar {

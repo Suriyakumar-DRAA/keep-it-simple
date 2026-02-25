@@ -1,0 +1,41 @@
+$primary-blue: #1d4ed8;
+$bg-soft-blue: #eff6ff;
+$border-color: #e5e7eb;
+
+.sub-header {
+  height: 40px;
+  margin-top: 50px;
+  transition: all 0.3s ease;
+
+  .breadcrumb {
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    .breadcrumb-item {
+      display: flex;
+      align-items: center;
+
+      & + .breadcrumb-item::before {
+        content: "›";
+        font-size: 1.2rem;
+        line-height: 1;
+        color: #9ca3af;
+      }
+
+      a {
+        color: #6b7280;
+        text-decoration: none;
+        transition: color 0.2s;
+
+        &:hover {
+          color: $primary-blue;
+        }
+      }
+
+      &.active {
+        color: #111827;
+        font-weight: 600;
+      }
+    }
+  }
+}

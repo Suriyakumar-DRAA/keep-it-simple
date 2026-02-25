@@ -3,7 +3,7 @@
         [style.width]="visiblePatientQueue() ? '390px' : '0px'" [style.opacity]="visiblePatientQueue() ? '1' : '0'"
         [style.visibility]="visiblePatientQueue() ? 'visible' : 'hidden'">
 
-        <div class="p-3 border-bottom">
+        <div class="p-2">
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <h2 class="h5 fw-bold m-0 text-dark text-truncate" title="{{ queueLabel }}">{{ queueLabel }}</h2>
                 <div class="d-flex gap-1">
@@ -24,16 +24,15 @@
             </div>
         </div>
 
-        <div class="flex-grow-1 overflow-y-auto custom-scrollbar">
-            <div *ngFor="let patient of patients" (click)="selectPatient.emit(patient.id)"
-                class="patient-card p-3 border-bottom cursor-pointer position-relative"
+        <div class="flex-grow-1 overflow-y-auto custom-scrollbar px-2">
+            @for(patient of patients; track patient.id){
+            <div (click)="selectPatient.emit(patient.id)"
+                class="patient-card p-3 border cursor-pointer position-relative mt-2"
+                [class.selected-border]="selectedPatientId === patient.id"
                 [class.bg-primary-subtle]="selectedPatientId === patient.id"
                 [class.hover-bg-light]="selectedPatientId !== patient.id">
 
-                <div *ngIf="selectedPatientId === patient.id"
-                    class="position-absolute start-0 top-0 bottom-0 bg-primary" style="width: 4px;"></div>
-
-                <div class="d-flex justify-content-between align-items-start mb-2 ps-2">
+                <div class="d-flex justify-content-between align-items-start mb-2">
                     <div class="text-truncate pe-2">
                         <span class="fw-bold text-dark small">{{ patient.name }}</span>
                         <span class="text-muted small"> ({{ patient.gender }})</span>
@@ -59,16 +58,17 @@
                         <span class="small text-secondary fw-medium">{{ getTimeDiff(patient?.case?.visit_date) }}</span>
                     </div>
                 </div>
-
-
             </div>
+            }
         </div>
     </div>
 
     <!-- Expand Button -->
-    <button *ngIf="!visiblePatientQueue()" (click)="onToggle()"
+    @if(!visiblePatientQueue()){
+    <button (click)="onToggle()"
         class="btn btn-sm btn-light border shadow position-absolute rounded-end d-flex align-items-center justify-content-center"
         style="width: 25px; height: 30px; z-index: 10;top: 23px" title="Expand Queue (Ctrl+B)">
         <i class="bi bi-chevron-right small"></i>
     </button>
+    }
 </div>

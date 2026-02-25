@@ -1,0 +1,60 @@
+/* Variables */
+$brand-primary: #0056b3;
+$brand-bg-active: #eff6ff;
+$ui-border: #e2e8f0;
+$text-muted: #303338;
+@import url(../opd-assessment.scss);
+
+/* Main Layout */
+.refraction-wrapper {
+  background-color: #ffffff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.refraction-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.refraction-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $text-muted;
+  letter-spacing: 0.025em;
+  margin-bottom: 0.5rem;
+}
+
+/* Complex Inputs Section */
+.input-section {
+  margin-top: 1.5rem;
+}
+
+.meta-label {
+  font-size: 0.65rem;
+  color: $text-muted;
+  font-weight: 600;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.select-chip{
+   margin-bottom: 3px !important;
+   width: 50px !important;
+   padding: 3px !important;
+}
