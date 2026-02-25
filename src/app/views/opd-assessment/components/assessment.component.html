@@ -1,7 +1,7 @@
 <div class="d-flex flex-column overflow-hidden">
     <app-stats-card> </app-stats-card>
 </div>
-<div class="d-flex flex-grow-1 overflow-hidden right-panel">
+<div class="d-flex flex-grow-1 overflow-hidden right-panel m-2 bg-white">
     <!-- Queue -->
     <app-patient-queue [patients]="patients" [selectedPatientId]="selectedPatientId"
         (selectPatient)="onSelectPatient($event)" [queueLabel]="selectedQueue" *ngIf="!isSidebarOpen">

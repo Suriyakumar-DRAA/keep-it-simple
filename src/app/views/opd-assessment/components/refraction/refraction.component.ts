@@ -17,7 +17,19 @@ export class RefractionComponent {
     sections: any[] = [
         { id: 'visualAcuity', label: 'Visual Acuity', statusKey: 'visual_acuity_status', notesKey: 'visual_acuity_notes' },
         { id: 'iop', label: 'Intraocular Pressure', statusKey: 'iop_status', notesKey: 'iop_notes' },
+        { id: 'autoRefraction', label: 'Auto Refraction', statusKey: 'auto_refraction_status', notesKey: 'auto_refraction_notes' },
         { id: 'dryRefraction', label: 'Dry Refraction', statusKey: 'dry_refraction_status', notesKey: 'dry_refraction_notes' },
+        { id: 'dilatedRefraction', label: 'Dilated Refraction', statusKey: 'dilated_refraction_status', notesKey: 'dilated_refraction_notes' },
+        { id: 'pgp', label: 'PGP', statusKey: 'pgp_status', notesKey: 'pgp_notes' },
+        { id: 'glassPrescription', label: 'Glass Prescription', statusKey: 'glass_prescription_status', notesKey: 'glass_prescription_notes' },
+        { id: 'intermediateGlassPrescription', label: 'Intermediate Glass Prescription', statusKey: 'intermediate_glass_prescription_status', notesKey: 'intermediate_glass_prescription_notes' },
+        { id: 'pmt', label: 'PMT', statusKey: 'pmt_status', notesKey: 'pmt_notes' },
+        { id: 'retinoScopy', label: 'Retinoscopy', statusKey: 'retinoscopy_status', notesKey: 'retinoscopy_notes' },
+        { id: 'keratometry', label: 'Keratometry', statusKey: 'keratometry_status', notesKey: 'keratometry_notes' },
+        { id: 'amsler', label: 'Amsler', statusKey: 'amsler_status', notesKey: 'amsler_notes' },
+        { id: 'contactLens', label: 'Contact Lens', statusKey: 'contact_lens_status', notesKey: 'contact_lens_notes' },
+        { id: 'colorVision', label: 'Color Vision', statusKey: 'color_vision_status', notesKey: 'color_vision_notes' },
+        { id: 'orthoptics', label: 'Orthoptics', statusKey: 'orthoptics_status', notesKey: 'orthoptics_notes' },   
     ];
     activeSection: string = 'visualAcuity';
     reData = {
@@ -81,6 +93,7 @@ export class RefractionComponent {
     };
     visualAcuityCommentRe!: string;
     visualAcuityCommentLe!: string;
+    
     constructor() {
     }
 
@@ -234,26 +247,27 @@ export class RefractionComponent {
     };
 
     copyReToLe() {
-        this.selectedUCVAData.distanceLe = this.selectedUCVAData.distanceRe;
-        this.selectedUCVAData.nearLe = this.selectedUCVAData.nearRe;
-        this.selectedUCVAData.isPDistanceCheckedLe = this.selectedUCVAData.isPDistanceCheckedRe;
-        this.selectedUCVAData.isPNearCheckedLe = this.selectedUCVAData.isPNearCheckedRe;
-        this.selectedUCVAData.commentDistanceLe = this.selectedUCVAData.commentDistanceRe;
-        this.selectedUCVAData.commentNearLe = this.selectedUCVAData.commentNearRe;
-        this.selectedPinHoleVisionData.isPCheckedLe = this.selectedPinHoleVisionData.isPCheckedRe;
-        this.selectedPinHoleVisionData.isNICheckedLe = this.selectedPinHoleVisionData.isNICheckedRe;
-        this.selectedPinHoleVisionData.leftEye = this.selectedPinHoleVisionData.rightEye;
-        this.selectedPinHoleVisionData.commentLe = this.selectedPinHoleVisionData.commentRe;
-        this.selectedGlassesData.distanceLe = this.selectedGlassesData.distanceRe;
-        this.selectedGlassesData.nearLe = this.selectedGlassesData.nearRe;
-        this.selectedGlassesData.isPDistanceCheckedLe = this.selectedGlassesData.isPDistanceCheckedRe;
-        this.selectedGlassesData.isPNearCheckedLe = this.selectedGlassesData.isPNearCheckedRe;
-        this.selectedContactLensData.leftEye = this.selectedContactLensData.rightEye;
-        this.selectedContactLensData.isPLeftEyeChecked = this.selectedContactLensData.isPRightEyeChecked;
-        this.selectedPRData.s_le = this.selectedPRData.s_re;
-        this.selectedPRData.i_le = this.selectedPRData.i_re;
-        this.selectedPRData.n_le = this.selectedPRData.n_re;
-        this.selectedPRData.t_le = this.selectedPRData.t_re;    
+        const mappings = [
+            { obj: this.selectedUCVAData, props: ['distance', 'near', 'isPDistanceChecked', 'isPNearChecked', 'commentDistance', 'commentNear'] },
+            { obj: this.selectedPinHoleVisionData, props: ['isPChecked', 'isNIChecked', 'comment'], customProps: [{ from: 'rightEye', to: 'leftEye' }] },
+            { obj: this.selectedGlassesData, props: ['distance', 'near', 'isPDistanceChecked', 'isPNearChecked'] },
+            { obj: this.selectedContactLensData, customProps: [{ from: 'rightEye', to: 'leftEye' }, { from: 'isPRightEyeChecked', to: 'isPLeftEyeChecked' }] },
+            { obj: this.selectedPRData, customProps: [{ from: 's_re', to: 's_le' }, { from: 'i_re', to: 'i_le' }, { from: 'n_re', to: 'n_le' }, { from: 't_re', to: 't_le' }] }
+        ];
+
+        mappings.forEach(mapping => {
+            if (mapping.props) {
+                mapping.props.forEach(prop => {
+                    (mapping.obj as any)[`${prop}Le`] = (mapping.obj as any)[`${prop}Re`];
+                });
+            }
+            if (mapping.customProps) {
+                mapping.customProps.forEach(custom => {
+                    (mapping.obj as any)[custom.to] = (mapping.obj as any)[custom.from];
+                });
+            }
+        });
+
         this.visualAcuityCommentLe = this.visualAcuityCommentRe;
     }
 
