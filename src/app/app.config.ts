@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 
 import { routes } from './app.routes';
-import { ApiInterceptor } from './core/interceptors';
+import { TokenInterceptorInterceptor } from '@core/interceptors/token-interceptor.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
@@ -12,13 +12,13 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideHttpClient(withInterceptorsFromDi()),
     provideHttpClient(
-      withInterceptorsFromDi()
+      withInterceptors(
+        [
+          TokenInterceptorInterceptor
+        ]
+      )
     ),
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiInterceptor,
-      multi: true
-    }
   ]
 };

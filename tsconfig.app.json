@@ -7,14 +7,17 @@
     "outDir": "./out-tsc/app",
     "types": [],
     "paths": {
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
       "@views/*": [
         "src/app/views/*"
       ],
-      "@shared/service/*": [
-        "src/app/shared/service/*"
-      ],
-      "@shared/model/*": [
-        "src/app/shared/model/*"
+      "@env/*": [
+        "src/environments/*"
       ]
     }
   },

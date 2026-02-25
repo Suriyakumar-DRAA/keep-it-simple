@@ -1,6 +1,6 @@
 <div class="split-container bg-light">
     <!-- Left Panel -->
-    <div [ngClass]="getLeftPanelClasses()">
+    <div class="shadow-sm" [ngClass]="getLeftPanelClasses()">
         <!-- Normal Header (visible when NOT collapsed) -->
         <div class="panel-header">
             <span class="panel-title">
@@ -42,7 +42,7 @@
                 </div>
 
                 <!-- Content for selected date -->
-                <div class="flex-grow-1 overflow-auto mt-3">
+                <div class="flex-grow-1 mt-3">
                     @if (selectedDateTab === '01-Jan-2026') {
                     <div class="row g-2 mb-3">
                         <div class="col-12 col-md-5 col-lg-5">
@@ -192,7 +192,7 @@
     </div>
 
     <!-- Right Panel -->
-    <div [ngClass]="getRightPanelClasses()">
+    <div class="shadow-sm" [ngClass]="getRightPanelClasses()">
         <!-- Normal Header (visible when NOT collapsed) -->
         <div class="panel-header">
             <span class="panel-title">
