@@ -105,6 +105,7 @@ export class RefractionComponent {
     }
 
     selectVisualAcuityDistanceVision(eye: 're' | 'le', value: string) {
+        console.log('Selected Visual Acuity Distance Vision:', { eye, value });
         if (eye === 're') {
             this.selectedUCVAData.distanceRe = value;
         } else {
