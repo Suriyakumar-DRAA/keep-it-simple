@@ -248,27 +248,26 @@ export class RefractionComponent {
     };
 
     copyReToLe() {
-        const mappings = [
-            { obj: this.selectedUCVAData, props: ['distance', 'near', 'isPDistanceChecked', 'isPNearChecked', 'commentDistance', 'commentNear'] },
-            { obj: this.selectedPinHoleVisionData, props: ['isPChecked', 'isNIChecked', 'comment'], customProps: [{ from: 'rightEye', to: 'leftEye' }] },
-            { obj: this.selectedGlassesData, props: ['distance', 'near', 'isPDistanceChecked', 'isPNearChecked'] },
-            { obj: this.selectedContactLensData, customProps: [{ from: 'rightEye', to: 'leftEye' }, { from: 'isPRightEyeChecked', to: 'isPLeftEyeChecked' }] },
-            { obj: this.selectedPRData, customProps: [{ from: 's_re', to: 's_le' }, { from: 'i_re', to: 'i_le' }, { from: 'n_re', to: 'n_le' }, { from: 't_re', to: 't_le' }] }
-        ];
-
-        mappings.forEach(mapping => {
-            if (mapping.props) {
-                mapping.props.forEach(prop => {
-                    (mapping.obj as any)[`${prop}Le`] = (mapping.obj as any)[`${prop}Re`];
-                });
-            }
-            if (mapping.customProps) {
-                mapping.customProps.forEach(custom => {
-                    (mapping.obj as any)[custom.to] = (mapping.obj as any)[custom.from];
-                });
-            }
-        });
-
+        this.selectedUCVAData.distanceLe = this.selectedUCVAData.distanceRe;
+        this.selectedUCVAData.nearLe = this.selectedUCVAData.nearRe;
+        this.selectedUCVAData.isPDistanceCheckedLe = this.selectedUCVAData.isPDistanceCheckedRe;
+        this.selectedUCVAData.isPNearCheckedLe = this.selectedUCVAData.isPNearCheckedRe;
+        this.selectedUCVAData.commentDistanceLe = this.selectedUCVAData.commentDistanceRe;
+        this.selectedUCVAData.commentNearLe = this.selectedUCVAData.commentNearRe;
+        this.selectedPinHoleVisionData.isPCheckedLe = this.selectedPinHoleVisionData.isPCheckedRe;
+        this.selectedPinHoleVisionData.isNICheckedLe = this.selectedPinHoleVisionData.isNICheckedRe;
+        this.selectedPinHoleVisionData.leftEye = this.selectedPinHoleVisionData.rightEye;
+        this.selectedPinHoleVisionData.commentLe = this.selectedPinHoleVisionData.commentRe;
+        this.selectedGlassesData.distanceLe = this.selectedGlassesData.distanceRe;
+        this.selectedGlassesData.nearLe = this.selectedGlassesData.nearRe;
+        this.selectedGlassesData.isPDistanceCheckedLe = this.selectedGlassesData.isPDistanceCheckedRe;
+        this.selectedGlassesData.isPNearCheckedLe = this.selectedGlassesData.isPNearCheckedRe;
+        this.selectedContactLensData.leftEye = this.selectedContactLensData.rightEye;
+        this.selectedContactLensData.isPLeftEyeChecked = this.selectedContactLensData.isPRightEyeChecked;
+        this.selectedPRData.s_le = this.selectedPRData.s_re;
+        this.selectedPRData.i_le = this.selectedPRData.i_re;
+        this.selectedPRData.n_le = this.selectedPRData.n_re;
+        this.selectedPRData.t_le = this.selectedPRData.t_re;    
         this.visualAcuityCommentLe = this.visualAcuityCommentRe;
     }
 
