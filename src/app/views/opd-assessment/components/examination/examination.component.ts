@@ -123,7 +123,6 @@ export class ExaminationComponent {
         comments: ''
     };
 
-
     //conjunctivaForm
     conjunctivaOptions: string[] = ['Congestion', 'Chemosis', 'Follicles', 'Papillae', 'Discharge'];
     conjunctivaCongestion: string[] = ['Circumcorneal', 'Ciliary', 'Conjunctival', 'Mixed'];
@@ -177,7 +176,6 @@ export class ExaminationComponent {
         comments: ''
     };
 
-
     // injuryForm
     injuryOpenGlobe = ['Rupture', 'Penetrating', 'IOFB', 'Perforating', 'Mixed'];
     injuryClosedGlobe = ['Contusion', 'Lamellar Laceration', 'Superficial Foreign Body', 'Mixed'];
@@ -211,7 +209,6 @@ export class ExaminationComponent {
     injuryLeftSideData = this.createInjuryObject();
     injuryRightSideData = this.createInjuryObject();
 
-
     // appendagesForm
     appendagesMain = ['Eyelids', 'Eyelashes', 'Lacrimal Sac', 'Syringing'];
     eyelidOptions = ['Chalazion', 'Ptosis', 'Swelling', 'Entropion', 'Ectropion', 'Mass', 'Meibomitis'];
@@ -240,26 +237,82 @@ export class ExaminationComponent {
     appendagesRightSideData = this.createAppendagesObject();
     appendagesLeftSideData = this.createAppendagesObject();
 
-    
+    //IrisForm
+    irisShapes = ['Normal', 'Defects'];
+    irisSynechiaeTypes = ['No', 'Anterior', 'Posterior'];
 
-    reData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
-    leData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
+    createIrisObject() {
+        return {
+            irisShape: 'Normal',
+            irisNVI: false,
+            irisSynechiae: 'No',
+            irisPI: false,
+            showComments: false,
+            comments: ''
+        };
+    }
 
-    //anteriorChamberForm
-    acOptions = [
-        'Cell',
-        'Flare',
-        'Hyphema',
-        'Hypopyon',
-        'Foreign Body'
-    ];
-    depth = ['Normal', 'Shallow', 'Deep'];
+    irisLeftSideData = this.createIrisObject();
+    irisRightSideData = this.createIrisObject();
 
+    // lensForm
+    lensNatures = ['Clear', 'Cataract', 'Pseudophakia', 'Aphakia'];
+    lensPositions = ['Central', 'Decentered', 'Subluxated'];
+    lensSizes = ['Normal', 'Swollen', 'Absorbed', 'Micro'];
+
+    createLensObject() {
+        return {
+            lensNature: 'Clear',
+            lensPosition: 'Central',
+            lensSize: 'Normal',
+            showComments: false,
+            comments: ''
+        };
+    }
+
+    lensLeftSideData = this.createLensObject();
+    lensRightSideData = this.createLensObject();
+
+    // AnteriorChamberForm
+    depthOptions = ['Normal', 'Shallow', 'Deep'];
+    acOptions = ['Cells', 'Flare', 'Hypopyon', 'Hyphaema', 'Vitreous'];
+
+    createAnteriorChamberObject() {
+        return {
+            acDepth: 'Normal',
+            ac_Cells: false, ac_Cells_details: '',
+            ac_Flare: false, ac_Flare_details: '',
+            ac_Hypopyon: false, ac_Hypopyon_details: '',
+            ac_Hyphaema: false, ac_Hyphaema_details: '',
+            ac_Vitreous: false, ac_Vitreous_details: '',
+            showComments: false,
+            comments: ''
+        };
+    }
+
+    anteriorChamberRightSideData = this.createAnteriorChamberObject();
+    anteriorChamberLeftSideData = this.createAnteriorChamberObject();
 
     //pupilForm
     pupilShape = ['Round', 'Eccentric', 'Irregular', 'Oval', 'Polycoria'];
     pupilDirect = ['Normal', 'Sluggish', 'Absent'];
+    pupilReaction = ['Brisk', 'Sluggish', 'Fixed']
     pupilConsensual = ['Normal', 'Sluggish', 'Absent'];
+
+    createPupilObject() {
+        return {
+            pupilShape: 'Round',
+            pupilSize: null,
+            reactionDirect: 'Normal',
+            reactionConsensual: 'Normal',
+            rapd: false,
+            showComments: false,
+            comments: ''
+        };
+    }
+
+    pupilRightSideData = this.createPupilObject();
+    pupilLeftSideData = this.createPupilObject();
 
     // --- Gonioscopy Dropdown Options ---
     gonioOptions = [
@@ -326,6 +379,26 @@ export class ExaminationComponent {
             ...this.appendagesRightSideData,
             showComments: this.appendagesLeftSideData.showComments
         };
+
+        this.irisLeftSideData = {
+            ...this.irisRightSideData,
+            showComments: this.irisLeftSideData.showComments
+        };
+
+        this.lensLeftSideData = {
+            ...this.lensRightSideData,
+            showComments: this.lensLeftSideData.showComments
+        };
+
+        this.anteriorChamberLeftSideData = {
+            ...this.anteriorChamberRightSideData,
+            showComments: this.anteriorChamberLeftSideData.showComments
+        };
+
+        this.pupilLeftSideData = {
+            ...this.pupilRightSideData,
+            showComments: this.pupilLeftSideData.showComments
+        };
     }
 
     selectSection(label: string) {
@@ -348,6 +421,9 @@ export class ExaminationComponent {
     isSelected(data: any, field: string, value: string): boolean {
         return data[field]?.includes(value) || false;
     }
+
+    reData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
+    leData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
 
     mmRange = Array.from({ length: 12 }, (_, i) => i); // 0 to 35
     timeRange = Array.from({ length: 12 }, (_, i) => i.toString().padStart(2, '0')); // 00 to 60
