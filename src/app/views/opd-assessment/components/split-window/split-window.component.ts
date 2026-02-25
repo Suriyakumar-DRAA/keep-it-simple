@@ -230,7 +230,7 @@ export class SplitWindowComponent {
     }
 
     setDefaultTab() {
-        this.activeTabId = 'refraction';
+        this.activeTabId = 'overview';
     }
 
     setActiveTab(tabId: string) {
