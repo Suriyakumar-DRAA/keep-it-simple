@@ -19,10 +19,8 @@ export const TokenInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
   const loadingService = inject(LoadingService);
   const dataSharedSvc = inject(DataShareSvcService);
 
-  // 1. Start Loading Spinner
   loadingService.requestStarted();
 
-  // 2. Setup initial URL and Auth check
   let currentUrl = req.url;
   const skipAuth = currentUrl.includes('?RemoveAuthToken');
 
@@ -30,11 +28,9 @@ export const TokenInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
     currentUrl = currentUrl.split('?RemoveAuthToken')[0];
   }
 
-  // 3. Chain Observables: Get Branch Key -> Get Token -> Handle Request
   return dataSharedSvc.selectedBranchData.pipe(
     take(1), // Get the latest value and complete
     switchMap((bKey) => {
-      // Convert Keycloak token promise to Observable
       return from(keycloakService.getToken()).pipe(
         switchMap((token) => {
 

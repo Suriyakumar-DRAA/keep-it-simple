@@ -50,6 +50,39 @@ export class ExaminationComponent {
         { id: 'fundus', label: 'Fundus', statusKey: 'fundus_status', notesKey: 'fundus_notes' },
     ];
 
+    // Appearance
+    appearanceFields = [
+        { key: 'phthisisBulbi', label: 'Phthisis Bulbi' },
+        { key: 'anophthalmos', label: 'Anophthalmos' },
+        { key: 'microphthalmos', label: 'Microphthalmos' },
+        { key: 'artificial', label: 'Artificial' },
+        { key: 'proptosis', label: 'Proptosis' },
+        { key: 'dystopia', label: 'Dystopia' },
+        { key: 'injured', label: 'Injured' },
+        { key: 'swollen', label: 'Swollen' }
+    ];
+
+    // injuryForm
+    injuryOpenGlobe = ['Rupture', 'Penetrating', 'IOFB', 'Perforating', 'Mixed'];
+    injuryClosedGlobe = ['Contusion', 'Lamellar Laceration', 'Superficial Foreign Body', 'Mixed'];
+    injuryRuptureDetails = ['Endophthalmitis', 'Panophthalmitis'];
+    injuryInvolvementDetails = [
+        'External (Limited to Bulbar Conjunctiva, Sclera, Cornea)',
+        'Anterior Segment (Involving Structures Internal to Cornea like AC, Lens, Posterior Capsule, Pars Plicata)',
+        'Structures Posterior to Posterior Lens'
+    ];
+    injuryIOFBMaterial = ['Pellet', 'Stone', 'Vegetative', 'Non Metallic', 'Glass'];
+    injuryStoneLocation = [
+        'Isolated to Cornea (Including Coreo Scleral Limbus)',
+        'Corneo Scleral Limbus to a point 5MM Posterior to Sclera',
+        'Posterior to Anterior 5MM of Sclera'
+    ];
+
+    //conjunctivaForm
+    conjunctivaOptions: string[] = ['Congestion', 'Chemosis', 'Follicles', 'Papillae', 'Discharge'];
+    conjunctivaCongestion: string[] = ['Circumcorneal', 'Ciliary', 'Conjunctival', 'Mixed'];
+
+
     data: any = {
         general_examination: 'Normal', one_eyed: 'Normal', squint_evaluation: 'Normal', overall_diagnosis_right: 'Normal', overall_diagnosis_left: 'Normal',
         appendages_status: 'completed', appendages_notes: 'Normal appearance',
@@ -85,17 +118,6 @@ export class ExaminationComponent {
         console.log('Saving examination data...', this.data);
     }
 
-    // Appearance
-    appearanceFields = [
-        { key: 'phthisisBulbi', label: 'Phthisis Bulbi' },
-        { key: 'anophthalmos', label: 'Anophthalmos' },
-        { key: 'microphthalmos', label: 'Microphthalmos' },
-        { key: 'artificial', label: 'Artificial' },
-        { key: 'proptosis', label: 'Proptosis' },
-        { key: 'dystopia', label: 'Dystopia' },
-        { key: 'injured', label: 'Injured' },
-        { key: 'swollen', label: 'Swollen' }
-    ];
 
     appearanceRightSideData: any = {
         phthisisBulbi: false,
@@ -123,10 +145,6 @@ export class ExaminationComponent {
         comments: ''
     };
 
-
-    //conjunctivaForm
-    conjunctivaOptions: string[] = ['Congestion', 'Chemosis', 'Follicles', 'Papillae', 'Discharge'];
-    conjunctivaCongestion: string[] = ['Circumcorneal', 'Ciliary', 'Conjunctival', 'Mixed'];
 
     conjunctivaRightSideData: any = {
         conjunctiva_Congestion: false,
@@ -178,21 +196,7 @@ export class ExaminationComponent {
     };
 
 
-    // injuryForm
-    injuryOpenGlobe = ['Rupture', 'Penetrating', 'IOFB', 'Perforating', 'Mixed'];
-    injuryClosedGlobe = ['Contusion', 'Lamellar Laceration', 'Superficial Foreign Body', 'Mixed'];
-    injuryRuptureDetails = ['Endophthalmitis', 'Panophthalmitis'];
-    injuryInvolvementDetails = [
-        'External (Limited to Bulbar Conjunctiva, Sclera, Cornea)',
-        'Anterior Segment (Involving Structures Internal to Cornea like AC, Lens, Posterior Capsule, Pars Plicata)',
-        'Structures Posterior to Posterior Lens'
-    ];
-    injuryIOFBMaterial = ['Pellet', 'Stone', 'Vegetative', 'Non Metallic', 'Glass'];
-    injuryStoneLocation = [
-        'Isolated to Cornea (Including Coreo Scleral Limbus)',
-        'Corneo Scleral Limbus to a point 5MM Posterior to Sclera',
-        'Posterior to Anterior 5MM of Sclera'
-    ];
+
 
     createInjuryObject() {
         return {
@@ -240,7 +244,7 @@ export class ExaminationComponent {
     appendagesRightSideData = this.createAppendagesObject();
     appendagesLeftSideData = this.createAppendagesObject();
 
-    
+
 
     reData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
     leData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
