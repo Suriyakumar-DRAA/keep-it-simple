@@ -60,12 +60,15 @@
                             @case ('Lens') { 
                                 <ng-container *ngTemplateOutlet="lensForm; context: { data: lensRightSideData, side: 'RE' }"></ng-container> 
                             }
-                            @case ('IOP') { <ng-container
-                                *ngTemplateOutlet="iopForm; context: { data: reData }"></ng-container> }
-                            @case ('Gonioscopy') { <ng-container
-                                *ngTemplateOutlet="gonioscopyForm; context: { data: reData }"></ng-container> }
-                            @case ('Fundus') { <ng-container
-                                *ngTemplateOutlet="fundusForm; context: { data: reData }"></ng-container> }
+                            @case ('IOP') { 
+                                <ng-container *ngTemplateOutlet="iopForm; context: { data: reData }"></ng-container> 
+                            }
+                            @case ('Gonioscopy') { 
+                                <ng-container *ngTemplateOutlet="gonioscopyForm; context: { data: goniosRightSideData, side: 'RE'}"></ng-container> 
+                            }
+                            @case ('Fundus') { 
+                                <ng-container *ngTemplateOutlet="fundusForm; context: { data: reData }"></ng-container> 
+                            }
                             }
 
                         </div>
@@ -107,12 +110,15 @@
                             @case ('Lens') { 
                                 <ng-container *ngTemplateOutlet="lensForm; context:  { data: lensLeftSideData, side: 'LE' }"></ng-container> 
                             }
-                            @case ('IOP') { <ng-container
-                                *ngTemplateOutlet="iopForm; context: { data: leData }"></ng-container> }
-                            @case ('Gonioscopy') { <ng-container
-                                *ngTemplateOutlet="gonioscopyForm; context: { data: leData }"></ng-container> }
-                            @case ('Fundus') { <ng-container
-                                *ngTemplateOutlet="fundusForm; context: { data: leData }"></ng-container> }
+                            @case ('IOP') { 
+                                <ng-container *ngTemplateOutlet="iopForm; context: { data: leData }"></ng-container> 
+                            }
+                            @case ('Gonioscopy') { 
+                                <ng-container *ngTemplateOutlet="gonioscopyForm; context: { data: goniosLeftSideData, side: 'LE' }"></ng-container> 
+                            }
+                            @case ('Fundus') { 
+                                <ng-container *ngTemplateOutlet="fundusForm; context: { data: leData }"></ng-container> 
+                            }
                             }
                         </div>
                     </div>
@@ -693,7 +699,6 @@
 
 <ng-template #pupilForm let-data="data" let-side="side">
     <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
-
         <div class="col-auto">
             <label class="form-label small fw-semibold text-secondary mb-1" style="font-size: 0.75rem;">Shape</label>
             <div class="chip-group" role="group">
@@ -701,7 +706,7 @@
                     <input type="radio" class="btn-check" 
                            [name]="side + 'pupilShape'" 
                            [id]="side + 'pShape' + s"
-                           [(ngModel)]="data.pupilShape" 
+                           [(ngModel)]="data.shape" 
                            [value]="s">
                     <label class="btn btn-sm me-1 border select-chip" [for]="side + 'pShape' + s">{{s}}</label>
                 }
@@ -713,9 +718,9 @@
             <div class="chip-group-input" style="width: 80px;">
                 <input type="number" 
                        class="form-control form-control-sm select-chip-input" 
-                       [(ngModel)]="data.pupilSize" 
+                       [(ngModel)]="data.pupil_size" 
                        min="0" step="0.5"
-                       [class.is-active-val]="data.pupilSize > 0"
+                       [class.is-active-val]="data.pupil_size > 0"
                        placeholder="0.0">
             </div>
         </div>
@@ -727,7 +732,7 @@
                     <input type="radio" class="btn-check" 
                            [name]="side + 'pDirect'" 
                            [id]="side + 'pDir' + r"
-                           [(ngModel)]="data.reactionDirect" 
+                           [(ngModel)]="data.reaction_to_light_direct" 
                            [value]="r">
                     <label class="btn btn-sm me-1 border select-chip" [for]="side + 'pDir' + r">{{r}}</label>
                 }
@@ -741,7 +746,7 @@
                     <input type="radio" class="btn-check" 
                            [name]="side + 'pConsensual'" 
                            [id]="side + 'pCon' + r"
-                           [(ngModel)]="data.reactionConsensual" 
+                           [(ngModel)]="data.reaction_to_light_consensual" 
                            [value]="r">
                     <label class="btn btn-sm me-1 border select-chip" [for]="side + 'pCon' + r">{{r}}</label>
                 }
@@ -760,17 +765,16 @@
                 <label class="btn btn-sm me-1 border select-chip" [for]="side + 'rapdYes'">Yes</label>
             </div>
         </div>
-
     </div>
 
     <div class="mt-4 pt-2">
         <button class="btn btn-link btn-sm text-decoration-none p-0 fw-bold border-0" type="button"
-            (click)="data.showComments = !data.showComments">
-            <i class="bi me-1" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
+            (click)="data.show_comments = !data.show_comments">
+            <i class="bi me-1" [class.bi-chevron-down]="!data.show_comments" [class.bi-chevron-up]="data.show_comments"></i>
             Comments
         </button>
 
-        @if(data.showComments) {
+        @if(data.show_comments) {
         <div class="mt-2 animate-fade-in">
             <textarea class="form-control form-control-sm border-light-subtle" 
                       rows="3" 
@@ -784,7 +788,6 @@
 
 <ng-template #irisForm let-data="data" let-side="side">
     <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
-
         <div class="col-auto">
             <label class="form-label small fw-semibold text-secondary mb-1" style="font-size: 0.75rem;">Shape</label>
             <div class="d-flex flex-column">
@@ -793,7 +796,7 @@
                         <input type="radio" class="btn-check" 
                                [name]="side + 'irisShape'" 
                                [id]="side + 'irisShape' + shape"
-                               [(ngModel)]="data.irisShape" 
+                               [(ngModel)]="data.shape" 
                                [value]="shape">
                         <label class="btn btn-sm me-1 border select-chip" [for]="side + 'irisShape' + shape">{{shape}}</label>
                     }
@@ -806,11 +809,11 @@
             <div class="d-flex flex-column">
                 <div class="chip-group" role="group">
                     <input type="radio" class="btn-check" [name]="side + 'irisNVI'" [id]="side + 'nviNo'" 
-                           [(ngModel)]="data.irisNVI" [value]="false">
+                           [(ngModel)]="data.neovascularisation" [value]="false">
                     <label class="btn btn-sm me-1 border select-chip" [for]="side + 'nviNo'">No</label>
 
                     <input type="radio" class="btn-check" [name]="side + 'irisNVI'" [id]="side + 'nviYes'" 
-                           [(ngModel)]="data.irisNVI" [value]="true">
+                           [(ngModel)]="data.neovascularisation" [value]="true">
                     <label class="btn btn-sm me-1 border select-chip" [for]="side + 'nviYes'">Yes</label>
                 </div>
             </div>
@@ -824,7 +827,7 @@
                         <input type="radio" class="btn-check" 
                                [name]="side + 'irisSyn'" 
                                [id]="side + 'syn' + syn"
-                               [(ngModel)]="data.irisSynechiae" 
+                               [(ngModel)]="data.synechiae" 
                                [value]="syn">
                         <label class="btn btn-sm me-1 border select-chip" [for]="side + 'syn' + syn">{{syn}}</label>
                     }
@@ -837,26 +840,25 @@
             <div class="d-flex flex-column">
                 <div class="chip-group" role="group">
                     <input type="radio" class="btn-check" [name]="side + 'irisPI'" [id]="side + 'piNo'" 
-                           [(ngModel)]="data.irisPI" [value]="false">
+                           [(ngModel)]="data.peripheral_iridotomy" [value]="false">
                     <label class="btn btn-sm me-1 border select-chip" [for]="side + 'piNo'">No</label>
 
                     <input type="radio" class="btn-check" [name]="side + 'irisPI'" [id]="side + 'piYes'" 
-                           [(ngModel)]="data.irisPI" [value]="true">
+                           [(ngModel)]="data.peripheral_iridotomy" [value]="true">
                     <label class="btn btn-sm me-1 border select-chip" [for]="side + 'piYes'">Yes</label>
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="mt-4 pt-2">
         <button class="btn btn-link btn-sm text-decoration-none p-0 fw-bold border-0 shadow-none" type="button"
-            (click)="data.showComments = !data.showComments">
-            <i class="bi me-1" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
+            (click)="data.show_comments = !data.show_comments">
+            <i class="bi me-1" [class.bi-chevron-down]="!data.show_comments" [class.bi-chevron-up]="data.show_comments"></i>
             Iris Comments
         </button>
 
-        @if(data.showComments) {
+        @if(data.show_comments) {
         <div class="mt-2 animate-fade-in">
             <textarea class="form-control form-control-sm border-light-subtle" rows="3"
                 [(ngModel)]="data.comments" placeholder="Enter findings..."></textarea>
@@ -954,39 +956,45 @@
     }
 </ng-template>
 
-<ng-template #gonioscopyForm let-data="data">
+<ng-template #gonioscopyForm let-data="data" let-side="side">
     <div class="d-flex flex-column align-items-center p-3">
 
         <div class="d-flex align-items-center gap-2 mb-4">
             <span class="field-label m-0 me-2">Superior:</span>
-            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioSuperior1">
-                <option value="Select" [defaultSelected]="'selected'" disabled selected>Select</option>
+            <select class="form-select form-select-sm" style="width: 100px;" 
+                    [name]="side + 'superior1'" [(ngModel)]="data.superior[0]">
+                <option value="Select" disabled>Select</option>
                 @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
             </select>
-            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioSuperior2">
-                <option value="" disabled selected>Select</option>
+            <select class="form-select form-select-sm" style="width: 100px;" 
+                    [name]="side + 'superior2'" [(ngModel)]="data.superior[1]">
+                <option value="Select" disabled>Select</option>
                 @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
             </select>
-            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioSuperior3">
-                <option value="" disabled selected>Select</option>
+            <select class="form-select form-select-sm" style="width: 100px;" 
+                    [name]="side + 'superior3'" [(ngModel)]="data.superior[2]">
+                <option value="Select" disabled>Select</option>
                 @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
             </select>
         </div>
 
         <div class="d-flex align-items-center justify-content-center gap-4 w-100 my-2">
-
+            
             <div class="d-flex flex-column gap-2">
                 <span class="field-label mb-1">Temporal:</span>
-                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioTemporal1">
-                    <option value="" disabled selected>Select</option>
+                <select class="form-select form-select-sm" style="width: 100px;" 
+                        [name]="side + 'temporal1'" [(ngModel)]="data.temporal[0]">
+                    <option value="Select" disabled>Select</option>
                     @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
                 </select>
-                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioTemporal2">
-                    <option value="" disabled selected>Select</option>
+                <select class="form-select form-select-sm" style="width: 100px;" 
+                        [name]="side + 'temporal2'" [(ngModel)]="data.temporal[1]">
+                    <option value="Select" disabled>Select</option>
                     @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
                 </select>
-                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioTemporal3">
-                    <option value="" disabled selected>Select</option>
+                <select class="form-select form-select-sm" style="width: 100px;" 
+                        [name]="side + 'temporal3'" [(ngModel)]="data.temporal[2]">
+                    <option value="Select" disabled>Select</option>
                     @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
                 </select>
             </div>
@@ -1000,49 +1008,57 @@
 
             <div class="d-flex flex-column gap-2">
                 <span class="field-label mb-1">Nasal:</span>
-                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioNasal1">
-                    <option value="" disabled selected>Select</option>
+                <select class="form-select form-select-sm" style="width: 100px;" 
+                        [name]="side + 'nasal1'" [(ngModel)]="data.nasal[0]">
+                    <option value="Select" disabled>Select</option>
                     @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
                 </select>
-                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioNasal2">
-                    <option value="" disabled selected>Select</option>
+                <select class="form-select form-select-sm" style="width: 100px;" 
+                        [name]="side + 'nasal2'" [(ngModel)]="data.nasal[1]">
+                    <option value="Select" disabled>Select</option>
                     @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
                 </select>
-                <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioNasal3">
-                    <option value="" disabled selected>Select</option>
+                <select class="form-select form-select-sm" style="width: 100px;" 
+                        [name]="side + 'nasal3'" [(ngModel)]="data.nasal[2]">
+                    <option value="Select" disabled>Select</option>
                     @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
                 </select>
             </div>
         </div>
 
-        <div class="d-flex align-items-center gap-2 mt-4">
+        <div class="d-flex align-items-center gap-2 mt-4"> 
             <span class="field-label m-0 me-2" style="min-width: 70px; text-align: right;">Inferior:</span>
-            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioInferior1">
-                <option value="" disabled selected>Select</option>
+            <select class="form-select form-select-sm" style="width: 100px;" 
+                    [name]="side + 'inferior1'" [(ngModel)]="data.inferior[0]">
+                <option value="Select" disabled>Select</option>
                 @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
             </select>
-            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioInferior2">
-                <option value="" disabled selected>Select</option>
+            <select class="form-select form-select-sm" style="width: 100px;" 
+                    [name]="side + 'inferior2'" [(ngModel)]="data.inferior[1]">
+                <option value="Select" disabled>Select</option>
                 @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
             </select>
-            <select class="form-select form-select-sm" style="width: 100px;" [(ngModel)]="data.gonioInferior3">
-                <option value="" disabled selected>Select</option>
+            <select class="form-select form-select-sm" style="width: 100px;" 
+                    [name]="side + 'inferior3'" [(ngModel)]="data.inferior[2]">
+                <option value="Select" disabled>Select</option>
                 @for(opt of gonioOptions; track opt) { <option [value]="opt">{{opt}}</option> }
             </select>
         </div>
 
     </div>
+
     <div class="d-flex align-items-center mb-2">
         <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
-            (click)="data.showComments = !data.showComments">
+            (click)="data.show_comments = !data.show_comments">
             Comments
-            <i class="bi" [class.bi-chevron-down]="!data.showComments" [class.bi-chevron-up]="data.showComments"></i>
+            <i class="bi" [class.bi-chevron-down]="!data.show_comments" [class.bi-chevron-up]="data.show_comments"></i>
         </a>
     </div>
 
-    @if(data.showComments) {
+    @if(data.show_comments) {
     <div class="field-group">
         <textarea class="form-control" rows="3" [(ngModel)]="data.comments"
+            [name]="side + 'gonioComments'"
             placeholder="Enter comments here..."></textarea>
     </div>
     }

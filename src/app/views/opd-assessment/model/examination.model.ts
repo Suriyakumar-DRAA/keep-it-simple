@@ -58,7 +58,7 @@ export interface IConjunctiva {
     comments?: string;
 }
 
-export interface ICornea{
+export interface ICornea {
     size: string;
     shapes: string;
     surfaces: Record<string, boolean>;
@@ -86,6 +86,65 @@ export interface IAnteriorChamber {
     hyphaema_details: string;
     foreign_body: boolean;
     foreign_body_details: string;
+    show_comments: boolean;
+    comments: string;
+}
+
+export interface IPupil {
+    shape: string;
+    pupil_size: string;
+    reaction_to_light_direct: string;
+    reaction_to_light_consensual: string;
+    rapd: boolean;
+    show_comments: boolean;
+    comments: string;
+}
+
+export interface IIris {
+    shape: string;
+    neovascularisation: boolean;
+    synechiae: string;
+    peripheral_iridotomy: boolean;
+    show_comments: boolean;
+    comments: string;
+}
+
+export interface ILens {
+    nature: string;
+    position: string;
+    size: string;
+    LOCS_grading?: any;
+    show_comments: boolean;
+    comments: string;
+}
+
+export interface IGonioscopy {
+    superior: string[];
+    inferior: string[];
+    nasal: string[];
+    temporal: string[];
+    show_comments: boolean;
+    comments: string;
+}
+
+export interface IFundus {
+    media: string;
+    media_details: string;
+    pvd: string;
+    optic_disc_size: string;
+    disk_ratio: string;
+    blood_vessels: string;
+    blood_vessels_details: string;
+    macula: any;
+    foveal_reflex: string;
+    foveal_reflex_details: string;
+    vitreous: string;
+    vitreous_details: string;
+    retinal_detachment: string;
+    retinal_detachment_details: string;
+    peripheral_lesions: string;
+    peripheral_lesions_details: string;
+    fundus: string;
     show_comments: boolean;
     comments: string;
 }

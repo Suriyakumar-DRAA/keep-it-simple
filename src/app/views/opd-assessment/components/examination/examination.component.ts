@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, EventEmitter, Inject, inject, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IAnteriorChamber, IAppearance, IConjunctiva, ICornea, IInjury } from '@views/opd-assessment/model/examination.model';
+import { IAnteriorChamber, IAppearance, IAppendages, IConjunctiva, ICornea, IGonioscopy, IInjury, IIris, ILens, IPupil } from '@views/opd-assessment/model/examination.model';
 import { AssessmentService } from '@views/opd-assessment/services/assessment.service';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
@@ -123,8 +123,7 @@ export class ExaminationComponent {
 
     // pupilForm
     pupilShape = ['Round', 'Eccentric', 'Irregular', 'Oval', 'Polycoria'];
-    pupilDirect = ['Normal', 'Sluggish', 'Absent'];
-    pupilReaction = ['Brisk', 'Sluggish', 'Fixed']
+    pupilReaction = ['Brisk', 'Sluggish', 'Absent']
     pupilConsensual = ['Normal', 'Sluggish', 'Absent'];
 
     // IrisForm
@@ -136,6 +135,7 @@ export class ExaminationComponent {
     lensPositions = ['Central', 'Decentered', 'Subluxated'];
     lensSizes = ['Normal', 'Swollen', 'Absorbed', 'Micro'];
 
+    // gonioscopyForm
     gonioOptions = ['Select', 'Grade 0', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Closed', 'Slit'];
 
     // fundusForm
@@ -228,7 +228,7 @@ export class ExaminationComponent {
     }
 
     // Appendages
-    appendagesRightSideData = {
+    appendagesRightSideData: IAppendages = {
         appendages_main: {
             'Eyelids': false,
             'Eyelashes': false,
@@ -251,7 +251,7 @@ export class ExaminationComponent {
         comments: ''
     };
 
-    appendagesLeftSideData = {
+    appendagesLeftSideData: IAppendages = {
         appendages_main: {
             'Eyelids': false,
             'Eyelashes': false,
@@ -344,79 +344,6 @@ export class ExaminationComponent {
         comments: ''
     };
 
-
-    createInjuryObject() {
-        return {
-            natureOfInjury: '',
-            openGlobeTypes: {},
-            ruptureDetails: {},
-            iofbMaterial: '',
-            stoneLocation: '',
-            closedGlobeTypes: {},
-            lamellarDetails: {},
-            showComments: false,
-            comments: ''
-        };
-    }
-
-
-
-    createPupilObject() {
-        return {
-            pupilShape: 'Round',
-            pupilSize: null,
-            reactionDirect: 'Normal',
-            reactionConsensual: 'Normal',
-            rapd: false,
-            showComments: false,
-            comments: ''
-        };
-    }
-
-    pupilRightSideData = this.createPupilObject();
-    pupilLeftSideData = this.createPupilObject();
-
-    // --- Fundus Form Logic ---
-    createIrisObject() {
-        return {
-            irisShape: 'Normal',
-            irisNVI: false,
-            irisSynechiae: 'No',
-            irisPI: false,
-            showComments: false,
-            comments: ''
-        };
-    }
-
-    irisLeftSideData = this.createIrisObject();
-    irisRightSideData = this.createIrisObject();
-
-    createLensObject() {
-        return {
-            lensNature: 'Clear',
-            lensPosition: 'Central',
-            lensSize: 'Normal',
-            showComments: false,
-            comments: ''
-        };
-    }
-
-    lensLeftSideData = this.createLensObject();
-    lensRightSideData = this.createLensObject();
-
-    createAnteriorChamberObject() {
-        return {
-            acDepth: 'Normal',
-            ac_Cells: false, ac_Cells_details: '',
-            ac_Flare: false, ac_Flare_details: '',
-            ac_Hypopyon: false, ac_Hypopyon_details: '',
-            ac_Hyphaema: false, ac_Hyphaema_details: '',
-            ac_ForeignBody: false, ac_ForeignBody_details: '',
-            showComments: false,
-            comments: ''
-        };
-    }
-
     anteriorChamberRightSideData: IAnteriorChamber = {
         depth: 'Normal',
         cells: false, cells_details: '',
@@ -438,6 +365,65 @@ export class ExaminationComponent {
         show_comments: false,
         comments: ''
     };
+
+    createPupilObject(): IPupil {
+        return {
+            shape: 'Round',
+            pupil_size: "0",
+            reaction_to_light_direct: 'Normal',
+            reaction_to_light_consensual: 'Normal',
+            rapd: false,
+            show_comments: false,
+            comments: ''
+        };
+    }
+
+    pupilRightSideData: IPupil = this.createPupilObject();
+    pupilLeftSideData: IPupil = this.createPupilObject();
+
+    createIrisObject(): IIris {
+        return {
+            shape: 'Normal',
+            neovascularisation: false,
+            synechiae: 'No',
+            peripheral_iridotomy: false,
+            show_comments: false,
+            comments: ''
+        };
+    }
+
+    irisLeftSideData: IIris = this.createIrisObject();
+    irisRightSideData: IIris = this.createIrisObject();
+
+    createLensObject(): ILens {
+        return {
+            nature: 'Clear',
+            position: 'Central',
+            size: 'Normal',
+            LOCS_grading: null,
+            show_comments: false,
+            comments: ''
+        };
+    }
+
+    lensLeftSideData: ILens = this.createLensObject();
+    lensRightSideData: ILens = this.createLensObject();
+
+
+    createGonioscopyObject(): IGonioscopy {
+        return {
+            superior: ['Select', 'Select', 'Select'],
+            inferior: ['Select', 'Select', 'Select'],
+            nasal: ['Select', 'Select', 'Select'],
+            temporal: ['Select', 'Select', 'Select'],
+            show_comments: false,
+            comments: ''
+        };
+    }
+
+    goniosLeftSideData: IGonioscopy = this.createGonioscopyObject();
+    goniosRightSideData: IGonioscopy = this.createGonioscopyObject();
+    
 
     // Optional: Function to handle the "Normal" button click at the top of the form
     setFundusNormal(data: any) {
@@ -482,12 +468,12 @@ export class ExaminationComponent {
 
         this.irisLeftSideData = {
             ...this.irisRightSideData,
-            showComments: this.irisLeftSideData.showComments
+            show_comments: this.irisLeftSideData.show_comments
         };
 
         this.lensLeftSideData = {
             ...this.lensRightSideData,
-            showComments: this.lensLeftSideData.showComments
+            show_comments: this.lensLeftSideData.show_comments
         };
 
         this.anteriorChamberLeftSideData = {
@@ -497,7 +483,12 @@ export class ExaminationComponent {
 
         this.pupilLeftSideData = {
             ...this.pupilRightSideData,
-            showComments: this.pupilLeftSideData.showComments
+            show_comments: this.pupilLeftSideData.show_comments
+        };
+
+        this.goniosLeftSideData = {
+            ...this.goniosRightSideData,
+            show_comments: this.goniosLeftSideData.show_comments
         };
     }
 
