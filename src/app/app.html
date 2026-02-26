@@ -1,20 +1,11 @@
- <app-sidebar class="flex-shrink-0"></app-sidebar>
+<!-- Top Header -->
+<app-header [userRole]="userRole" (roleChange)="userRole = $event">
+</app-header>
 
 <div class="d-flex flex-column vh-100 bg-light">
-  
-
-  <!-- Top Header -->
-  <app-header [userRole]="userRole" (roleChange)="userRole = $event">
-  </app-header>
-
-  <!-- Sub Header -->
-  <!-- <app-sub-header [currentDate]="currentDate">
-  </app-sub-header> -->
-
   <!-- Body Layout -->
   <div class="d-flex flex-grow-1">
-    <!-- Sidebar -->
-   
+    <app-sidebar class="flex-shrink-0"></app-sidebar>
     <!-- Main Content -->
     <div class="flex-grow-1 mt-5" style="margin-left: 64px;">
       <router-outlet></router-outlet>

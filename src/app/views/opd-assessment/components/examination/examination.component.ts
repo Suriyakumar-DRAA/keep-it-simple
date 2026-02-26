@@ -50,6 +50,39 @@ export class ExaminationComponent {
         { id: 'fundus', label: 'Fundus', statusKey: 'fundus_status', notesKey: 'fundus_notes' },
     ];
 
+    // Appearance
+    appearanceFields = [
+        { key: 'phthisisBulbi', label: 'Phthisis Bulbi' },
+        { key: 'anophthalmos', label: 'Anophthalmos' },
+        { key: 'microphthalmos', label: 'Microphthalmos' },
+        { key: 'artificial', label: 'Artificial' },
+        { key: 'proptosis', label: 'Proptosis' },
+        { key: 'dystopia', label: 'Dystopia' },
+        { key: 'injured', label: 'Injured' },
+        { key: 'swollen', label: 'Swollen' }
+    ];
+
+    // injuryForm
+    injuryOpenGlobe = ['Rupture', 'Penetrating', 'IOFB', 'Perforating', 'Mixed'];
+    injuryClosedGlobe = ['Contusion', 'Lamellar Laceration', 'Superficial Foreign Body', 'Mixed'];
+    injuryRuptureDetails = ['Endophthalmitis', 'Panophthalmitis'];
+    injuryInvolvementDetails = [
+        'External (Limited to Bulbar Conjunctiva, Sclera, Cornea)',
+        'Anterior Segment (Involving Structures Internal to Cornea like AC, Lens, Posterior Capsule, Pars Plicata)',
+        'Structures Posterior to Posterior Lens'
+    ];
+    injuryIOFBMaterial = ['Pellet', 'Stone', 'Vegetative', 'Non Metallic', 'Glass'];
+    injuryStoneLocation = [
+        'Isolated to Cornea (Including Coreo Scleral Limbus)',
+        'Corneo Scleral Limbus to a point 5MM Posterior to Sclera',
+        'Posterior to Anterior 5MM of Sclera'
+    ];
+
+    //conjunctivaForm
+    conjunctivaOptions: string[] = ['Congestion', 'Chemosis', 'Follicles', 'Papillae', 'Discharge'];
+    conjunctivaCongestion: string[] = ['Circumcorneal', 'Ciliary', 'Conjunctival', 'Mixed'];
+
+
     data: any = {
         general_examination: 'Normal', one_eyed: 'Normal', squint_evaluation: 'Normal', overall_diagnosis_right: 'Normal', overall_diagnosis_left: 'Normal',
         appendages_status: 'completed', appendages_notes: 'Normal appearance',
@@ -85,17 +118,6 @@ export class ExaminationComponent {
         console.log('Saving examination data...', this.data);
     }
 
-    // Appearance
-    appearanceFields = [
-        { key: 'phthisisBulbi', label: 'Phthisis Bulbi' },
-        { key: 'anophthalmos', label: 'Anophthalmos' },
-        { key: 'microphthalmos', label: 'Microphthalmos' },
-        { key: 'artificial', label: 'Artificial' },
-        { key: 'proptosis', label: 'Proptosis' },
-        { key: 'dystopia', label: 'Dystopia' },
-        { key: 'injured', label: 'Injured' },
-        { key: 'swollen', label: 'Swollen' }
-    ];
 
     appearanceRightSideData: any = {
         phthisisBulbi: false,
@@ -123,9 +145,6 @@ export class ExaminationComponent {
         comments: ''
     };
 
-    //conjunctivaForm
-    conjunctivaOptions: string[] = ['Congestion', 'Chemosis', 'Follicles', 'Papillae', 'Discharge'];
-    conjunctivaCongestion: string[] = ['Circumcorneal', 'Ciliary', 'Conjunctival', 'Mixed'];
 
     conjunctivaRightSideData: any = {
         conjunctiva_Congestion: false,
@@ -176,21 +195,8 @@ export class ExaminationComponent {
         comments: ''
     };
 
-    // injuryForm
-    injuryOpenGlobe = ['Rupture', 'Penetrating', 'IOFB', 'Perforating', 'Mixed'];
-    injuryClosedGlobe = ['Contusion', 'Lamellar Laceration', 'Superficial Foreign Body', 'Mixed'];
-    injuryRuptureDetails = ['Endophthalmitis', 'Panophthalmitis'];
-    injuryInvolvementDetails = [
-        'External (Limited to Bulbar Conjunctiva, Sclera, Cornea)',
-        'Anterior Segment (Involving Structures Internal to Cornea like AC, Lens, Posterior Capsule, Pars Plicata)',
-        'Structures Posterior to Posterior Lens'
-    ];
-    injuryIOFBMaterial = ['Pellet', 'Stone', 'Vegetative', 'Non Metallic', 'Glass'];
-    injuryStoneLocation = [
-        'Isolated to Cornea (Including Coreo Scleral Limbus)',
-        'Corneo Scleral Limbus to a point 5MM Posterior to Sclera',
-        'Posterior to Anterior 5MM of Sclera'
-    ];
+
+
 
     createInjuryObject() {
         return {
@@ -237,61 +243,21 @@ export class ExaminationComponent {
     appendagesRightSideData = this.createAppendagesObject();
     appendagesLeftSideData = this.createAppendagesObject();
 
-    //IrisForm
-    irisShapes = ['Normal', 'Defects'];
-    irisSynechiaeTypes = ['No', 'Anterior', 'Posterior'];
 
-    createIrisObject() {
-        return {
-            irisShape: 'Normal',
-            irisNVI: false,
-            irisSynechiae: 'No',
-            irisPI: false,
-            showComments: false,
-            comments: ''
-        };
-    }
 
-    irisLeftSideData = this.createIrisObject();
-    irisRightSideData = this.createIrisObject();
+    reData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
+    leData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
 
-    // lensForm
-    lensNatures = ['Clear', 'Cataract', 'Pseudophakia', 'Aphakia'];
-    lensPositions = ['Central', 'Decentered', 'Subluxated'];
-    lensSizes = ['Normal', 'Swollen', 'Absorbed', 'Micro'];
+    //anteriorChamberForm
+    acOptions = [
+        'Cell',
+        'Flare',
+        'Hyphema',
+        'Hypopyon',
+        'Foreign Body'
+    ];
+    depth = ['Normal', 'Shallow', 'Deep'];
 
-    createLensObject() {
-        return {
-            lensNature: 'Clear',
-            lensPosition: 'Central',
-            lensSize: 'Normal',
-            showComments: false,
-            comments: ''
-        };
-    }
-
-    lensLeftSideData = this.createLensObject();
-    lensRightSideData = this.createLensObject();
-
-    // AnteriorChamberForm
-    depthOptions = ['Normal', 'Shallow', 'Deep'];
-    acOptions = ['Cells', 'Flare', 'Hypopyon', 'Hyphaema', 'Vitreous'];
-
-    createAnteriorChamberObject() {
-        return {
-            acDepth: 'Normal',
-            ac_Cells: false, ac_Cells_details: '',
-            ac_Flare: false, ac_Flare_details: '',
-            ac_Hypopyon: false, ac_Hypopyon_details: '',
-            ac_Hyphaema: false, ac_Hyphaema_details: '',
-            ac_Vitreous: false, ac_Vitreous_details: '',
-            showComments: false,
-            comments: ''
-        };
-    }
-
-    anteriorChamberRightSideData = this.createAnteriorChamberObject();
-    anteriorChamberLeftSideData = this.createAnteriorChamberObject();
 
     //pupilForm
     pupilShape = ['Round', 'Eccentric', 'Irregular', 'Oval', 'Polycoria'];

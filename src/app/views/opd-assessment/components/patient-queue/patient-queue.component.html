@@ -1,11 +1,11 @@
-<div class="h-100 d-flex position-relative bg-white rounded {{visiblePatientQueue() ? 'me-2 border' : ''}}">
+<div class="shadow-sm h-100 d-flex position-relative bg-white {{visiblePatientQueue() ? 'me-2' : ''}}">
     <div class="queue-content d-flex flex-column overflow-hidden transition-all"
         [style.width]="visiblePatientQueue() ? '390px' : '0px'" [style.opacity]="visiblePatientQueue() ? '1' : '0'"
         [style.visibility]="visiblePatientQueue() ? 'visible' : 'hidden'">
 
         <div class="p-2">
             <div class="d-flex align-items-center justify-content-between mb-2">
-                <h2 class="h5 fw-bold m-0 text-dark text-truncate" title="{{ queueLabel }}">{{ queueLabel }}</h2>
+                <h2 class="h5 m-0" title="{{ queueLabel }}">{{ queueLabel }}</h2>
                 <div class="d-flex gap-1">
                     <small class="text-muted d-flex align-items-center me-2" style="font-size: 0.7rem;">Ctrl+B</small>
                     <button class="btn btn-sm btn-light border" (click)="onToggle()">
