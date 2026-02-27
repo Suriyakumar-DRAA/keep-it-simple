@@ -716,7 +716,7 @@
 
 <ng-template #pupilForm let-data="data" let-side="side">
     <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
-        <div class="col-auto">
+        <div>
             <label class="form-label small fw-semibold text-secondary mb-1" style="font-size: 0.75rem;">Shape</label>
             <div class="chip-group" role="group">
                 @for(s of pupilShape; track s) {
@@ -887,7 +887,7 @@
 <ng-template #lensForm let-data="data" let-side="side">
     <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
 
-        <div class="col-auto">
+        <div>
             <label class="form-label small fw-semibold text-secondary mb-1" style="font-size: 0.75rem;">Nature</label>
             <div class="d-flex flex-column">
                 <div class="chip-group" role="group">
@@ -903,7 +903,7 @@
             </div>
         </div>
 
-        <div class="col-auto">
+        <div>
             <label class="form-label small fw-semibold text-secondary mb-1" style="font-size: 0.75rem;">Position</label>
             <div class="d-flex flex-column">
                 <div class="chip-group" role="group">
@@ -919,7 +919,7 @@
             </div>
         </div>
 
-        <div class="col-auto">
+        <div>
             <label class="form-label small fw-semibold text-secondary mb-1" style="font-size: 0.75rem;">Size</label>
             <div class="d-flex flex-column">
                 <div class="chip-group" role="group">
@@ -1163,8 +1163,8 @@
         </div>
     </div>
 
-    <div class="row g-3 mb-3">
-        <div class="col-md-4">
+    <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
+        <div>
             <label class="form-label small fw-semibold text-secondary mb-1">Vitreous</label>
             <div class="chip-group d-flex" role="group">
                 @for(v of ['Clear', 'Haze']; track v) {
@@ -1173,7 +1173,7 @@
                 }
             </div>
         </div>
-        <div class="col-md-4">
+        <div >
             <label class="form-label small fw-semibold text-secondary mb-1">RD</label>
             <div class="chip-group d-flex" role="group">
                 @for(r of ['Absent', 'Present']; track r) {
@@ -1182,7 +1182,7 @@
                 }
             </div>
         </div>
-        <div class="col-md-4">
+        <div>
             <label class="form-label small fw-semibold text-secondary mb-1">Peripheral Lesions</label>
             <div class="chip-group d-flex" role="group">
                 @for(pl of ['Absent', 'Present']; track pl) {
@@ -1194,7 +1194,7 @@
     </div>
 
     <div class="row g-2">
-        <div class="col-12">
+        <div class="col-12 mt-2">
             <input type="text" class="form-control form-control-sm shadow-none" [(ngModel)]="data.fundus" placeholder="Overall fundus findings...">
         </div>
     </div>

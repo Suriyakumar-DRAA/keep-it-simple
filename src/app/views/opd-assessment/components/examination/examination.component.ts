@@ -101,7 +101,7 @@ export class ExaminationComponent {
         { label: 'Phlycten', key: 'phlycten' },
         { label: 'Discharge', key: 'discharge' }
     ];
-    conjunctivaCongestion: string[] = ['Circumcorneal', 'Ciliary', 'Conjunctival', 'Mixed'];
+    conjunctivaCongestion: string[] = ['Generalized', 'Localized', 'Ciliary'];
 
     // cormeaForm
     sizes = ['Normal', 'Micro', 'Macro'];
