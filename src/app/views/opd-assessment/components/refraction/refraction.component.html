@@ -129,12 +129,12 @@
                     }
             </div>
         </div>
-        <div class="field-group">
+        <div class="field-group w-100">
             <div class="d-flex justify-content-between align-items-center">
                 <label class="field-label">PR</label>
             </div>
             <div class="input-section m-1">
-                <div class="control-row">
+                <div class="d-flex ">
                     <div class="col-3 d-flex align-items-center">
                         <span class="text-muted me-2">S</span>
                         <select class="form-select form-select-sm"
@@ -146,7 +146,7 @@
                         </select>
                     </div>
                     <div class="col-3  d-flex align-items-center">
-                        <span class="text-muted me-2">I</span>
+                        <span class="text-muted ms-1 me-2">I</span>
                         <select class="form-select form-select-sm"
                             [ngModel]="eye === 're' ? selectedPRData.i_re : selectedPRData.i_le"
                             (ngModelChange)="selectPRDataField(eye, 'i', $event)">
@@ -154,7 +154,7 @@
                         </select>
                     </div>
                     <div class="col-3  d-flex align-items-center">
-                        <span class="text-muted me-2">N</span>
+                        <span class="text-muted ms-1 me-2">N</span>
                         <select class="form-select form-select-sm"
                             [ngModel]="eye === 're' ? selectedPRData.n_re : selectedPRData.n_le"
                             (ngModelChange)="selectPRDataField(eye, 'n', $event)">
@@ -162,7 +162,7 @@
                         </select>
                     </div>
                     <div class="col-3  d-flex align-items-center">
-                        <span class="text-muted me-2">T</span>
+                        <span class="text-muted ms-1 me-2">T</span>
                         <select class="form-select form-select-sm"
                             [ngModel]="eye === 're' ? selectedPRData.t_re : selectedPRData.t_le"
                             (ngModelChange)="selectPRDataField(eye, 't', $event)">
