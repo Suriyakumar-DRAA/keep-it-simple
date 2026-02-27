@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, EventEmitter, Inject, inject, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IAnteriorChamber, IAppearance, IAppendages, IConjunctiva, ICornea, IGonioscopy, IInjury, IIris, ILens, IPupil } from '@views/opd-assessment/model/examination.model';
 import { AssessmentService } from '@views/opd-assessment/services/assessment.service';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
@@ -52,7 +53,7 @@ export class ExaminationComponent {
 
     // Appearance
     appearanceFields = [
-        { key: 'phthisisBulbi', label: 'Phthisis Bulbi' },
+        { key: 'phthisis_bulbi', label: 'Phthisis Bulbi' },
         { key: 'anophthalmos', label: 'Anophthalmos' },
         { key: 'microphthalmos', label: 'Microphthalmos' },
         { key: 'artificial', label: 'Artificial' },
@@ -78,10 +79,75 @@ export class ExaminationComponent {
         'Posterior to Anterior 5MM of Sclera'
     ];
 
-    //conjunctivaForm
-    conjunctivaOptions: string[] = ['Congestion', 'Chemosis', 'Follicles', 'Papillae', 'Discharge'];
+    // appendagesForm
+    appendagesMain = ['Eyelids', 'Eyelashes', 'Lacrimal Sac', 'Syringing'];
+    eyelidOptions = ['Chalazion', 'Ptosis', 'Swelling', 'Entropion', 'Ectropion', 'Mass', 'Meibomitis'];
+    eyelashOptions = ['Trichiasis', 'Dystrichiasis'];
+    lacrimalSacOptions = ['Swelling', 'Roplas'];
+    syringingOptions = ['Syringing'];
+
+
+    // conjunctivaForm
+    conjunctivaOptions = [
+        { label: 'Congestion', key: 'conjunctiva_congestion' },
+        { label: 'Tear', key: 'Tear' },
+        { label: 'Conjunctival Bleb', key: 'conjuctival_Bleb' },
+        { label: 'Haemorrhage', key: 'sub_conjunctival_haemorrhage' },
+        { label: 'Foreign Body', key: 'foreign_body' },
+        { label: 'Follicles', key: 'follicles' },
+        { label: 'Papillae', key: 'papillae' },
+        { label: 'Pinguecula', key: 'pinguecula' },
+        { label: 'Pterygium', key: 'pterygium' },
+        { label: 'Phlycten', key: 'phlycten' },
+        { label: 'Discharge', key: 'discharge' }
+    ];
     conjunctivaCongestion: string[] = ['Circumcorneal', 'Ciliary', 'Conjunctival', 'Mixed'];
 
+    // cormeaForm
+    sizes = ['Normal', 'Micro', 'Macro'];
+    shapes = ['Normal', 'Irregular', 'Keratoconus', 'Keratoglobus'];
+    surfaces = ['Normal', 'Epi defect', 'Thinning', 'Scarring', 'Vascularisation', 'Degeneration', 'Dystrophy',
+        'Foreign body', 'Tear', 'KP', 'Opacity', 'Ulcer', 'Suture', 'Graft', 'Contact Lens', "Edema"];
+    stainings = ['Normal', 'Punctate', 'Negative'];
+    cornealSensationOptions = ['Normal', 'Absent', 'Reduced'];
+
+    // anteriorChamberForm
+    acOptions = [
+        { label: 'Cells', key: 'cells', detailsKey: 'cells_details' },
+        { label: 'Flare', key: 'flare', detailsKey: 'flare_details' },
+        { label: 'Hypopyon', key: 'hypopyon', detailsKey: 'hypopyon_details' },
+        { label: 'Hyphaema', key: 'hyphaema', detailsKey: 'hyphaema_details' },
+        { label: 'Foreign Body', key: 'foreign_body', detailsKey: 'foreign_body_details' }
+    ];
+    depthOptions = ['Normal', 'Shallow', 'Deep'];
+
+    // pupilForm
+    pupilShape = ['Round', 'Eccentric', 'Irregular', 'Oval', 'Polycoria'];
+    pupilReaction = ['Brisk', 'Sluggish', 'Absent']
+    pupilConsensual = ['Normal', 'Sluggish', 'Absent'];
+
+    // IrisForm
+    irisShapes = ['Normal', 'Defects'];
+    irisSynechiaeTypes = ['No', 'Anterior', 'Posterior'];
+
+    // lensForm
+    lensNatures = ['Clear', 'Cataract', 'Pseudophakia', 'Aphakia'];
+    lensPositions = ['Central', 'Decentered', 'Subluxated'];
+    lensSizes = ['Normal', 'Swollen', 'Absorbed', 'Micro'];
+
+    // gonioscopyForm
+    gonioOptions = ['Select', 'Grade 0', 'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Closed', 'Slit'];
+
+    // fundusForm
+    cdRatioOptions = ['0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9', '1.0'];
+    maculaOptions = [
+        'Foveal Reflex', 'Hard Exudates', 'Microaneurysm', 'Hemorrhages',
+        'Subretinal Hemorrhages', 'Scar', 'Atrophic area', 'Pigment Alteration',
+        'Drusen', 'Subretinal Fluid', 'Cystoid', 'Thickening', 'Whitening',
+        'Cotton Wool Spots', 'Pigment Epithelial Detachment', 'Altered Foveal Reflex',
+        'Vascular Abnormalities', 'Pigmentary Changes', 'Epiretinal Membrane',
+        'FTMH', 'Lamellar Hole', 'ILM Striae', 'White Dots', 'Yellow Flecks', 'Cherry Red Spot'
+    ];
 
     data: any = {
         general_examination: 'Normal', one_eyed: 'Normal', squint_evaluation: 'Normal', overall_diagnosis_right: 'Normal', overall_diagnosis_left: 'Normal',
@@ -109,18 +175,9 @@ export class ExaminationComponent {
         else this.expandedSections.add(id);
     }
 
-    copyRightToLeft() {
-        this.data.cornea_left_size = this.data.cornea_right_size;
-        // ... copy other fields ...
-    }
-
-    saveData() {
-        console.log('Saving examination data...', this.data);
-    }
-
-
-    appearanceRightSideData: any = {
-        phthisisBulbi: false,
+    // Appearance
+    appearanceRightSideData: IAppearance = {
+        phthisis_bulbi: false,
         anophthalmos: false,
         microphthalmos: false,
         artificial: false,
@@ -128,12 +185,12 @@ export class ExaminationComponent {
         dystopia: false,
         injured: false,
         swollen: false,
-        showComments: false,
+        show_comments: false,
         comments: ''
     };
 
-    appearanceLeftSideData: any = {
-        phthisisBulbi: false,
+    appearanceLeftSideData: IAppearance = {
+        phthisis_bulbi: false,
         anophthalmos: false,
         microphthalmos: false,
         artificial: false,
@@ -141,154 +198,232 @@ export class ExaminationComponent {
         dystopia: false,
         injured: false,
         swollen: false,
-        showComments: false,
+        show_comments: false,
         comments: ''
     };
 
-
-    conjunctivaRightSideData: any = {
-        conjunctiva_Congestion: false,
-        congestionType: '',
-        conjunctiva_Chemosis: false,
-        conjunctiva_Follicles: false,
-        conjunctiva_Papillae: false,
-        conjunctiva_Discharge: false,
-        showComments: false,
+    // Injury
+    injuryLeftSideData: IInjury = {
+        nature_of_injury: '',
+        open_globe_types: {},
+        rupture_details: {},
+        iofb_material: '',
+        stone_location: '',
+        closed_globe_types: {},
+        lamellar_details: {},
+        show_comments: false,
         comments: ''
     };
-    conjunctivaLeftSideData: any = {
-        conjunctiva_Congestion: false,
-        congestionType: '',
-        conjunctiva_Chemosis: false,
-        conjunctiva_Follicles: false,
-        conjunctiva_Papillae: false,
-        conjunctiva_Discharge: false,
-        showComments: false,
+
+    injuryRightSideData: IInjury = {
+        nature_of_injury: '',
+        open_globe_types: {},
+        rupture_details: {},
+        iofb_material: '',
+        stone_location: '',
+        closed_globe_types: {},
+        lamellar_details: {},
+        show_comments: false,
+        comments: ''
+    }
+
+    // Appendages
+    appendagesRightSideData: IAppendages = {
+        appendages_main: {
+            'Eyelids': false,
+            'Eyelashes': false,
+            'Lacrimal Sac': false,
+            'Syringing': false
+        },
+        eyelids_Chalazion: false,
+        eyelids_Ptosis: false,
+        eyelids_Swelling: false,
+        eyelids_Entropion: false,
+        eyelids_Ectropion: false,
+        eyelids_Mass: false,
+        eyelids_Meibomitis: false,
+        eyelashes_Trichiasis: false,
+        eyelashes_Dystrichiasis: false,
+        lacrimalSac_Swelling: false,
+        lacrimalSac_Roplas: false,
+        syringing_Syringing: false,
+        show_comments: false,
+        comments: ''
+    };
+
+    appendagesLeftSideData: IAppendages = {
+        appendages_main: {
+            'Eyelids': false,
+            'Eyelashes': false,
+            'Lacrimal Sac': false,
+            'Syringing': false
+        },
+        eyelids_Chalazion: false,
+        eyelids_Ptosis: false,
+        eyelids_Swelling: false,
+        eyelids_Entropion: false,
+        eyelids_Ectropion: false,
+        eyelids_Mass: false,
+        eyelids_Meibomitis: false,
+        eyelashes_Trichiasis: false,
+        eyelashes_Dystrichiasis: false,
+        lacrimalSac_Swelling: false,
+        lacrimalSac_Roplas: false,
+        syringing_Syringing: false,
+        show_comments: false,
+        comments: ''
+    };
+
+    // Conjunctiva
+    conjunctivaRightSideData: IConjunctiva = {
+        conjunctiva_congestion: false,
+        congestion_type: '',
+        Tear: false,
+        conjuctival_Bleb: false,
+        sub_conjunctival_haemorrhage: false,
+        foreign_body: false,
+        follicles: false,
+        papillae: false,
+        pinguecula: false,
+        pterygium: false,
+        phlycten: false,
+        discharge: false,
+        show_comments: false,
+        comments: ''
+    };
+
+    conjunctivaLeftSideData: IConjunctiva = {
+        conjunctiva_congestion: false,
+        congestion_type: '',
+        Tear: false,
+        conjuctival_Bleb: false,
+        sub_conjunctival_haemorrhage: false,
+        foreign_body: false,
+        follicles: false,
+        papillae: false,
+        pinguecula: false,
+        pterygium: false,
+        phlycten: false,
+        discharge: false,
+        show_comments: false,
         comments: ''
     };
 
     //scleraForm
-    sizes = ['Normal', 'Micro', 'Macro'];
-    shapes = ['Normal', 'Keratoconus', 'Globus'];
-    surfaces = ['Normal', 'Irregular', 'Hazy', 'Keratoconus', 'Keratoglobus'];
-    stainings = ['Normal', 'Punctate', 'Ulcer'];
-
-    corneaRightSideData: any = {
+    corneaRightSideData: ICornea = {
         size: 'Normal',
-        shapes: { Normal: true, Keratoconus: false, Globus: false },
-        surfaces: { Normal: true, Irregular: false, Hazy: false },
-        stainings: { Normal: true, Punctate: false, Ulcer: false },
+        shapes: 'Normal',
+        surfaces: {
+            Normal: true, 'Epi defect': false, Thinning: false, Scarring: false,
+            Vascularisation: false, Degeneration: false, Dystrophy: false,
+            'Foreign body': false, Tear: false, KP: false, Opacity: false,
+            Ulcer: false, Suture: false, Graft: false, 'Contact Lens': false, Edema: false
+        },
+        stainings: 'Normal',
+        corneal_sensation: 'Normal',
         schirmer1_mm: 0, schirmer1_min: 0, schirmer1_sec: 0,
         schirmer2_mm: 0, schirmer2_min: 0, schirmer2_sec: 0,
-        showComments: false,
+        show_comments: false,
         comments: ''
     };
 
-    corneaLeftSideData: any = {
+    corneaLeftSideData: ICornea = {
         size: 'Normal',
-        shapes: { Normal: true, Keratoconus: false, Globus: false },
-        surfaces: { Normal: true, Irregular: false, Hazy: false },
-        stainings: { Normal: true, Punctate: false, Ulcer: false },
+        shapes: 'Normal',
+        surfaces: {
+            Normal: true, 'Epi defect': false, Thinning: false, Scarring: false,
+            Vascularisation: false, Degeneration: false, Dystrophy: false,
+            'Foreign body': false, Tear: false, KP: false, Opacity: false,
+            Ulcer: false, Suture: false, Graft: false, 'Contact Lens': false, Edema: false
+        },
+        stainings: 'Normal',
+        corneal_sensation: 'Normal',
         schirmer1_mm: 0, schirmer1_min: 0, schirmer1_sec: 0,
         schirmer2_mm: 0, schirmer2_min: 0, schirmer2_sec: 0,
-        showComments: false,
+        show_comments: false,
         comments: ''
     };
 
+    anteriorChamberRightSideData: IAnteriorChamber = {
+        depth: 'Normal',
+        cells: false, cells_details: '',
+        flare: false, flare_details: '',
+        hypopyon: false, hypopyon_details: '',
+        hyphaema: false, hyphaema_details: '',
+        foreign_body: false, foreign_body_details: '',
+        show_comments: false,
+        comments: ''
+    };
+    anteriorChamberLeftSideData: IAnteriorChamber = {
 
+        depth: 'Normal',
+        cells: false, cells_details: '',
+        flare: false, flare_details: '',
+        hypopyon: false, hypopyon_details: '',
+        hyphaema: false, hyphaema_details: '',
+        foreign_body: false, foreign_body_details: '',
+        show_comments: false,
+        comments: ''
+    };
 
-
-    createInjuryObject() {
+    createPupilObject(): IPupil {
         return {
-            natureOfInjury: '',
-            openGlobeTypes: {},
-            ruptureDetails: {},
-            iofbMaterial: '',
-            stoneLocation: '',
-            closedGlobeTypes: {},
-            lamellarDetails: {},
-            showComments: false,
+            shape: 'Round',
+            pupil_size: "0",
+            reaction_to_light_direct: 'Normal',
+            reaction_to_light_consensual: 'Normal',
+            rapd: false,
+            show_comments: false,
             comments: ''
         };
     }
 
-    injuryLeftSideData = this.createInjuryObject();
-    injuryRightSideData = this.createInjuryObject();
+    pupilRightSideData: IPupil = this.createPupilObject();
+    pupilLeftSideData: IPupil = this.createPupilObject();
 
-
-    // appendagesForm
-    appendagesMain = ['Eyelids', 'Eyelashes', 'Lacrimal Sac', 'Syringing'];
-    eyelidOptions = ['Chalazion', 'Ptosis', 'Swelling', 'Entropion', 'Ectropion', 'Mass', 'Meibomitis'];
-    eyelashOptions = ['Trichiasis', 'Dystrichiasis'];
-    lacrimalSacOptions = ['Swelling', 'Roplas'];
-    syringingOptions = ['Syringing'];
-    createAppendagesObject() {
+    createIrisObject(): IIris {
         return {
-            appendagesMain: {
-                'Eyelids': false,
-                'Eyelashes': false,
-                'Lacrimal Sac': false,
-                'Syringing': false
-            },
-            eyelids_Chalazion: false, eyelids_Ptosis: false, eyelids_Swelling: false,
-            eyelids_Entropion: false, eyelids_Ectropion: false, eyelids_Mass: false,
-            eyelids_Meibomitis: false,
-            eyelashes_Trichiasis: false, eyelashes_Dystrichiasis: false,
-            lacrimalSac_Swelling: false, lacrimalSac_Roplas: false,
-            syringing_Syringing: false,
-            showComments: false,
+            shape: 'Normal',
+            neovascularisation: false,
+            synechiae: 'No',
+            peripheral_iridotomy: false,
+            show_comments: false,
             comments: ''
         };
     }
 
-    appendagesRightSideData = this.createAppendagesObject();
-    appendagesLeftSideData = this.createAppendagesObject();
+    irisLeftSideData: IIris = this.createIrisObject();
+    irisRightSideData: IIris = this.createIrisObject();
+
+    createLensObject(): ILens {
+        return {
+            nature: 'Clear',
+            position: 'Central',
+            size: 'Normal',
+            LOCS_grading: null,
+            show_comments: false,
+            comments: ''
+        };
+    }
+
+    lensLeftSideData: ILens = this.createLensObject();
+    lensRightSideData: ILens = this.createLensObject();
 
 
+    createGonioscopyObject(): IGonioscopy {
+        return {
+            superior: ['Select', 'Select', 'Select'],
+            inferior: ['Select', 'Select', 'Select'],
+            nasal: ['Select', 'Select', 'Select'],
+            temporal: ['Select', 'Select', 'Select'],
+            show_comments: false,
+            comments: ''
+        };
+    }
 
-    reData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
-    leData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
-
-    //anteriorChamberForm
-    acOptions = [
-        'Cell',
-        'Flare',
-        'Hyphema',
-        'Hypopyon',
-        'Foreign Body'
-    ];
-    depth = ['Normal', 'Shallow', 'Deep'];
-
-
-    //pupilForm
-    pupilShape = ['Round', 'Eccentric', 'Irregular', 'Oval', 'Polycoria'];
-    pupilDirect = ['Normal', 'Sluggish', 'Absent'];
-    pupilConsensual = ['Normal', 'Sluggish', 'Absent'];
-
-    // --- Gonioscopy Dropdown Options ---
-    gonioOptions = [
-        'Select',
-        'Grade 0',
-        'Grade 1',
-        'Grade 2',
-        'Grade 3',
-        'Grade 4',
-        'Closed',
-        'Slit'
-    ];
-
-    // --- Fundus Form L
-
-    cdRatioOptions = ['0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9', '1.0'];
-
-    maculaOptions = [
-        'Foveal Reflex', 'Hard Exudates', 'Microaneurysm', 'Hemorrhages',
-        'Subretinal Hemorrhages', 'Scar', 'Atrophic area', 'Pigment Alteration',
-        'Drusen', 'Subretinal Fluid', 'Cystoid', 'Thickening', 'Whitening',
-        'Cotton Wool Spots', 'Pigment Epithelial Detachment', 'Altered Foveal Reflex',
-        'Vascular Abnormalities', 'Pigmentary Changes', 'Epiretinal Membrane',
-        'FTMH', 'Lamellar Hole', 'ILM Striae', 'White Dots', 'Yellow Flecks', 'Cherry Red Spot'
-    ];
+    goniosLeftSideData: IGonioscopy = this.createGonioscopyObject();
+    goniosRightSideData: IGonioscopy = this.createGonioscopyObject();
+    
 
     // Optional: Function to handle the "Normal" button click at the top of the form
     setFundusNormal(data: any) {
@@ -308,27 +443,52 @@ export class ExaminationComponent {
     copyReToLe() {
         this.appearanceLeftSideData = {
             ...this.appearanceRightSideData,
-            showComments: this.appearanceLeftSideData.showComments
+            show_comments: this.appearanceLeftSideData.show_comments
         };
 
         this.conjunctivaLeftSideData = {
             ...this.conjunctivaRightSideData,
-            showComments: this.conjunctivaLeftSideData.showComments
+            show_comments: this.conjunctivaLeftSideData.show_comments
         };
 
         this.corneaLeftSideData = {
             ...this.corneaRightSideData,
-            showComments: this.corneaLeftSideData.showComments
+            show_comments: this.corneaLeftSideData.show_comments
         };
 
         this.injuryLeftSideData = {
             ...this.injuryRightSideData,
-            showComments: this.injuryLeftSideData.showComments
+            show_comments: this.injuryLeftSideData.show_comments
         };
 
         this.appendagesLeftSideData = {
             ...this.appendagesRightSideData,
-            showComments: this.appendagesLeftSideData.showComments
+            show_comments: this.appendagesLeftSideData.show_comments
+        };
+
+        this.irisLeftSideData = {
+            ...this.irisRightSideData,
+            show_comments: this.irisLeftSideData.show_comments
+        };
+
+        this.lensLeftSideData = {
+            ...this.lensRightSideData,
+            show_comments: this.lensLeftSideData.show_comments
+        };
+
+        this.anteriorChamberLeftSideData = {
+            ...this.anteriorChamberRightSideData,
+            show_comments: this.anteriorChamberLeftSideData.show_comments
+        };
+
+        this.pupilLeftSideData = {
+            ...this.pupilRightSideData,
+            show_comments: this.pupilLeftSideData.show_comments
+        };
+
+        this.goniosLeftSideData = {
+            ...this.goniosRightSideData,
+            show_comments: this.goniosLeftSideData.show_comments
         };
     }
 
@@ -352,6 +512,9 @@ export class ExaminationComponent {
     isSelected(data: any, field: string, value: string): boolean {
         return data[field]?.includes(value) || false;
     }
+
+    reData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
+    leData: EyeData = { size: 'Macro', shape: 'Normal', surface: 'Normal', staining: 'Normal' };
 
     mmRange = Array.from({ length: 12 }, (_, i) => i); // 0 to 35
     timeRange = Array.from({ length: 12 }, (_, i) => i.toString().padStart(2, '0')); // 00 to 60
