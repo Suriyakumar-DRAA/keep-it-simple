@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, EventEmitter, Inject, inject, Input, Output, signal } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AssessmentService } from '@views/opd-assessment/services/assessment.service';
-import moment from 'moment';
-import { forkJoin } from 'rxjs';
+import { SelectedContactLensData, SelectedGlassesData, SelectedPinholeVisionData, SelectedPrData, SelectedUcvaData } from '@views/opd-assessment/model/refraction-model';
+
 
 @Component({
     selector: 'app-refraction',
@@ -40,72 +39,24 @@ export class RefractionComponent {
         distance: ["PL-", "PL+", "FL", "HM", "CFCF", "FC", "1/60", "2/60", "3/60", "4/60", "5/60", "6/60", "6/36", "6/24", "6/18", "6/12", "6/9", "6/7.5", "6/6", "6/5"],
         near: ["N4", "N5", "N6", "N8", "N10", "N12", "N14", "N18", "N24", "N26", "N36", "<.N36", "<6/60", "6/60", "6/36", "6/24", "6/18", "6/12", "6/9", "6/7.5", "6/6", "6/5"]
     };
-    selectedUCVAData = {
-        distanceRe: '',
-        nearRe: '',
-        distanceLe: '',
-        nearLe: '',
-        isPDistanceCheckedRe: false,
-        isPDistanceCheckedLe: false,
-        isPNearCheckedRe: false,
-        isPNearCheckedLe: false,
-        commentDistanceRe: '',
-        commentDistanceLe: '',
-        commentNearRe: '',
-        commentNearLe: ''
-    };
-    selectedPinHoleVisionData = {
-        rightEye: '',
-        leftEye: '',
-        isPCheckedRe: false,
-        isPCheckedLe: false,
-        isNICheckedRe: false,
-        isNICheckedLe: false,
-        commentRe: '',
-        commentLe: ''
-    };
-    selectedGlassesData = {
-        distanceRe: '',
-        nearRe: '',
-        distanceLe: '',
-        nearLe: '',
-        isPDistanceCheckedRe: false,
-        isPDistanceCheckedLe: false,
-        isPNearCheckedRe: false,
-        isPNearCheckedLe: false,
-    };
-    selectedContactLensData = {
-        rightEye: '',
-        leftEye: '',
-        isPRightEyeChecked: false,
-        isPLeftEyeChecked: false,
-    };
+    selectedUCVAData : SelectedUcvaData = {} as SelectedUcvaData;
+    selectedPinHoleVisionData: SelectedPinholeVisionData = {} as SelectedPinholeVisionData;
+    selectedGlassesData : SelectedGlassesData = {} as SelectedGlassesData;
+    selectedContactLensData : SelectedContactLensData = {} as SelectedContactLensData;
     prDropDownData = ["Sel", "+", "-"];
-    selectedPRData = {
-        s_re: '',
-        i_re: '',
-        n_re: '',
-        t_re: '',
-        s_le: '',
-        i_le: '',
-        n_le: '',
-        t_le: '',
-    };
+    selectedPRData : SelectedPrData = {} as SelectedPrData;
     visualAcuityCommentRe!: string;
     visualAcuityCommentLe!: string;
     
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     selectSection(id: string) {
         this.activeSection = id;
     }
 
     selectVisualAcuityDistanceVision(eye: 're' | 'le', value: string) {
-        console.log('Selected Visual Acuity Distance Vision:', { eye, value });
         if (eye === 're') {
             this.selectedUCVAData.distanceRe = value;
         } else {

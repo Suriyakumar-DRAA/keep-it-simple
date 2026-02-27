@@ -50,8 +50,8 @@ export class SplitWindowComponent {
 
     tabs = [
         { id: 'overview', label: 'Overview', completed: true },
-        { id: 'examination', label: 'Examination', completed: true },
         { id: 'refraction', label: 'Refraction', completed: true },
+        { id: 'examination', label: 'Examination', completed: true },
         { id: 'invest', label: 'Investigation', completed: true },
         { id: 'diag', label: 'Diagnosis', completed: true },
         { id: 'advice', label: 'Advice', completed: true },

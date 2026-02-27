@@ -1,132 +1,151 @@
-<div class="modal-backdrop fade show modal-layout"
-    (click)="closePatientJourney()">
-</div>
-
-<!-- Right-side Drawer -->
+<div class="modal-backdrop fade show modal-layout" (click)="closePatientJourney()"></div>
 <div class="report-drawer d-flex flex-column bg-white shadow-lg" (click)="$event.stopPropagation()">
-
-    <!-- Header -->
     <div class="px-4 py-3 border-bottom d-flex justify-content-between align-items-center bg-white">
         <h5 class="mb-0 fw-semibold text-dark">Time Line</h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="closePatientJourney()"></button>
     </div>
-    <div class="px-3 ">
+    <div class="px-3">
         <div class="journey-content mt-2">
-          <div class="card m-4 rounded-0 border border-secondary">
-            <div class="card-body p-0">
-            <div class="d-flex">
-                <div class="col-2 border-end status-icon">
-                    <div class="position-absolute top-0 start-0 bg-primary text-white fw-bold px-2 status-mark">
-                E
-            </div>
-                  <img src="assets/images/patient-journey/ophthal.png" alt="Ophthal Icon"  class="current-step-icon position-relative m-2">
-                </div>
-              <div class="col-3 align-content-center w-auto">
-                <div class="ms-2">
-                 <p class="m-0 fw-bold">Dr.Preethi</p>
-                <p class="m-0 text-muted">Ophthalmologist</p>
-                </div>
-               
-              </div>
-
-              <div class="col-3 align-content-center ms-5">
-                <div class="time-pill p-2">
-                <p class="m-0 fw-bold text-center"><i class="bi bi-stopwatch me-2"></i>03 min</p>
-                </div>
-
-
-              </div>
-
-              <div class="col-3 align-content-center w-auto total-time-section ms-auto">
-                <div class="m-2">
-                 <p class="m-0 fw-bold">Total time</p>
-                <p class="m-0 text-muted">01:23 min</p>
-                </div>
-               
-              </div>
-            </div>
-            </div>
-          </div>
-          <hr class="m-0">
-        
-        <div class="timeline-container ms-5 m-0">
-        @for(timeline of timelineData ; track timeline.id ; let i = $index ; let isFirst = $first ; let isLast = $last){
-        @if(isFirst){
-        <div class="w-100 px-2 mt-4 mb-4">
-            <div class="status-card " [ngClass]="{'active': timeline.status === 'current'}">
-                <div class="compact-card-content">
-                    <div class="icon-wrapper square-icon  position-relative">
-                        @if(timeline.status === 'completed'){
-                        <div class="completed-status "><i class="bi bi-patch-check-fill"></i></div>
-                        }@else if(timeline.status === 'current') {
-                        <div class="completed-status text-warning "><i class="bi bi-patch-exclamation-fill"></i></div>
-                        }@else{
-                        <div class="completed-status text-muted "><i class="bi bi-patch-question-fill"></i></div>
-                        }
-                        <img src={{timeline.icon}} alt="Waiting Icon" class="current-step-icon w-75 h-75">
-                    </div>
-                    <div class="flex-column ms-2">
-                        <p class="metric-label ">{{timeline.label}}</p>
-                        <h4 class="metric-number fw-bolder m-0">{{timeline.time}}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        }
-        @else if(!isFirst && !isLast){
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="w-100 px-2 m-0">
-                <div class="status-card " [ngClass]="{'active': timeline.status === 'current'}">
-                    <div class="compact-card-content">
-                        <div class="icon-wrapper square-icon  position-relative">
-                            @if(timeline.status === 'completed'){
-                            <div class="completed-status "><i class="bi bi-patch-check-fill"></i></div>
-                            }@else if(timeline.status === 'current') {
-                            <div class="completed-status text-warning "><i class="bi bi-patch-exclamation-fill"></i></div>
-                            }@else{
-                            <div class="completed-status text-muted "><i class="bi bi-patch-question-fill"></i></div>
-                            }
-                            <img src={{timeline.icon}} alt="Waiting Icon" class="current-step-icon w-75 h-75">
-                        </div>
-                        <div class="flex-column ms-2">
-                            <p class="metric-label ">{{timeline.label}}</p>
-                            <h4 class="metric-number fw-bolder m-0">{{timeline.time}}</h4>
+            <div class="border-bottom border-secondary">
+                <div class="card m-4 rounded-0 border border-secondary">
+                    <div class="card-body p-0">
+                        <div class="d-flex">
+                            <div class="col-2 border-end status-icon">
+                                @if (currentStep[0].status === "current") {
+                                <div
+                                    class="position-absolute top-0 start-0 bg-primary text-white fw-bold px-2 status-mark">
+                                    E
+                                </div>
+                                }
+                                <img src="{{ currentStep[0].icon }}" alt="Ophthal Icon"
+                                    class="current-step-icon position-relative m-2" />
+                            </div>
+                            <div class="col-3 align-content-center w-auto">
+                                <div class="ms-2">
+                                    <p class="m-0 fw-bold">{{ currentStep[0].groupName }}</p>
+                                    <p class="m-0 text-muted">{{ currentStep[0].label }}</p>
+                                </div>
+                            </div>
+                            <div class="col-3 align-content-center ms-5">
+                                <div class="time-pill p-2">
+                                    <p class="m-0 fw-bold text-center">
+                                        <i class="bi bi-stopwatch me-2"></i>{{ currentStep[0].time }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-3 align-content-center w-auto total-time-section ms-auto">
+                                <div class="m-2">
+                                    <p class="m-0 fw-bold">Total time</p>
+                                    <p class="m-0 text-muted">{{ totalTime }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        
-        </div>
-        <div class="timeline-line"></div>
-        }
-        @if(isLast){
-        <div class="w-100 px-2 mt-4 mb-4">
-            <div class="status-card">
-                <div class="compact-card-content">
-                    <div class="icon-wrapper square-icon position-relative">
-                        @if(timeline.status === 'completed'){
-                        <div class="completed-status "><i class="bi bi-patch-check-fill"></i></div>
-                        }@else if(timeline.status === 'current') {
-                        <div class="completed-status text-warning "><i class="bi bi-patch-exclamation-fill"></i></div>
-                        }@else{
-                        <div class="completed-status text-muted "><i class="bi bi-patch-question-fill"></i></div>
-                        }
-                        <i class="bi bi-door-open text-dark"></i>
-                    </div>
-                    <div class="flex-column ms-2">
-                        <p class="metric-label">Visit Complete</p>
+            <div class="timeline-container ms-5 m-0">
+                @for (timeline of timelineData; track timeline.id; let i = $index;let isFirst = $first;let isLast = $last) {
+                @if (isFirst) {
+                <div class="w-100 px-2 mt-4 mb-4">
+                    <div class="status-card p-2 cursor-pointer d-flex position-relative align-items-center"
+                        [ngClass]="{ active: timeline.status === 'current' }">
+                        <div class="d-flex align-items-center w-100 gap-3">
+                            <div
+                                class="icon-wrapper square-icon position-relative justify-content-center align-items-center d-flex">
+                                @if (timeline.status === "completed") {
+                                <div class="completed-status">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                </div>
+                                } @else if (timeline.status === "current") {
+                                <div class="completed-status text-warning">
+                                    <i class="bi bi-patch-exclamation-fill"></i>
+                                </div>
+                                } @else {
+                                <div class="completed-status text-muted">
+                                    <i class="bi bi-patch-question-fill"></i>
+                                </div>
+                                }
+                                <img src="{{ timeline.icon }}" alt="Waiting Icon" class="current-step-icon w-75 h-75" />
+                            </div>
+                            <div class="flex-column ms-2">
+                                <p class="metric-label">{{ timeline.label }}</p>
+                                <h4 class="metric-number fw-bolder m-0">
+                                    {{ timeline.time }}
+                                </h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                @if (!isLast) {
+                <div class="timeline-line"></div>
+                }
+                } @else if (!isFirst && !isLast) {
+                <div class="timeline-item position-relative ps-4 mb-4">
+                    <div class="timeline-dot position-absolute"></div>
+                    <div class="w-100 px-2 m-0">
+                        <div class="status-card p-2 cursor-pointer d-flex position-relative align-items-center"
+                            [ngClass]="{ active: timeline.status === 'current' }">
+                            <div class="d-flex align-items-center w-100 gap-3">
+                                <div
+                                    class="icon-wrapper square-icon position-relative justify-content-center align-items-center d-flex">
+                                    @if (timeline.status === "completed") {
+                                    <div class="completed-status">
+                                        <i class="bi bi-patch-check-fill"></i>
+                                    </div>
+                                    } @else if (timeline.status === "current") {
+                                    <div class="completed-status text-warning">
+                                        <i class="bi bi-patch-exclamation-fill"></i>
+                                    </div>
+                                    } @else {
+                                    <div class="completed-status text-muted">
+                                        <i class="bi bi-patch-question-fill"></i>
+                                    </div>
+                                    }
+                                    <img src="{{ timeline.icon }}" alt="Waiting Icon"
+                                        class="current-step-icon w-75 h-75" />
+                                </div>
+                                <div class="flex-column ms-2">
+                                    <p class="metric-label">{{ timeline.label }}</p>
+                                    <h4 class="metric-number fw-bolder m-0">
+                                        {{ timeline.time }}
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-line"></div>
+                }
+                @if (isLast) {
+                <div class="w-100 px-2 mt-4 mb-4">
+                    <div class="status-card p-2 cursor-pointer d-flex position-relative align-items-center">
+                        <div class="d-flex align-items-center w-100 gap-3">
+                            <div
+                                class="icon-wrapper square-icon position-relative justify-content-center align-items-center d-flex">
+                                @if (timeline.status === "completed") {
+                                <div class="completed-status">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                </div>
+                                } @else if (timeline.status === "current") {
+                                <div class="completed-status text-warning">
+                                    <i class="bi bi-patch-exclamation-fill"></i>
+                                </div>
+                                } @else {
+                                <div class="completed-status text-muted">
+                                    <i class="bi bi-patch-question-fill"></i>
+                                </div>
+                                }
+                                <i class="bi bi-door-open text-dark"></i>
+                            </div>
+                            <div class="flex-column ms-2">
+                                <p class="metric-label">{{ timeline.label }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+                }
             </div>
         </div>
-        }
-        
-        }
-
-        </div>
-
-          
     </div>
 </div>
