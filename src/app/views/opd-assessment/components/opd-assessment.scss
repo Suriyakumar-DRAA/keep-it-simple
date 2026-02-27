@@ -46,7 +46,19 @@ $text-muted: #303338;
 
 /* Chips / Pills Selection */
 .chip-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    position: relative;
+    
     .btn-check {
+        position: absolute !important;
+        clip: rect(0, 0, 0, 0) !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
         border-color: $ui-border;
         &:checked + .select-chip {
             border-radius: 8px;

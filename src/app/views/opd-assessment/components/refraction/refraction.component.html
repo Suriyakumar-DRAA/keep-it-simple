@@ -31,7 +31,6 @@
                                 *ngTemplateOutlet="visualAcuityForm; context: { data: reData, eye: 're' }"></ng-container>
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="right-panel-data-card">
                             <div class="right-panel-data-card__header">
@@ -60,20 +59,18 @@
             </div>
             <div>
                 <div class="col-auto">
-
-                    <div class="d-flex flex-column">
-                        <div class="chip-group" role="group">
-                            @for(item of data.distance; track item ; let i = $index) {
-                            <input type="radio" class="btn-check" [name]="eye + '-distance-' + i"
-                                [id]="eye + '-distance-' + item + i"
-                                [ngModel]="eye === 're' ? selectedUCVAData.distanceRe : selectedUCVAData.distanceLe"
-                                (ngModelChange)="selectVisualAcuityDistanceVision(eye, $event)" [value]="item">
-                            <label class="btn btn-sm me-1 border select-chip"
-                                [for]="eye + '-distance-' + item + i">{{item}}</label>
-                            }
+                        <div class="d-flex flex-column">
+                            <div class="chip-group" role="group">
+                                @for(item of data.distance; track item ; let i = $index) {
+                                <input type="radio" class="btn-check" [name]="eye + '-distance-' + i"
+                                    [id]="eye + '-distance-' + item + i"
+                                    [ngModel]="eye === 're' ? selectedUCVAData.distanceRe : selectedUCVAData.distanceLe"
+                                    (ngModelChange)="selectVisualAcuityDistanceVision(eye, $event)" [value]="item">
+                                <label class="btn btn-sm me-1 border select-chip"
+                                    [for]="eye + '-distance-' + item + i">{{item}}</label>
+                                }
+                            </div>
                         </div>
-
-                    </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-end">
                     <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
@@ -99,42 +96,39 @@
                         [class.is-active]="eye === 're' ? selectedUCVAData.isPNearCheckedRe : selectedUCVAData.isPNearCheckedLe"
                         (click)="toggleVisualAcuityNearP(eye)">P</button>
                 </div>
+                    <div class="col-auto">
+                        <div class="d-flex flex-column">
+                            <div class="chip-group" role="group">
+                                @for(item of data.near; track item ; let i = $index) {
+                                <input type="radio" class="btn-check" [name]="eye + '-near-' + i"
+                                    [id]="eye + '-near-' + item + i"
+                                    [ngModel]="eye === 're' ? selectedUCVAData.nearRe : selectedUCVAData.nearLe"
+                                    (ngModelChange)="selectVisualAcuityNearVision(eye, $event)" [value]="item">
+                                <label class="btn btn-sm me-1 border select-chip"
+                                    [for]="eye + '-near-' + item + i">{{item}}</label>
+                                }
+                            </div>
 
-                <div class="col-auto">
-                    <div class="d-flex flex-column">
-                        <div class="chip-group" role="group">
-                            @for(item of data.near; track item ; let i = $index) {
-                            <input type="radio" class="btn-check" [name]="eye + '-near-' + i"
-                                [id]="eye + '-near-' + item + i"
-                                [ngModel]="eye === 're' ? selectedUCVAData.nearRe : selectedUCVAData.nearLe"
-                                (ngModelChange)="selectVisualAcuityNearVision(eye, $event)" [value]="item">
-                            <label class="btn btn-sm me-1 border select-chip"
-                                [for]="eye + '-near-' + item + i">{{item}}</label>
-                            }
                         </div>
-
                     </div>
-                </div>
-                <div class="d-flex align-items-center justify-content-end">
-                    <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
-                        (click)="data.showNearUcvaComments = !data.showNearUcvaComments">
-                        Comments
-                        <i class="bi" [class.bi-chevron-down]="!data.showNearUcvaComments"
-                            [class.bi-chevron-up]="data.showNearUcvaComments"></i>
-                    </a>
-                </div>
-                @if(data.showNearUcvaComments) {
-                <div class="field-group">
-                    <textarea class="form-control" rows="3"
-                        [ngModel]="eye === 're' ? selectedUCVAData.commentNearRe : selectedUCVAData.commentNearLe"
-                        (ngModelChange)="updateUCVAComment(eye, 'near', $event)"
-                        placeholder="Enter comments here..."></textarea>
-                </div>
-                }
+                    <div class="d-flex align-items-center justify-content-end">
+                        <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
+                            (click)="data.showNearUcvaComments = !data.showNearUcvaComments">
+                            Comments
+                            <i class="bi" [class.bi-chevron-down]="!data.showNearUcvaComments"
+                                [class.bi-chevron-up]="data.showNearUcvaComments"></i>
+                        </a>
+                    </div>
+                    @if(data.showNearUcvaComments) {
+                    <div class="field-group">
+                        <textarea class="form-control" rows="3"
+                            [ngModel]="eye === 're' ? selectedUCVAData.commentNearRe : selectedUCVAData.commentNearLe"
+                            (ngModelChange)="updateUCVAComment(eye, 'near', $event)"
+                            placeholder="Enter comments here..."></textarea>
+                    </div>
+                    }
             </div>
-
         </div>
-
         <div class="field-group">
             <div class="d-flex justify-content-between align-items-center">
                 <label class="field-label">PR</label>
@@ -178,7 +172,6 @@
                 </div>
             </div>
         </div>
-
         <div class="field-group">
             <div class="d-flex justify-content-between align-items-center">
                 <label class="field-label">PinHole</label>
@@ -190,7 +183,6 @@
                         [class.is-active]="eye === 're' ? selectedPinHoleVisionData.isNICheckedRe : selectedPinHoleVisionData.isNICheckedLe"
                         (click)="togglePinHoleNI(eye)">NI</button>
                 </div>
-
             </div>
 
             <div class="col-auto">
@@ -224,7 +216,6 @@
                     (ngModelChange)="updatePinHoleComment(eye, $event)" placeholder="Enter comments here..."></textarea>
             </div>
             }
-
         </div>
         <div class="field-group">
             <label class="field-label">Glasses</label>
@@ -248,12 +239,10 @@
                             [for]="eye + '-glasses-distance-' + item + i">{{item}}</label>
                         }
                     </div>
-
                 </div>
             </div>
             <div>
                 <div class="d-flex justify-content-between align-items-center">
-
                     <label class="field-label">Near</label>
                     <button type="button" class="select-chip me-2 mb-1"
                         [class.is-active]="eye === 're' ? selectedGlassesData.isPNearCheckedRe : selectedGlassesData.isPNearCheckedLe"
@@ -274,7 +263,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="field-group">
             <div class="d-flex justify-content-between align-items-center">
@@ -283,7 +271,6 @@
                     [class.is-active]="eye === 're' ? selectedContactLensData.isPRightEyeChecked : selectedContactLensData.isPLeftEyeChecked"
                     (click)="toggleContactLensP(eye)">P</button>
             </div>
-
             <div class="col-auto">
                 <div class="d-flex flex-column">
                     <div class="chip-group" role="group">
@@ -298,10 +285,7 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
     </div>
     <div class="d-flex align-items-center justify-content-end">
         <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
@@ -311,7 +295,6 @@
                 [class.bi-chevron-up]="data.showVisualAcuityComments"></i>
         </a>
     </div>
-
     @if(data.showVisualAcuityComments) {
     <div class="field-group">
         <textarea class="form-control" rows="3" [ngModel]="eye === 're' ? visualAcuityCommentRe : visualAcuityCommentLe"
