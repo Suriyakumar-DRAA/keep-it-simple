@@ -43,6 +43,36 @@
                 </div>
             </div>
             }
+            @else if(activeSection === 'iop') {
+                            <div>
+                <div class="mb-2">
+                    <h6 class="field-label" style="font-size: 1rem;">Intraocular Pressure</h6>
+                </div>
+                <div class="row gx-4">
+                    <div class="col-md-6">
+                        <div class="right-panel-data-card">
+                            <div class="right-panel-data-card__header">
+                                <h5 class="right-panel-data-card__title">Right Side (RE)</h5>
+                                <button class="right-panel-data-card__action" (click)="copyReToLe()">
+                                    Copy to Left <i class="bi bi-arrow-right"></i>
+                                </button>
+                            </div>
+                            <ng-container
+                                *ngTemplateOutlet="intraocularPressureForm; context: {data: iopReData, eye: 're' }"></ng-container>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="right-panel-data-card">
+                            <div class="right-panel-data-card__header">
+                                <h5 class="right-panel-data-card__title">Left Side (LE)</h5>
+                            </div>
+                            <ng-container
+                                *ngTemplateOutlet="intraocularPressureForm; context: {data: iopLeData, eye: 'le' }"></ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
         </div>
     </div>
 </div>
@@ -294,6 +324,44 @@
     <div class="field-group">
         <textarea class="form-control" rows="3" [ngModel]="eye === 're' ? visualAcuityCommentRe : visualAcuityCommentLe"
             (ngModelChange)="updateVisualAcuityComment(eye, $event)" placeholder="Enter comments here..."></textarea>
+    </div>
+    }
+</ng-template>
+
+<ng-template #intraocularPressureForm let-data="data" let-eye="eye">
+        <div class="d-flex flex-wrap justify-content-between gap-3 mb-2">
+            <div class="d-flex w-100">
+                <div class="col-6">
+                        <label for="iopRange" class="form-label">IOP range</label>
+            <input type="range" class="form-range" min="0" max="60" id="iopRange">
+                </div>
+                <div class="col-2 align-content-end ms-2">
+                    <div class="d-flex align-items-center">
+                      <input type="text" class="form-control" id="iopValue" placeholder="IOP">  
+                      <p class="m-0 ms-2">mmHG</p>
+                    </div>
+                  
+                </div>
+                 <div class="col-2 ms-auto  align-content-end">
+                    <div class="d-flex">
+                      <input type="text" class="form-control" id="time" >  
+                    </div>
+                  
+                </div>
+            </div>
+   
+        </div>
+         <div class="d-flex align-items-center">
+        <a class="link text-decoration-none fw-bold" style="font-size: 0.9rem; cursor:pointer;"
+            (click)="data.showIopComment = !data.showIopComment">
+            Comments <i class="bi" [class.bi-chevron-down]="!data.showIopComment"
+                [class.bi-chevron-up]="data.showIopComment"></i>
+        </a>
+    </div>
+    @if(data.showIopComment) {
+    <div class="field-group">
+        <textarea class="form-control" rows="3" [ngModel]="eye === 're' ? iopCommentRe : iopCommentLe"
+            placeholder="Enter comments here..."></textarea>
     </div>
     }
 </ng-template>
