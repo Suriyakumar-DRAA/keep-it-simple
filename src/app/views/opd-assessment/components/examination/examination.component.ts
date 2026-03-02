@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, EventEmitter, Inject, inject, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IAnteriorChamber, IAppearance, IAppendages, IConjunctiva, ICornea, IGonioscopy, IInjury, IIris, ILens, IPupil } from '@views/opd-assessment/model/examination.model';
+import { IAnteriorChamber, IAppearance, IAppendages, IConjunctiva, ICornea, IFundus, IGonioscopy, IInjury, IIris, ILens, IPupil } from '@views/opd-assessment/model/examination.model';
 import { AssessmentService } from '@views/opd-assessment/services/assessment.service';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
@@ -101,7 +101,7 @@ export class ExaminationComponent {
         { label: 'Phlycten', key: 'phlycten' },
         { label: 'Discharge', key: 'discharge' }
     ];
-    conjunctivaCongestion: string[] = ['Circumcorneal', 'Ciliary', 'Conjunctival', 'Mixed'];
+    conjunctivaCongestion: string[] = ['Generalized', 'Localized', 'Ciliary'];
 
     // cormeaForm
     sizes = ['Normal', 'Micro', 'Macro'];
@@ -423,7 +423,33 @@ export class ExaminationComponent {
 
     goniosLeftSideData: IGonioscopy = this.createGonioscopyObject();
     goniosRightSideData: IGonioscopy = this.createGonioscopyObject();
-    
+
+    createFundusObject(): IFundus {
+        return {
+            media: 'Clear',
+            media_details: '',
+            pvd: 'Absent',
+            optic_disc_size: 'Normal',
+            disk_ratio: '0.3',
+            blood_vessels: 'Normal',
+            blood_vessels_details: '',
+            macula: [],
+            foveal_reflex: 'Present',
+            foveal_reflex_details: '',
+            vitreous: 'Clear',
+            vitreous_details: '',
+            retinal_detachment: 'Absent',
+            retinal_detachment_details: '',
+            peripheral_lesions: 'Absent',
+            peripheral_lesions_details: '',
+            fundus: 'Normal limits',
+            show_comments: false,
+            comments: ''
+        };
+    }
+    fundusLeftSideData: IFundus = this.createFundusObject();
+    fundusRightSideData: IFundus = this.createFundusObject();
+
 
     // Optional: Function to handle the "Normal" button click at the top of the form
     setFundusNormal(data: any) {
@@ -489,6 +515,11 @@ export class ExaminationComponent {
         this.goniosLeftSideData = {
             ...this.goniosRightSideData,
             show_comments: this.goniosLeftSideData.show_comments
+        };
+
+        this.fundusLeftSideData = {
+            ...this.fundusRightSideData,
+            show_comments: this.fundusLeftSideData.show_comments
         };
     }
 
