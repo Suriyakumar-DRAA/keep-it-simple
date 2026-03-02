@@ -46,11 +46,7 @@ $text-muted: #303338;
 
 /* Chips / Pills Selection */
 .chip-group {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
     position: relative;
-    
     .btn-check {
         position: absolute !important;
         clip: rect(0, 0, 0, 0) !important;
