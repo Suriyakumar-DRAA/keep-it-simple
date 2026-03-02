@@ -52,7 +52,7 @@
         <div class="field-group">
             <label class="field-label">UCVA</label>
             <div class="d-flex justify-content-between align-items-center">
-                <label class="field-label">Distance</label>
+                <label class="field-label text-secondary">Distance</label>
                 <button type="button" class="select-chip me-2 mb-1"
                     [class.is-active]="eye === 're' ? selectedUCVAData.isPDistanceCheckedRe : selectedUCVAData.isPDistanceCheckedLe"
                     (click)="toggleVisualAcuityDistanceP(eye)">P</button>
@@ -91,7 +91,7 @@
             </div>
             <div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <label class="field-label">Near</label>
+                    <label class="field-label text-secondary">Near</label>
                     <button type="button" class="select-chip me-2 mb-2 mt-1"
                         [class.is-active]="eye === 're' ? selectedUCVAData.isPNearCheckedRe : selectedUCVAData.isPNearCheckedLe"
                         (click)="toggleVisualAcuityNearP(eye)">P</button>
@@ -217,8 +217,8 @@
         <div class="field-group">
             <label class="field-label">Glasses</label>
             <div class="d-flex justify-content-between align-items-center">
-                <label class="field-label">Distance</label>
-                <button type="button" class="select-chip me-2 mb-1"
+                <label class="field-label text-secondary">Distance</label>
+                <button type="button" class="select-chip me-2 mb-2 mt-1"
                     [class.is-active]="eye === 're' ? selectedGlassesData.isPDistanceCheckedRe : selectedGlassesData.isPDistanceCheckedLe"
                     (click)="toggleGlassesDistanceP(eye)">P</button>
             </div>
@@ -238,8 +238,8 @@
             </div>
             <div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <label class="field-label">Near</label>
-                    <button type="button" class="select-chip me-2 mb-1"
+                    <label class="field-label text-secondary">Near</label>
+                    <button type="button" class="select-chip me-2 mb-2 mt-1"
                         [class.is-active]="eye === 're' ? selectedGlassesData.isPNearCheckedRe : selectedGlassesData.isPNearCheckedLe"
                         (click)="toggleGlassesNearP(eye)">P</button>
                 </div>
