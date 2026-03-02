@@ -4,7 +4,7 @@
     height: 100vh;
     width: 100%;
     gap: 10px;
-    margin-top: 10px;
+    padding: 10px 10px 10px 0px;
 }
 
 // Panel Styles - Card Design
@@ -15,7 +15,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 }
 
@@ -178,7 +178,7 @@
         display: block;
     }
 
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    // box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
 // Vertical Text

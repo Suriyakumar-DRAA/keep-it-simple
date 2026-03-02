@@ -5,10 +5,11 @@ import { HeaderComponent } from './core/layout/header/header.component';
 import { UserRole } from '@shared/model/role.model';
 import { CommonService } from '@shared/service/common.service';
 import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
+import { BreadcrumbComponent } from "./core/layout/breadcrumb/breadcrumb.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule, HeaderComponent, SidebarComponent],
+  imports: [RouterOutlet, FormsModule, HeaderComponent, SidebarComponent, BreadcrumbComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
