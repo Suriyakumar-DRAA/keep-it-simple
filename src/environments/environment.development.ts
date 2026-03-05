@@ -3,7 +3,7 @@ export const environment = {
     localUrl: 'http://localhost:2026',
     apiUrl: 'http://localhost:4000/api',
     keycloakRootUrl: 'https://dev-auth.dragarwal.com' + '/auth/',
-    appKey: 'facfe7b7-8df1-4ab8-97a4-5a00802b8e75',
+    appKey: 'a8f61710-0ff3-4b76-9ca0-98a99eb10dfb',
     appName: 'EHR',
     googleMapKey: '',
 };

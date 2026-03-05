@@ -2,7 +2,7 @@ import { HttpInterceptorFn, HttpRequest, HttpResponse, HttpErrorResponse } from 
 import { inject } from '@angular/core';
 import { KeycloakService } from '@shared/service/keycloak.service';
 import { LoadingService } from '@shared/service/loading.service';
-import { DataShareSvcService } from '@shared/service/data-share-svc.service';
+import { DataShareService } from '@shared/service/data-share.service';
 import { environment } from '@env/environment';
 import { from, switchMap, tap, finalize, catchError, throwError, take } from 'rxjs';
 
@@ -17,7 +17,7 @@ function generateRandomString(length: number): string {
 export const TokenInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
   const keycloakService = inject(KeycloakService);
   const loadingService = inject(LoadingService);
-  const dataSharedSvc = inject(DataShareSvcService);
+  const dataSharedService = inject(DataShareService);
 
   loadingService.requestStarted();
 
@@ -28,7 +28,7 @@ export const TokenInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
     currentUrl = currentUrl.split('?RemoveAuthToken')[0];
   }
 
-  return dataSharedSvc.selectedBranchData.pipe(
+  return dataSharedService.selectedBranchData.pipe(
     take(1), // Get the latest value and complete
     switchMap((bKey) => {
       return from(keycloakService.getToken()).pipe(

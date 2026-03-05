@@ -11,10 +11,10 @@ import { UserRole } from '@shared/model/role.model';
     imports: [CommonModule, FormsModule],
 })
 export class HeaderComponent {
-
     @Input({ required: true }) userRole!: UserRole;
     @Output() roleChange = new EventEmitter<UserRole>();
- currentDate: string="Oct 11, 2025";
+    currentDate: string = "Oct 11, 2025";
+
     showRoleMenu = false;
     private elementRef = inject(ElementRef);
 

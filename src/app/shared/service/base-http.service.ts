@@ -5,25 +5,25 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class HttpServices {
+export class BaseHttpServices {
   private http = inject(HttpClient);
 
-  getHttp<T>(url: string, params?: HttpParams, isRemoveAuthToken?: boolean): Observable<T> {
+  get<T>(url: string, params?: HttpParams, isRemoveAuthToken?: boolean): Observable<T> {
     const finalUrl = this.buildUrl(url, (isRemoveAuthToken ?? false));
     return this.http.get<T>(finalUrl, { params });
   }
 
-  postHttp<T>(url: string, data: any, isRemoveAuthToken?: boolean): Observable<T> {
+  post<T>(url: string, data: any, isRemoveAuthToken?: boolean): Observable<T> {
     const finalUrl = this.buildUrl(url, (isRemoveAuthToken ?? false));
     return this.http.post<T>(finalUrl, data);
   }
 
-  putHttp<T>(url: string, data: any, isRemoveAuthToken?: boolean): Observable<T> {
+  put<T>(url: string, data: any, isRemoveAuthToken?: boolean): Observable<T> {
     const finalUrl = this.buildUrl(url, (isRemoveAuthToken ?? false));
     return this.http.put<T>(finalUrl, data);
   }
 
-  deleteHttp<T>(url: string, isRemoveAuthToken?: boolean): Observable<T> {
+  delete<T>(url: string, isRemoveAuthToken?: boolean): Observable<T> {
     const finalUrl = this.buildUrl(url, (isRemoveAuthToken ?? false));
     return this.http.delete<T>(finalUrl);
   }
