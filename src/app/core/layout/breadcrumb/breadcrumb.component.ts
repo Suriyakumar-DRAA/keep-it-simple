@@ -19,9 +19,9 @@ export class BreadcrumbComponent {
 
   @Input() currentDate: string = 'Oct 11, 2025';
   @Input() breadcrumbs: BreadcrumbItem[] = [
-    { label: 'Home', url: '/' },
-    { label: 'Library', url: '/library' },
-    { label: 'Data', active: true }
+    { label: 'Home', url: '/dockster' },
+    { label: 'OPD', url: '/outpatients' },
+    // { label: 'Data', active: true }
   ];
 
 }

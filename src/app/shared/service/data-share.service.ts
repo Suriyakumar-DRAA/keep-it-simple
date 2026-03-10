@@ -16,8 +16,6 @@ export interface Notification {
 })
 export class DataShareService {
 
-  constructor() { }
-
   /** This is used for branch selection */
   private selectedBranch = new BehaviorSubject<string>('');
   selectedBranchData = this.selectedBranch.asObservable();
@@ -77,7 +75,6 @@ export class DataShareService {
   showNotification(notification: Notification): void {
     this.notificationSubject.next(notification);
   }
-
 
   showSuccess(message: string, autoHide = true, autoHideDelay = 2000): void {
     this.showNotification({

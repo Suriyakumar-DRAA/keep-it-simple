@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, ElementRef, EventEmitter, HostListener, inject, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AppInitService } from '@core/init/app-init.service';
 import { UserRole } from '@shared/model/role.model';
+import { CommonService } from '@shared/service/common.service';
 
 @Component({
     selector: 'app-header',
@@ -17,20 +19,11 @@ export class HeaderComponent {
 
     showRoleMenu = false;
     private elementRef = inject(ElementRef);
+    private appInitService = inject(AppInitService);
 
     constructor() { }
 
     ngOnInit() {
-    }
-
-    toggleRoleMenu(event?: Event) {
-        if (event) event.stopPropagation();
-        this.showRoleMenu = !this.showRoleMenu;
-    }
-
-    selectRole(role: UserRole) {
-        this.roleChange.emit(role);
-        this.showRoleMenu = false;
     }
 
     @HostListener('document:click', ['$event'])
@@ -44,5 +37,21 @@ export class HeaderComponent {
                 this.showRoleMenu = false;
             }
         }
+    }
+
+    toggleRoleMenu(event?: Event) {
+        if (event) event.stopPropagation();
+        this.showRoleMenu = !this.showRoleMenu;
+    }
+
+    selectRole(role: UserRole) {
+        this.roleChange.emit(role);
+        this.showRoleMenu = false;
+    }
+
+    onLogout() {
+        this.appInitService.logOut();
+        sessionStorage.clear();
+
     }
 }
